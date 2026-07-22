@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoFfy 4u - Online Shop</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
+        body { background-color: #f4f6f9; color: #333; }
+        header { background: #6c5ce7; color: white; padding: 20px; text-align: center; font-size: 28px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; padding: 15px; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; background-color: #eee; }
+        .product-title { font-size: 18px; margin: 15px 0 8px; font-weight: bold; }
+        .product-price { color: #ff4757; font-size: 20px; font-weight: bold; margin-bottom: 15px; }
+        .order-btn { display: inline-block; background-color: #25D366; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .order-btn:hover { background-color: #128C7E; }
+        footer { text-align: center; padding: 20px; background: #333; color: white; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>LoFfy 4u</header>
+
+    <div class="container">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <img src="product1.jpg" alt="Product 1" class="product-img">
+            <div class="product-title">Premium Quality Product 1</div>
+            <div class="product-price">৳ ৫০০</div>
+            <a href="https://wa.me/8801XXXXXXXXX?text=Hello%20LoFfy%204u,%20ami%20apnar%20site%20theke%20'Premium%20Quality%20Product%201'%20ti%20kinte%20cai." target="_blank" class="order-btn">💬 Order on WhatsApp</a>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+            <img src="product2.jpg" alt="Product 2" class="product-img">
+            <div class="product-title">Exclusive Product 2</div>
+            <div class="product-price">৳ ১,২০০</div>
+            <a href="https://wa.me/8801845840375?text=Hello%20LoFfy%204u,%20ami%20apnar%20site%20theke%20'Exclusive%20Product%202'%20ti%20kinte%20cai." target="_blank" class="order-btn">💬 Order on WhatsApp</a>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+            <img src="product3.jpg" alt="Product 3" class="product-img">
+            <div class="product-title">Stylish Item 3</div>
+            <div class="product-price">৳ ৮৫০</div>
+            <a href="https://wa.me/8801XXXXXXXXX?text=Hello%20LoFfy%204u,%20ami%20apnar%20site%20theke%20'Stylish%20Item%203'%20ti%20kinte%20cai." target="_blank" class="order-btn">💬 Order on WhatsApp</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 LoFfy 4u. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
