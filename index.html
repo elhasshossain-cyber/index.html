@@ -24,45 +24,58 @@
             transition: transform 0.5s ease;
         }
         .img-container:hover .zoom-img {
-            transform: scale(1.12);
+            transform: scale(1.08);
         }
 
         /* Review Section Fade Effect */
         #live-review-text {
             transition: opacity 0.5s ease-in-out;
         }
+
+        /* Active animations for active premium feel */
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.15);
+        }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="text-gray-800 antialiased selection:bg-orange-500 selection:text-white">
 
-    <!-- Top Navigation Bar -->
-    <nav class="bg-white shadow-md sticky top-0 z-40 border-b-2 border-orange-brand">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold text-orange-brand tracking-wider">LoFfy <span class="text-gray-700">4u</span></a>
-            <div class="flex items-center space-x-4">
-                <button onclick="toggleAdminModal()" class="text-sm bg-gray-800 text-white px-3 py-2 rounded-md hover:bg-gray-700 transition">
-                    <i class="fa-solid fa-user-gear mr-1"></i> এডমিন প্যানেল
+    <!-- Top Navigation Bar (Mobile Optimized) -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40 border-b-2 border-orange-brand px-2 sm:px-4">
+        <div class="container mx-auto py-3 flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" class="text-2xl sm:text-3xl font-bold text-orange-brand tracking-wider">
+                LoFfy <span class="text-gray-700">4u</span>
+            </a>
+            
+            <!-- Actions -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <!-- Secured Admin Trigger -->
+                <button onclick="checkAdminAccess()" class="text-xs sm:text-sm bg-gray-900 text-white px-2.5 py-2 rounded-xl hover:bg-gray-800 transition flex items-center gap-1 font-semibold">
+                    <i class="fa-solid fa-lock text-[10px] text-orange-400"></i> এডমিন
                 </button>
-                <div class="relative cursor-pointer" onclick="toggleCartModal()">
-                    <i class="fa-solid fa-basket-shopping text-2xl text-gray-700 hover:text-orange-brand transition"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-brand text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                
+                <!-- Cart Icon -->
+                <div class="relative cursor-pointer p-2 rounded-full hover:bg-gray-100 transition" onclick="toggleCartModal()">
+                    <i class="fa-solid fa-basket-shopping text-xl sm:text-2xl text-gray-700 hover:text-orange-brand transition"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-orange-brand text-white text-[10px] w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center font-bold">0</span>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Banner / Cover Section -->
-    <div class="container mx-auto px-4 my-6">
+    <!-- Banner / Cover Section (100% Mobile Responsive Grid) -->
+    <div class="container mx-auto px-4 my-4 sm:my-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <!-- Landscape / Long Banner -->
-            <div class="md:col-span-2 relative rounded-2xl overflow-hidden shadow-lg h-64 md:h-80 bg-gray-200">
+            <div class="md:col-span-2 relative rounded-2xl overflow-hidden shadow-md h-40 sm:h-64 md:h-80 bg-gray-200">
                 <img id="cover-long" src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=80" alt="Long Banner" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center p-8">
-                    <h2 class="text-white text-3xl md:text-4xl font-bold">প্রিমিয়াম কালেকশন<br><span class="text-orange-400 text-xl md:text-2xl">সেরা দামে সেরা পণ্য</span></h2>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent flex items-center p-4 sm:p-8">
+                    <h2 class="text-white text-xl sm:text-3xl md:text-4xl font-bold leading-tight">প্রিমিয়াম কালেকশন<br><span class="text-orange-400 text-sm sm:text-xl md:text-2xl font-medium">সেরা দামে সেরা পণ্য</span></h2>
                 </div>
             </div>
-            <!-- Square Banner -->
-            <div class="relative rounded-2xl overflow-hidden shadow-lg h-64 md:h-80 bg-gray-200">
+            <!-- Square Banner (Hidden on extra small mobile screens to keep UI clean, visible from sm up) -->
+            <div class="relative rounded-2xl overflow-hidden shadow-md h-40 sm:h-64 md:h-80 bg-gray-200 hidden sm:block">
                 <img id="cover-square" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80" alt="Square Banner" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black/40 flex flex-col justify-end p-6">
                     <h3 class="text-white text-xl font-bold">নতুন অফার</h3>
@@ -72,51 +85,51 @@
         </div>
     </div>
 
-    <!-- Live Customer Review Notification Bar (New Feature: 5s interval) -->
-    <div class="container mx-auto px-4 my-4">
-        <div class="bg-orange-50 border border-orange-200 rounded-xl p-3 flex items-center shadow-sm">
-            <div class="flex items-center space-x-2 bg-orange-brand text-white text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider animate-pulse whitespace-nowrap">
-                <i class="fa-solid fa-star text-[10px]"></i> <span>Live Review</span>
+    <!-- Live Customer Review Notification Bar (5s interval) -->
+    <div class="container mx-auto px-4 my-3">
+        <div class="bg-orange-50/70 border border-orange-100 rounded-xl p-2.5 flex items-center shadow-sm">
+            <div class="flex items-center space-x-1 bg-orange-brand text-white text-[10px] sm:text-xs px-2 py-0.5 sm:py-1 rounded-full font-bold uppercase tracking-wider animate-pulse whitespace-nowrap">
+                <i class="fa-solid fa-star text-[9px]"></i> <span>Live</span>
             </div>
-            <div class="ml-3 text-sm text-gray-700 font-medium italic truncate w-full">
+            <div class="ml-2 sm:ml-3 text-xs sm:text-sm text-gray-700 font-medium italic truncate w-full">
                 <span id="live-review-text">রিভিউ লোড হচ্ছে...</span>
             </div>
         </div>
     </div>
 
-    <!-- Features Section -->
-    <div class="container mx-auto px-4 my-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white p-4 rounded-xl shadow-sm border border-orange-100">
-            <div class="flex items-center space-x-3 p-2 justify-center">
-                <i class="fa-solid fa-truck-fast text-2xl text-orange-brand"></i>
-                <div><h4 class="font-bold text-sm">দ্রুত ডেলিভারি</h4><p class="text-xs text-gray-500">সারাদেশে ক্যাশ অন ডেলিভারি</p></div>
+    <!-- Features Section (Grid layout responsive for mobile touch) -->
+    <div class="container mx-auto px-4 my-4">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-orange-100/50">
+            <div class="flex items-center space-x-2 sm:space-x-3 p-1">
+                <i class="fa-solid fa-truck-fast text-lg sm:text-2xl text-orange-brand"></i>
+                <div><h4 class="font-bold text-xs sm:text-sm">দ্রুত ডেলিভারি</h4><p class="text-[10px] text-gray-400">ক্যাশ অন ডেলিভারি</p></div>
             </div>
-            <div class="flex items-center space-x-3 p-2 justify-center">
-                <i class="fa-solid fa-shield-heart text-2xl text-orange-brand"></i>
-                <div><h4 class="font-bold text-sm">১০০% অরিজিনাল</h4><p class="text-xs text-gray-500">কোয়ালিটি নিশ্চিত পণ্য</p></div>
+            <div class="flex items-center space-x-2 sm:space-x-3 p-1">
+                <i class="fa-solid fa-shield-heart text-lg sm:text-2xl text-orange-brand"></i>
+                <div><h4 class="font-bold text-xs sm:text-sm">১০০% জেনুইন</h4><p class="text-[10px] text-gray-400">সেরা কোয়ালিটি পণ্য</p></div>
             </div>
-            <div class="flex items-center space-x-3 p-2 justify-center">
-                <i class="fa-solid fa-headset text-2xl text-orange-brand"></i>
-                <div><h4 class="font-bold text-sm">২৪/৭ সাপোর্ট</h4><p class="text-xs text-gray-500">যেকোনো প্রয়োজনে কল করুন</p></div>
+            <div class="flex items-center space-x-2 sm:space-x-3 p-1">
+                <i class="fa-solid fa-headset text-lg sm:text-2xl text-orange-brand"></i>
+                <div><h4 class="font-bold text-xs sm:text-sm">হেল্প সাপোর্ট</h4><p class="text-[10px] text-gray-400">যেকোনো সময় কল করুন</p></div>
             </div>
-            <div class="flex items-center space-x-3 p-2 justify-center">
-                <i class="fa-solid fa-rotate-left text-2xl text-orange-brand"></i>
-                <div><h4 class="font-bold text-sm">সহজ রিটার্ন</h4><p class="text-xs text-gray-500">৭ দিনের মধ্যে পরিবর্তনের সুযোগ</p></div>
+            <div class="flex items-center space-x-2 sm:space-x-3 p-1">
+                <i class="fa-solid fa-rotate-left text-lg sm:text-2xl text-orange-brand"></i>
+                <div><h4 class="font-bold text-xs sm:text-sm">সহজ রিটার্ন</h4><p class="text-[10px] text-gray-400">৭ দিনের রিপ্লেসমেন্ট</p></div>
             </div>
         </div>
     </div>
 
     <!-- Product Showcase Title -->
-    <div class="container mx-auto px-4 my-6">
-        <div class="border-l-4 border-orange-brand pl-3">
-            <h2 class="text-2xl font-bold text-gray-800 tracking-wide">আমাদের প্রোডাক্টসমূহ</h2>
-            <p class="text-sm text-gray-500">আপনার পছন্দের পণ্যটি এখনই অর্ডার করুন</p>
+    <div class="container mx-auto px-4 my-4 sm:my-6">
+        <div class="border-l-4 border-orange-brand pl-2.5">
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-800 tracking-wide">আমাদের প্রোডাক্টসমূহ</h2>
+            <p class="text-xs text-gray-400">পছন্দের পণ্যটি এখনই অর্ডার বা বুক করুন</p>
         </div>
     </div>
 
-    <!-- Product Grid Section -->
-    <div class="container mx-auto px-4 mb-16">
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Product Grid Section (Optimized beautifully for Mobile Viewports) -->
+    <div class="container mx-auto px-4 mb-20">
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             <!-- Dynamic Products Will Render Here -->
         </div>
     </div>
@@ -125,14 +138,14 @@
     <footer class="bg-gray-900 text-gray-400 py-8 border-t-4 border-orange-brand">
         <div class="container mx-auto px-4 text-center">
             <p class="text-white font-bold text-xl mb-1">LoFfy 4u</p>
-            <p class="text-sm mb-4">আপনার সন্তুষ্টিই আমাদের একমাত্র লক্ষ্য।</p>
+            <p class="text-xs sm:text-sm mb-4">আপনার সন্তুষ্টিই আমাদের একমাত্র লক্ষ্য।</p>
             
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-6 text-sm text-gray-300 mb-6">
-                <a href="mailto:loffy4you@gmail.com" class="hover:text-orange-brand transition flex items-center gap-2">
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-6 text-xs sm:text-sm text-gray-300 mb-6">
+                <a href="mailto:loffy4you@gmail.com" class="hover:text-orange-brand transition flex items-center gap-1.5">
                     <i class="fa-solid fa-envelope text-orange-brand"></i> loffy4you@gmail.com
                 </a>
-                <a href="https://wa.me/8801845840375" target="_blank" class="hover:text-orange-brand transition flex items-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-emerald-500 font-bold text-base"></i> 01845840375
+                <a href="https://wa.me/8801845840375" target="_blank" class="hover:text-orange-brand transition flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-emerald-500 font-bold"></i> 01845840375
                 </a>
             </div>
 
@@ -141,12 +154,12 @@
                 <a href="#" class="hover:text-orange-brand transition"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://wa.me/8801845840375" target="_blank" class="hover:text-orange-brand transition"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
-            <p class="text-xs text-gray-500">&copy; 2026 LoFfy 4u. All Rights Reserved.</p>
+            <p class="text-[10px] text-gray-500">&copy; 2026 LoFfy 4u. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- Interactive AI Customer Support Chat Box (Updated Feature) -->
-    <div id="welcome-chat-box" class="fixed bottom-6 right-6 z-50 max-w-xs w-80 bg-white rounded-2xl shadow-2xl border border-orange-200 transform translate-y-full opacity-0 transition-all duration-700 ease-out">
+    <!-- Interactive AI Customer Support Chat Box (Mobile Adaptive Screen) -->
+    <div id="welcome-chat-box" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-[calc(100%-2rem)] w-76 sm:w-80 bg-white rounded-2xl shadow-2xl border border-orange-200 transform translate-y-full opacity-0 transition-all duration-700 ease-out">
         <!-- Header -->
         <div class="bg-orange-brand text-white p-3 rounded-t-2xl flex items-center justify-between">
             <div class="flex items-center space-x-2">
@@ -156,15 +169,15 @@
                 </div>
                 <div>
                     <h4 class="text-xs font-bold leading-tight">LoFfy 4u AI Support</h4>
-                    <p class="text-[10px] text-orange-100">অনলাইন (সক্রিয়)</p>
+                    <p class="text-[9px] text-orange-100">অনলাইন (সক্রিয়)</p>
                 </div>
             </div>
-            <button onclick="closeWelcomeChat()" class="text-white/80 hover:text-white text-lg font-bold">&times;</button>
+            <button onclick="closeWelcomeChat()" class="text-white/80 hover:text-white text-lg font-bold p-1">&times;</button>
         </div>
         
         <!-- Chat Area (Scrollable Messages) -->
-        <div class="p-4 bg-cream rounded-b-2xl flex flex-col">
-            <div id="chat-messages-container" class="space-y-2.5 max-h-48 overflow-y-auto mb-3 pr-1 text-xs">
+        <div class="p-3 sm:p-4 bg-cream rounded-b-2xl flex flex-col">
+            <div id="chat-messages-container" class="space-y-2 max-h-40 sm:max-h-48 overflow-y-auto mb-3 pr-1 text-[11px] sm:text-xs">
                 <!-- Bot Main Message -->
                 <div class="flex flex-col items-start">
                     <div class="bg-white p-2.5 rounded-xl rounded-tl-none shadow-sm border border-gray-100 max-w-[90%] text-gray-700 leading-relaxed">
@@ -176,17 +189,17 @@
             
             <!-- Dynamic AI Option Replies/Suggestions -->
             <div id="ai-options" class="flex flex-wrap gap-1.5 mb-3">
-                <button onclick="askAI('পণ্যগুলোর কোয়ালিটি কেমন?', 'আমাদের সকল পণ্য ১০০% প্রিমিয়াম ও অরিজিনাল। কাস্টমারদের সর্বোচ্চ সন্তুষ্টি নিশ্চিত করতে আমরা নিজেরা কোয়ালিটি যাচাই করি।')" class="bg-orange-50 text-orange-brand text-[10px] border border-orange-200 px-2 py-1 rounded-full hover:bg-orange-500 hover:text-white transition">কোয়ালিটি কেমন?</button>
-                <button onclick="askAI('ডেলিভারি চার্জ কত?', 'সারাদেশে হোম ডেলিভারি দেওয়া হয়। ডেলিভারি চার্জ ঢাকার ভেতরে ৮০ টাকা এবং ঢাকার বাইরে ১৫০ টাকা।')" class="bg-orange-50 text-orange-brand text-[10px] border border-orange-200 px-2 py-1 rounded-full hover:bg-orange-500 hover:text-white transition">ডেলিভারি চার্জ?</button>
-                <button onclick="askAI('অর্ডার কীভাবে করব?', 'আপনার পছন্দের প্রোডাক্টটির নিচে থাকা **Buy Now** বাটনে ক্লিক করে নাম, মোবাইল নম্বর এবং ঠিকানা দিলেই অর্ডার হয়ে যাবে।')" class="bg-orange-50 text-orange-brand text-[10px] border border-orange-200 px-2 py-1 rounded-full hover:bg-orange-500 hover:text-white transition">অর্ডার করার নিয়ম?</button>
+                <button onclick="askAI('পণ্যগুলোর কোয়ালিটি কেমন?', 'আমাদের সকল পণ্য ১০০% প্রিমিয়াম ও অরিজিনাল। কাস্টমারদের সর্বোচ্চ সন্তুষ্টি নিশ্চিত করতে আমরা নিজেরা কোয়ালিটি যাচাই করি।')" class="bg-orange-50 text-orange-brand text-[10px] border border-orange-200 px-2 py-0.5 sm:py-1 rounded-full hover:bg-orange-500 hover:text-white transition">কোয়ালিটি কেমন?</button>
+                <button onclick="askAI('ডেলিভারি চার্জ কত?', 'সারাদেশে হোম ডেলিভারি দেওয়া হয়। ডেলিভারি চার্জ ঢাকার ভেতরে ৮০ টাকা এবং ঢাকার বাইরে ১৫০ টাকা।')" class="bg-orange-50 text-orange-brand text-[10px] border border-orange-200 px-2 py-0.5 sm:py-1 rounded-full hover:bg-orange-500 hover:text-white transition">ডেলিভারি চার্জ?</button>
+                <button onclick="askAI('অर्डर কীভাবে করব?', 'আপনার পছন্দের প্রোডাক্টটির নিচে থাকা **Buy Now** বাটনে ক্লিক করে নাম, মোবাইল নম্বর এবং ঠিকানা দিলেই অর্ডার হয়ে যাবে।')" class="bg-orange-50 text-orange-brand text-[10px] border border-orange-200 px-2 py-0.5 sm:py-1 rounded-full hover:bg-orange-500 hover:text-white transition">অর্ডার করার নিয়ম?</button>
             </div>
             
             <!-- Quick Action Call Buttons -->
             <div class="space-y-1.5 border-t pt-2.5">
-                <button onclick="triggerChatWhatsApp()" class="w-full bg-emerald-600 text-white text-[11px] font-bold py-2 px-3 rounded-lg hover:bg-emerald-700 transition flex items-center justify-center gap-1.5">
+                <button onclick="triggerChatWhatsApp()" class="w-full bg-emerald-600 text-white text-[10px] sm:text-[11px] font-bold py-2 px-3 rounded-lg hover:bg-emerald-700 transition flex items-center justify-center gap-1.5">
                     <i class="fa-brands fa-whatsapp text-sm"></i> হোয়াটসঅ্যাপে সরাসরি চ্যাট
                 </button>
-                <button onclick="triggerChatCall()" class="w-full bg-gray-800 text-white text-[11px] font-bold py-2 px-3 rounded-lg hover:bg-gray-700 transition flex items-center justify-center gap-1.5">
+                <button onclick="triggerChatCall()" class="w-full bg-gray-800 text-white text-[10px] sm:text-[11px] font-bold py-2 px-3 rounded-lg hover:bg-gray-700 transition flex items-center justify-center gap-1.5">
                     <i class="fa-solid fa-phone text-sm"></i> সরাসরি কল করুন
                 </button>
             </div>
@@ -194,42 +207,46 @@
     </div>
 
 
-    <!-- ================= MODALS & FORMS ================= -->
+    <!-- ================= MODALS & FORMS (FULL RESPONSIVE TOUCH OVERLAYS) ================= -->
 
-    <!-- 1. Admin Panel Modal -->
-    <div id="admin-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+    <!-- 1. Admin Panel Modal (Protected View) -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-4 sm:p-6 shadow-2xl max-h-[92vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-sliders text-orange-brand mr-2"></i>এডমিন কন্ট্রোল প্যানেল</h3>
-                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                <h3 class="text-lg sm:text-xl font-bold text-gray-800"><i class="fa-solid fa-sliders text-orange-brand mr-2"></i>এডমিন কন্ট্রোল প্যানেল</h3>
+                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-gray-600 text-2xl p-1">&times;</button>
             </div>
             
+            <div class="text-xs bg-emerald-50 text-emerald-800 px-3 py-2 rounded-lg mb-4 font-semibold">
+                <i class="fa-solid fa-user-check mr-1"></i> ভেরিফাইড এডমিন: elhasshossain@gmail.com
+            </div>
+
             <!-- Update Covers Section -->
-            <div class="mb-6 p-4 bg-orange-50 rounded-xl border border-orange-200">
-                <h4 class="font-bold mb-2 text-orange-brand text-sm"><i class="fa-solid fa-image mr-1"></i> কভার ফটো পরিবর্তন করুন (Image URL)</h4>
+            <div class="mb-6 p-3 sm:p-4 bg-orange-50 rounded-xl border border-orange-200">
+                <h4 class="font-bold mb-2 text-orange-brand text-xs sm:text-sm"><i class="fa-solid fa-image mr-1"></i> কভার ফটো পরিবর্তন করুন (Image URL)</h4>
                 <div class="space-y-2">
-                    <input type="text" id="input-cover-long" placeholder="লম্বা চ্যাপ্টা কভারের লিংক (Landscape)" class="w-full p-2 text-sm border rounded">
-                    <input type="text" id="input-cover-square" placeholder="স্কয়ার কভারের লিংক (Square)" class="w-full p-2 text-sm border rounded">
-                    <button onclick="updateCovers()" class="w-full bg-gray-800 text-white text-xs py-2 rounded hover:bg-gray-700">কভার আপডেট করুন</button>
+                    <input type="text" id="input-cover-long" placeholder="লম্বা কভারের লিংক (Landscape)" class="w-full p-2 text-xs border rounded-lg focus:outline-none focus:border-orange-500">
+                    <input type="text" id="input-cover-square" placeholder="স্কয়ার কভারের লিংক (Square)" class="w-full p-2 text-xs border rounded-lg focus:outline-none focus:border-orange-500">
+                    <button onclick="updateCovers()" class="w-full bg-gray-800 text-white text-xs py-2 rounded-lg hover:bg-gray-700 font-semibold">কভার আপডেট করুন</button>
                 </div>
             </div>
 
             <!-- Add Product Form -->
             <form id="product-form" onsubmit="handleProductSubmit(event)">
-                <h4 class="font-bold mb-2 text-gray-700 text-sm"><i class="fa-solid fa-plus-circle mr-1"></i> নতুন প্রোডাক্ট যোগ করুন</h4>
+                <h4 class="font-bold mb-2 text-gray-700 text-xs sm:text-sm"><i class="fa-solid fa-plus-circle mr-1"></i> নতুন প্রোডাক্ট যোগ করুন</h4>
                 <div class="space-y-3">
-                    <input type="text" id="prod-name" placeholder="প্রোডাক্টের নাম" required class="w-full p-2 border rounded text-sm">
-                    <input type="number" id="prod-price" placeholder="মূল্য (টাকা)" required class="w-full p-2 border rounded text-sm">
-                    <input type="text" id="prod-img" placeholder="ছবির লিংক (Image URL)" required class="w-full p-2 border rounded text-sm">
-                    <textarea id="prod-desc" placeholder="প্রোডাক্টের সংক্ষিপ্ত বিবরণ..." class="w-full p-2 border rounded text-sm h-20"></textarea>
-                    <button type="submit" class="w-full bg-orange-brand text-white font-bold py-2 rounded-lg hover:bg-orange-600 transition">ওয়েবসাইটে পাবলিশ করুন</button>
+                    <input type="text" id="prod-name" placeholder="প্রোডাক্টের নাম" required class="w-full p-2 border rounded-lg text-xs sm:text-sm focus:outline-none focus:border-orange-500">
+                    <input type="number" id="prod-price" placeholder="মূল্য (টাকা)" required class="w-full p-2 border rounded-lg text-xs sm:text-sm focus:outline-none focus:border-orange-500">
+                    <input type="text" id="prod-img" placeholder="ছবির অনলাইন লিংক (Image URL)" required class="w-full p-2 border rounded-lg text-xs sm:text-sm focus:outline-none focus:border-orange-500">
+                    <textarea id="prod-desc" placeholder="প্রোডাক্টের বিবরণ..." class="w-full p-2 border rounded-lg text-xs sm:text-sm h-16 sm:h-20 focus:outline-none focus:border-orange-500"></textarea>
+                    <button type="submit" class="w-full bg-orange-brand text-white font-bold py-2 rounded-lg hover:bg-orange-600 transition text-xs sm:text-sm">ওয়েবসাইটে পাবলিশ করুন</button>
                 </div>
             </form>
 
             <!-- Admin Product List for Delete -->
             <div class="mt-6">
-                <h4 class="font-bold mb-2 text-red-600 text-sm"><i class="fa-solid fa-trash mr-1"></i> প্রোডাক্ট ডিলিট করুন</h4>
-                <div id="admin-product-list" class="space-y-2 max-h-40 overflow-y-auto border p-2 rounded bg-gray-50">
+                <h4 class="font-bold mb-2 text-red-600 text-xs sm:text-sm"><i class="fa-solid fa-trash mr-1"></i> প্রোডাক্ট ডিলিট করুন</h4>
+                <div id="admin-product-list" class="space-y-2 max-h-36 overflow-y-auto border p-2 rounded-lg bg-gray-50">
                     <!-- Products list for deletion -->
                 </div>
             </div>
@@ -237,32 +254,36 @@
     </div>
 
     <!-- 2. Shopping Cart / Checkout Modal -->
-    <div id="cart-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
-            <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-basket-shopping text-orange-brand mr-2"></i>আপনার শপিং ব্যাগ</h3>
-                <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
-            </div>
-            
-            <div id="cart-items" class="space-y-3 max-h-48 overflow-y-auto mb-4">
-                <!-- Cart items list -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-4 sm:p-6 shadow-2xl max-h-[90vh] flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-center border-b pb-3 mb-3">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800"><i class="fa-solid fa-basket-shopping text-orange-brand mr-2"></i>আপনার শপিং ব্যাগ</h3>
+                    <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600 text-2xl p-1">&times;</button>
+                </div>
+                
+                <div id="cart-items" class="space-y-2 max-h-40 sm:max-h-48 overflow-y-auto mb-3">
+                    <!-- Cart items list -->
+                </div>
+
+                <div class="border-t pt-2.5 mb-3 flex justify-between font-bold text-base sm:text-lg text-gray-800">
+                    <span>সর্বমোট:</span>
+                    <span>৳ <span id="cart-total">0</span></span>
+                </div>
             </div>
 
-            <div class="border-t pt-3 mb-4 flex justify-between font-bold text-lg text-gray-800">
-                <span>সর্বমোট:</span>
-                <span>৳ <span id="cart-total">0</span></span>
-            </div>
+            <div>
+                <!-- Shipping Information Form -->
+                <div id="checkout-form-sec" class="hidden space-y-2.5 border-t pt-3 mb-2">
+                    <h4 class="font-bold text-xs sm:text-sm text-gray-700">অর্ডার সম্পন্ন করতে তথ্য দিন:</h4>
+                    <input type="text" id="cust-name" placeholder="আপনার নাম" class="w-full p-2 border rounded-lg text-xs sm:text-sm">
+                    <input type="text" id="cust-phone" placeholder="মোবাইল নাম্বার" class="w-full p-2 border rounded-lg text-xs sm:text-sm">
+                    <input type="text" id="cust-address" placeholder="পূর্ণাঙ্গ ঠিকানা" class="w-full p-2 border rounded-lg text-xs sm:text-sm">
+                    <button onclick="confirmOrder()" class="w-full bg-emerald-600 text-white font-bold py-2 rounded-lg hover:bg-emerald-500 transition text-xs sm:text-sm">অর্ডার কনফার্ম করুন (ক্যাশ অন ডেলিভারি)</button>
+                </div>
 
-            <!-- Shipping Information Form -->
-            <div id="checkout-form-sec" class="hidden space-y-3 border-t pt-3">
-                <h4 class="font-bold text-sm text-gray-700">অর্ডার সম্পন্ন করতে তথ্য দিন:</h4>
-                <input type="text" id="cust-name" placeholder="আপনার নাম" class="w-full p-2 border rounded text-sm">
-                <input type="text" id="cust-phone" placeholder="মোবাইল নাম্বার" class="w-full p-2 border rounded text-sm">
-                <input type="text" id="cust-address" placeholder="পূর্ণাঙ্গ ঠিকানা" class="w-full p-2 border rounded text-sm">
-                <button onclick="confirmOrder()" class="w-full bg-emerald-600 text-white font-bold py-2 rounded-lg hover:bg-emerald-500 transition">অর্ডার কনফার্ম করুন (ক্যাশ অন ডেলিভারি)</button>
+                <button id="checkout-btn" onclick="showCheckoutForm()" class="w-full bg-orange-brand text-white font-bold py-2 rounded-lg hover:bg-orange-600 transition text-xs sm:text-sm">চেকআউট করতে এগিয়ে যান</button>
             </div>
-
-            <button id="checkout-btn" onclick="showCheckoutForm()" class="w-full bg-orange-brand text-white font-bold py-2 rounded-lg hover:bg-orange-600 transition">চেকআউট করতে এগিয়ে যান</button>
         </div>
     </div>
 
@@ -270,14 +291,18 @@
     <script>
         const WHATSAPP_NUMBER = "8801845840375"; 
         const CALL_NUMBER = "01845840375";       
+        
+        // --- Security Configuration ---
+        const ALLOWED_ADMIN_EMAIL = "elhasshossain@gmail.com"; 
+        const ADMIN_PASSWORD = "admin4u"; // আপনি চাইলে এই পাসওয়ার্ডটি পরিবর্তন করতে পারেন
 
-        // Dummy/Preloaded Products
+        // Preloaded Products
         let products = JSON.parse(localStorage.getItem('lofffy_products')) || [
             { id: 1, name: "প্রিমিয়াম গ্যাজেট বা পণ্য ১", price: 1250, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80", desc: "খুবই চমৎকার ও হাই কোয়ালিটির একটি প্রোডাক্ট।" },
             { id: 2, name: "স্টাইলিশ স্মার্ট ওয়াচ ২", price: 2400, img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80", desc: "প্রিমিয়াম ডিজাইন এবং সব ধরনের আধুনিক ফিচার সম্বলিত।" }
         ];
 
-        // Customer Reviews Database (Bangla & English mixed)
+        // Customer Reviews Database
         const reviews = [
             "খুবই ভালো প্রোডাক্ট, ডেলিভারি অনেক ফাস্ট ছিল! 👍 - রনি, ঢাকা",
             "Highly recommended! The quality is amazing. - Sifat, Sylhet",
@@ -294,21 +319,39 @@
         let cart = [];
         let lastReviewIndex = -1;
 
-        // App Initialization
         window.onload = function() {
             renderProducts();
             loadCovers();
-            triggerWelcomeChat(); // AI chat pops up after 2.5 seconds
-            initLiveReviews();    // Custom live review switching at 5 seconds
+            triggerWelcomeChat(); 
+            initLiveReviews();    
         };
 
-        // Feature 1: Automatic AI Chat Trigger (2.5 Seconds delay)
+        // Feature 1: Admin Protection Verification Logic
+        function checkAdminAccess() {
+            const emailInput = prompt("এডমিন ইমেইলটি প্রবেশ করান:");
+            
+            if (emailInput === null) return; // User canceled the prompt
+
+            if (emailInput.trim().toLowerCase() === ALLOWED_ADMIN_EMAIL.toLowerCase()) {
+                const passwordInput = prompt("আপনার এডমিন পাসওয়ার্ড দিন:");
+                
+                if (passwordInput === ADMIN_PASSWORD) {
+                    toggleAdminModal(); // Access granted
+                } else {
+                    alert("ভুল পাসওয়ার্ড! এক্সেস রিফিউজড।");
+                }
+            } else {
+                alert("দুঃখিত! এই ইমেইলটির এই সাইটের এডমিন এক্সেস নেই।");
+            }
+        }
+
+        // Feature 2: Automatic AI Chat Trigger (2.5 Seconds delay)
         function triggerWelcomeChat() {
             setTimeout(() => {
                 const chatBox = document.getElementById('welcome-chat-box');
                 if (chatBox) {
                     chatBox.classList.remove('translate-y-full', 'opacity-0');
-                    chatBox.classList.add('translate-y-0', 'opacity-100');
+                    chatBox.classList.add('translate-y-0', 'opacity-100', 'glow-effect');
                 }
             }, 2500); 
         }
@@ -316,28 +359,23 @@
         function closeWelcomeChat() {
             const chatBox = document.getElementById('welcome-chat-box');
             if (chatBox) {
-                chatBox.classList.remove('translate-y-0', 'opacity-100');
+                chatBox.classList.remove('translate-y-0', 'opacity-100', 'glow-effect');
                 chatBox.classList.add('translate-y-full', 'opacity-0');
             }
         }
 
-        // Feature 2: Interactive AI Agent Messaging System
+        // Interactive AI Agent Messaging System
         function askAI(userQuestion, botAnswer) {
             const chatContainer = document.getElementById('chat-messages-container');
-            
-            // Append User Question Bubble
             chatContainer.innerHTML += `
                 <div class="flex flex-col items-end">
-                    <div class="bg-orange-brand text-white p-2.5 rounded-xl rounded-tr-none shadow-sm max-w-[85%] font-semibold">
+                    <div class="bg-orange-brand text-white p-2 rounded-xl rounded-tr-none shadow-sm max-w-[85%] font-medium">
                         ${userQuestion}
                     </div>
                 </div>
             `;
-            
-            // Scroll to bottom
             chatContainer.scrollTop = chatContainer.scrollHeight;
 
-            // Generate Smart AI Reply with a tiny typing lag feel
             setTimeout(() => {
                 chatContainer.innerHTML += `
                     <div class="flex flex-col items-start">
@@ -350,31 +388,24 @@
             }, 400);
         }
 
-        // Feature 3: Live Customer Review Auto-Changer (Every 5 Seconds with Random Selection)
+        // Feature 3: Live Customer Review Auto-Changer (Every 5 Seconds)
         function initLiveReviews() {
             function updateReviewText() {
                 const reviewEl = document.getElementById('live-review-text');
                 if(!reviewEl) return;
                 
-                // Fade out animation transition
                 reviewEl.style.opacity = 0;
-
                 setTimeout(() => {
                     let nextIndex;
-                    // Loop to prevent identical successive reviews
                     do {
                         nextIndex = Math.floor(Math.random() * reviews.length);
                     } while (nextIndex === lastReviewIndex && reviews.length > 1);
                     
                     lastReviewIndex = nextIndex;
                     reviewEl.innerText = reviews[nextIndex];
-                    
-                    // Fade back in
                     reviewEl.style.opacity = 1;
                 }, 500);
             }
-
-            // Fire once immediately and set a tight 5-seconds repeat intervals
             updateReviewText();
             setInterval(updateReviewText, 5000);
         }
@@ -388,7 +419,7 @@
             window.location.href = `tel:${CALL_NUMBER}`;
         }
 
-        // Render dynamic product layout
+        // Render dynamic product layout (Fully Adaptive Grid for mobile layout screens)
         function renderProducts() {
             const grid = document.getElementById('product-grid');
             const adminList = document.getElementById('admin-product-list');
@@ -396,41 +427,41 @@
             adminList.innerHTML = '';
 
             if(products.length === 0) {
-                grid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">কোনো প্রোডাক্ট পাওয়া যায়নি। এডমিন প্যানেল থেকে যোগ করুন।</p>`;
+                grid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10 text-sm">কোনো প্রোডাক্ট পাওয়া যায়নি। এডমিন প্যানেল থেকে যোগ করুন।</p>`;
             }
 
             products.forEach(product => {
                 grid.innerHTML += `
-                    <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col justify-between hover:shadow-xl transition duration-300">
-                        <div class="relative img-container overflow-hidden bg-gray-100 h-56 flex items-center justify-center">
+                    <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 flex flex-col justify-between hover:shadow-md transition duration-300">
+                        <div class="relative img-container overflow-hidden bg-gray-50 h-48 sm:h-56 flex items-center justify-center">
                             <img src="${product.img}" alt="${product.name}" class="zoom-img w-full h-full object-cover">
-                            <span class="absolute top-2 right-2 bg-orange-brand text-white text-xs font-bold px-2 py-1 rounded-full">৳ ${product.price}</span>
+                            <span class="absolute top-2 right-2 bg-orange-brand text-white text-xs font-bold px-2 py-0.5 rounded-full">৳ ${product.price}</span>
                         </div>
-                        <div class="p-4 flex-grow">
-                            <h3 class="font-bold text-gray-800 text-base line-clamp-1 mb-1">${product.name}</h3>
-                            <p class="text-xs text-gray-500 line-clamp-2 mb-3">${product.desc || 'কোনো বিবরণ নেই।'}</p>
+                        <div class="p-3 sm:p-4 flex-grow">
+                            <h3 class="font-bold text-gray-800 text-sm sm:text-base line-clamp-1 mb-1">${product.name}</h3>
+                            <p class="text-[11px] sm:text-xs text-gray-400 line-clamp-2 mb-3">${product.desc || 'কোনো বিবরণ নেই।'}</p>
                         </div>
-                        <div class="p-3 bg-gray-50 border-t border-gray-100 grid grid-cols-2 gap-2 text-xs font-semibold">
-                            <button onclick="addToCart(${product.id})" class="bg-amber-500 text-white py-2 px-1 rounded hover:bg-amber-600 transition flex items-center justify-center gap-1">
-                                <i class="fa-solid fa-cart-plus"></i> Add Cart
+                        <div class="p-2 bg-gray-50 border-t border-gray-100 grid grid-cols-2 gap-1.5 text-[10px] sm:text-xs font-semibold">
+                            <button onclick="addToCart(${product.id})" class="bg-amber-500 text-white py-2 rounded-lg hover:bg-amber-600 transition flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-cart-plus"></i> Bag
                             </button>
-                            <button onclick="buyNow(${product.id})" class="bg-orange-brand text-white py-2 px-1 rounded hover:bg-orange-600 transition flex items-center justify-center gap-1">
+                            <button onclick="buyNow(${product.id})" class="bg-orange-brand text-white py-2 rounded-lg hover:bg-orange-600 transition flex items-center justify-center gap-1">
                                 <i class="fa-solid fa-bolt"></i> Buy Now
                             </button>
-                            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('হ্যালো LoFfy 4u, আমি এই প্রোডাক্টটি অর্ডার করতে চাই: ' + product.name + ' - মূল্য: ৳' + product.price)}" target="_blank" class="bg-emerald-600 text-white py-2 px-1 rounded hover:bg-emerald-700 transition flex items-center justify-center gap-1">
-                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('হ্যালো LoFfy 4u, আমি এই প্রোডাক্টটি অর্ডার করতে চাই: ' + product.name + ' - মূল্য: ৳' + product.price)}" target="_blank" class="bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition flex items-center justify-center gap-1 text-center">
+                                <i class="fa-brands fa-whatsapp"></i> WhatsApp
                             </a>
-                            <a href="tel:${CALL_NUMBER}" class="bg-blue-600 text-white py-2 px-1 rounded hover:bg-blue-700 transition flex items-center justify-center gap-1">
-                                <i class="fa-solid fa-phone text-sm"></i> Order Call
+                            <a href="tel:${CALL_NUMBER}" class="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-1 text-center">
+                                <i class="fa-solid fa-phone"></i> Call Order
                             </a>
                         </div>
                     </div>
                 `;
 
                 adminList.innerHTML += `
-                    <div class="flex justify-between items-center text-xs p-2 border-b">
-                        <span class="truncate max-w-[250px] font-medium">${product.name}</span>
-                        <button onclick="deleteProduct(${product.id})" class="text-red-500 hover:text-red-700 font-bold"><i class="fa-solid fa-trash-can"></i></button>
+                    <div class="flex justify-between items-center text-[11px] p-2 border-b bg-white rounded-md my-1">
+                        <span class="truncate max-w-[180px] font-medium text-gray-700">${product.name}</span>
+                        <button onclick="deleteProduct(${product.id})" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 `;
             });
@@ -503,15 +534,15 @@
             cart.forEach((item, index) => {
                 total += item.price;
                 itemsContainer.innerHTML += `
-                    <div class="flex items-center justify-between bg-gray-50 p-2 rounded border">
+                    <div class="flex items-center justify-between bg-gray-50 p-2 rounded-xl border border-gray-100">
                         <div class="flex items-center space-x-2">
-                            <img src="${item.img}" class="w-10 h-10 object-cover rounded">
+                            <img src="${item.img}" class="w-8 h-8 object-cover rounded-lg">
                             <div>
-                                <h5 class="text-xs font-bold truncate max-w-[150px]">${item.name}</h5>
-                                <p class="text-xs text-orange-brand font-semibold">৳ ${item.price}</p>
+                                <h5 class="text-[11px] font-bold truncate max-w-[120px]">${item.name}</h5>
+                                <p class="text-[10px] text-orange-brand font-semibold">৳ ${item.price}</p>
                             </div>
                         </div>
-                        <button onclick="removeFromCart(${index})" class="text-gray-400 hover:text-red-500 text-sm">&times;</button>
+                        <button onclick="removeFromCart(${index})" class="text-gray-400 hover:text-red-500 text-base px-2">&times;</button>
                     </div>
                 `;
             });
@@ -537,8 +568,7 @@
             if(!name || !phone || !address) return alert('দয়া করে আপনার ডেলিভারি ইনফরমেশন সম্পূর্ণ পূরণ করুন।');
 
             let total = document.getElementById('cart-total').innerText;
-
-            alert(`ধন্যবাদ ${name}!\nআপনার অর্ডারটি ক্যাশ অন ডেলিভারিতে নথিভুক্ত করা হয়েছে।\nসর্বমোট বিল: ৳${total}\nখুব দ্রুত আমাদের ডেলিভারি টিম আপনার সাথে যোগাযোগ করবে।`);
+            alert(`ধন্যবাদ ${name}!\nআপনার অর্ডারটি ক্যাশ অন ডেলিভারিতে নথিভুক্ত করা হয়েছে।\nসর্বমোট বিল: ৳${total}`);
             
             cart = [];
             updateCartUI();
