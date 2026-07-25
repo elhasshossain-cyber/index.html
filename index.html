@@ -22,7 +22,7 @@
         /* 2 Sec Dynamic Smooth Zoom for Top Small Banner */
         @keyframes dynamic-zoom {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.04); }
         }
         .animate-subtle-zoom {
             animation: dynamic-zoom 2s infinite ease-in-out;
@@ -40,9 +40,12 @@
 <body class="text-gray-800 antialiased selection:bg-slate-900 selection:text-white">
 
     <nav class="bg-orange-brand shadow-md sticky top-0 z-40 border-b border-orange-700 px-2 sm:px-4">
-        <div class="container mx-auto py-3 flex justify-between items-center">
-            <a href="#" class="text-2xl sm:text-3xl font-bold text-[#D4AF37] tracking-wider drop-shadow-sm">
-                LoFfy <span class="text-white">4u</span>
+        <div class="container mx-auto py-2 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <img src="https://lh3.googleusercontent.com/d/1Xl2Kx2y8lX5lXW2lX5lXW2lX5lXW2lX5=s800?authuser=0" onerror="this.src='https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=100&q=80'" class="h-12 w-auto object-contain rounded-md" alt="LoFfy 4u Logo">
+                <span class="text-2xl sm:text-3xl font-bold text-[#D4AF37] tracking-wider drop-shadow-sm hidden sm:inline">
+                    LoFfy <span class="text-white">4u</span>
+                </span>
             </a>
             
             <div class="flex items-center space-x-3">
@@ -168,7 +171,7 @@
                             <span id="modal-old-price" class="text-gray-400 text-sm line-through"></span>
                         </div>
                         
-                        <div id="modal-timer-box" class="hidden my-3 p-2 bg-red-50 border border-red-200 rounded-xl"></div>
+                        <div id="modal-timer-box" class="hidden my-3 p-3 bg-red-950 text-white rounded-xl shadow-md font-mono text-center border-l-4 border-amber-400"></div>
 
                         <div id="modal-video-box" class="hidden mt-2">
                             <p class="text-[11px] font-bold text-gray-500 mb-1"><i class="fa-solid fa-video text-red-500"></i> প্রোডাক্ট ভিডিও রিভিউ:</p>
@@ -261,11 +264,9 @@
             <button onclick="closeInvoiceModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 font-bold text-lg">✕</button>
             
             <div id="invoice-print-area" class="text-xs">
-                <div class="text-center mb-4 border-b pb-2">
-                    <h2 class="text-2xl font-bold text-[#D4AF37] tracking-wider bg-orange-brand inline-block px-4 py-1.5 rounded-xl shadow-sm">
-                        LoFfy <span class="text-white">4u</span>
-                    </h2>
-                    <p class="text-gray-500 text-[10px] mt-1">প্রিমিয়াম অনলাইন শপিং হাব</p>
+                <div class="text-center mb-4 border-b pb-2 flex flex-col items-center justify-center">
+                    <img src="https://lh3.googleusercontent.com/d/1Xl2Kx2y8lX5lXW2lX5lXW2lX5lXW2lX5=s800?authuser=0" onerror="this.src='https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=100&q=80'" class="h-16 w-auto object-contain mx-auto mb-1" alt="LoFfy 4u Logo">
+                    <p class="text-gray-500 text-[10px]">প্রিমিয়াম অনলাইন শপিং হাব</p>
                     <p class="text-gray-400 text-[9px]">তারিখ: <span id="inv-date"></span> | ইনভয়েস নং: #INV-<span id="inv-num"></span></p>
                 </div>
                 
@@ -311,12 +312,19 @@
     </div>
 
     <script>
-        let products = JSON.parse(localStorage.getItem('loFfy_products')) || [
+        // Core Live Database Initialization Component (Code Edit Persistence Shield Enabled)
+        let defaultProducts = [
             { id: 1, title: "Premium Men's Casual Shirt", price: 1250, category: "শার্ট", discount: 20, timer: "2026-12-31T23:59:00", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", images: ["https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=500&q=80"] },
             { id: 2, title: "Luxury Waterproof Smartwatch", price: 3400, category: "ঘড়ি", discount: 15, timer: "2026-11-25T18:00:00", video: "", images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80"] },
             { id: 3, title: "Ultra Breathable Sports Sneaker", price: 2800, category: "জুতো", discount: 30, timer: "", video: "", images: ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=500&q=80"] },
             { id: 4, title: "Premium TWS Wireless Earbuds", price: 1950, category: "গ্যাজেট", discount: 10, timer: "2026-08-15T12:00:00", video: "", images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=500&q=80"] }
         ];
+
+        // Persistence Logic Layer
+        if (!localStorage.getItem('loFfy_products')) {
+            localStorage.setItem('loFfy_products', JSON.stringify(defaultProducts));
+        }
+        let products = JSON.parse(localStorage.getItem('loFfy_products'));
 
         let cart = [];
         let activeAdmin = localStorage.getItem('isAdminActive') === 'true';
@@ -385,7 +393,7 @@
             closeAdminModal();
         }
 
-        // Setup Sliders using distinct database arrays (3500ms / 3.5s Smooth Interval Rotation Engine)
+        // Setup Sliders using distinct database arrays (4000ms / 4s Smooth Interval Rotation Engine)
         function setupSliders() {
             const largeContainer = document.getElementById('large-slider-container');
             const smallContainer = document.getElementById('small-slider-container');
@@ -401,9 +409,9 @@
                 middleContainer.innerHTML += `<img class="middle-slide absolute inset-0 w-full h-full object-cover fade-slide ${i===0?'opacity-100':'opacity-0'}" src="${middleSliderImages[i % middleSliderImages.length]}">`;
             }
 
-            startSliderIntervals('large-slide', 3500);
-            startSliderIntervals('small-slide', 3500);
-            startSliderIntervals('middle-slide', 3500);
+            startSliderIntervals('large-slide', 4000);
+            startSliderIntervals('small-slide', 4000);
+            startSliderIntervals('middle-slide', 4000);
         }
 
         function startSliderIntervals(className, time) {
@@ -437,7 +445,7 @@
             renderProducts();
             initializeTimers();
             closeAdminModal();
-            alert('প্রোডাক্টটি সফলভাবে লাইভ যোগ করা হয়েছে!');
+            alert('প্রোডাক্টটি সফলভাবে লাইভ যোগ করা হয়েছে এবং এটি স্থায়ীভাবে সংরক্ষিত থাকবে!');
         }
 
         function renderProducts() {
@@ -470,8 +478,7 @@
                             <div>
                                 <h4 class="font-bold text-sm text-gray-800 line-clamp-1">${p.title}</h4>
                                 <div class="flex items-center space-x-2 my-1">
-                                    <span class="text-orange-brand font-bold text-sm">৳${discPrice}</span>
-                                    ${p.discount > 0 ? `<span class="text-gray-400 text-xs line-through">৳${p.price}</span>` : ''}
+                                    <span class="text-orange-brand font-bold text-sm">৳${discPrice}</span>${p.discount > 0 ? `<span class="text-gray-400 text-xs line-through">৳${p.price}</span>` : ''}
                                 </div>
                                 
                                 ${p.timer ? `
@@ -529,13 +536,13 @@
             // Live Customized Timers Structure Integration inside Modal Overlay
             const timerBox = document.getElementById('modal-timer-box');
             if(p.timer) {
-                timerBox.innerHTML = `<p class="text-[11px] text-red-600 font-bold text-center countdown-timer-modal" data-expire="${p.timer}">অফার শেষ হতে বাকি: লোডিং...</p>`;
+                timerBox.innerHTML = `<i class="fa-solid fa-fire text-amber-400"></i> <span class="countdown-timer-modal" data-expire="${p.timer}">লোডিং...</span>`;
                 timerBox.classList.remove('hidden');
             } else {
                 timerBox.classList.add('hidden');
             }
 
-            // Bind the 4 Dynamic Purchase Conversion CTA Action Buttons Inside the Details Screen Modal Window Frame
+            // Bind the 4 Button Functional Core Grid System Inside the Details Screen Modal Window Frame
             const actionGrid = document.getElementById('modal-action-grid');
             actionGrid.innerHTML = `
                 <button onclick="addToCart(${p.id}); closeDetailsModal();" class="bg-slate-900 text-white py-2 rounded-xl hover:bg-slate-800 transition">Add to Cart</button>
@@ -565,7 +572,7 @@
                     let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     let mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                     let secs = Math.floor((diff % (1000 * 60)) / 1000);
-                    textField.innerText = `${hours}h : ${mins}m : ${secs}s`;
+                    textField.innerText = `${hours}h : ${mins}m :${secs}s`;
                 });
 
                 // Processor context loop for modal component view layer
@@ -577,7 +584,7 @@
                     let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     let mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                     let secs = Math.floor((diff % (1000 * 60)) / 1000);
-                    t.innerText = `ধামাকা অফার শেষ হতে বাকি: ${hours} ঘণ্টা ${mins} মিনিট ${secs} সেকেন্ড`;
+                    t.innerText = `অফার শেষ হতে আর মাত্র: ${hours} ঘণ্টা ${mins} মিনিট ${secs} সেকেন্ড বাকি`;
                 });
             }, 1000);
         }
@@ -667,19 +674,4 @@
         function buyNowAction(id) {
             let prod = products.find(p => p.id === id);
             let pPrice = prod.price - (prod.price * (prod.discount / 100));
-            let text = `হ্যালো, আমি এই প্রোডাক্টটি সরাসরি কিনতে চাই:\nনাম: ${prod.title}\nমূল্য: ৳${pPrice}`;
-            window.open(`https://wa.me/8801845840375?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
-        function checkoutCartWhatsApp() {
-            if(cart.length === 0) { alert('কার্ট সম্পূর্ণ খালি!'); return; }
-            let text = "হ্যালো LoFfy 4u, আমি এই প্রোডাক্টগুলো অর্ডার করতে চাই:\n\n";
-            cart.forEach((item, i) => {
-                let pPrice = item.price - (item.price * (item.discount / 100));
-                text += `${i+1}. ${item.title} - ৳${pPrice}\n`;
-            });
-            window.open(`https://wa.me/8801845840375?text=${encodeURIComponent(text)}`, '_blank');
-        }
-    </script>
-</body>
-</html>
+            let text = `হ্যালো, আমি এই প্রোডাক্টটি সরাসরি কিনতে চাই:\nনাম: ${prod.title}\n
