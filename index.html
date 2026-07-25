@@ -12,9 +12,12 @@
             font-family: 'Hind Siliguri', sans-serif;
             background-color: #FDFBF7;
         }
-        .text-orange-brand { color: #FF6B00; }
-        .bg-orange-brand { background-color: #FF6B00; }
-        .border-orange-brand { border-color: #FF6B00; }
+        /* লোগোর সাথে সামঞ্জস্য রেখে গ্রিন ও ইয়োলো ব্র্যান্ডিং থিম */
+        .text-green-brand { color: #16a34a; }
+        .bg-green-brand { background-color: #16a34a; }
+        .border-green-brand { border-color: #16a34a; }
+        .text-yellow-brand { color: #facc15; }
+        .bg-yellow-brand { background-color: #facc15; }
         
         .zoom-img { transition: transform 0.5s ease; }
         .img-container:hover .zoom-img { transform: scale(1.08); }
@@ -22,7 +25,7 @@
         /* 2 Sec Dynamic Smooth Zoom for Top Small Banner */
         @keyframes dynamic-zoom {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
+            50% { transform: scale(1.05); }
         }
         .animate-subtle-zoom {
             animation: dynamic-zoom 2s infinite ease-in-out;
@@ -39,13 +42,10 @@
 </head>
 <body class="text-gray-800 antialiased selection:bg-slate-900 selection:text-white">
 
-    <nav class="bg-orange-brand shadow-md sticky top-0 z-40 border-b border-orange-700 px-2 sm:px-4">
-        <div class="container mx-auto py-2 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2">
-                <img src="https://lh3.googleusercontent.com/d/1Xl2Kx2y8lX5lXW2lX5lXW2lX5lXW2lX5=s800?authuser=0" onerror="this.src='https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=100&q=80'" class="h-12 w-auto object-contain rounded-md" alt="LoFfy 4u Logo">
-                <span class="text-2xl sm:text-3xl font-bold text-[#D4AF37] tracking-wider drop-shadow-sm hidden sm:inline">
-                    LoFfy <span class="text-white">4u</span>
-                </span>
+    <nav class="bg-green-brand shadow-md sticky top-0 z-40 border-b border-green-700 px-2 sm:px-4">
+        <div class="container mx-auto py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl sm:text-3xl font-bold text-[#facc15] tracking-wider drop-shadow-sm flex items-center gap-1">
+                LoFfy <span class="text-white">4u</span>
             </a>
             
             <div class="flex items-center space-x-3">
@@ -61,7 +61,7 @@
                     <i class="fa-solid fa-right-to-bracket"></i> লগইন
                 </button>
 
-                <div class="relative cursor-pointer p-2 rounded-full hover:bg-orange-600 transition" onclick="toggleCartModal()">
+                <div class="relative cursor-pointer p-2 rounded-full hover:bg-green-600 transition" onclick="toggleCartModal()">
                     <i class="fa-solid fa-basket-shopping text-xl text-white"></i>
                     <span id="cart-count" class="absolute top-0 right-0 bg-slate-950 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
                 </div>
@@ -69,6 +69,7 @@
         </div>
     </nav>
 
+    <!-- Popup Ad Modal -->
     <div id="popup-ad-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full relative animate-subtle-zoom">
             <button onclick="closePopupAd()" class="absolute top-3 right-3 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black transition z-10">✕</button>
@@ -76,41 +77,43 @@
                 <img id="popup-ad-img" src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80" class="w-full h-auto object-cover" alt="Advertisement">
                 <div class="p-4 bg-slate-950 text-center">
                     <h4 id="popup-ad-title" class="text-white font-bold text-lg">ধামাকা প্রিমিয়াম অফার!</h4>
-                    <p class="text-orange-400 text-sm font-semibold">পছন্দের প্রোডাক্টটি কিনতে এখনই ভিজিট করুন।</p>
+                    <p class="text-yellow-400 text-sm font-semibold">পছন্দের প্রোডাক্টটি কিনতে এখনই ভিজিট করুন।</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Sliders Section -->
     <div class="container mx-auto px-4 my-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="md:col-span-2 relative rounded-2xl overflow-hidden shadow-md h-56 sm:h-64 md:h-80 bg-gray-900">
                 <div id="large-slider-container" class="w-full h-full relative"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center p-6 pointer-events-none">
-                    <h2 class="text-white text-xl sm:text-3xl font-bold">প্রিমিয়াম মেগা কালেকশন<br><span class="text-orange-400 text-sm sm:text-lg font-medium">সেরা দামে সেরা পণ্য দেশজুড়ে ক্যাশ অন ডেলিভারি</span></h2>
+                    <h2 class="text-white text-xl sm:text-3xl font-bold">প্রিমিয়াম মেগা কালেকশন<br><span class="text-yellow-400 text-sm sm:text-lg font-medium">সেরা দামে সেরা পণ্য দেশজুড়ে ক্যাশ অন ডেলিভারি</span></h2>
                 </div>
             </div>
 
-            <div class="relative rounded-2xl overflow-hidden shadow-md h-56 sm:h-64 md:h-80 bg-gray-950 border border-orange-500/20 animate-subtle-zoom">
+            <div class="relative rounded-2xl overflow-hidden shadow-md h-56 sm:h-64 md:h-80 bg-gray-950 border border-green-500/20 animate-subtle-zoom">
                 <div id="small-slider-container" class="w-full h-full relative"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-4 pointer-events-none">
                     <span class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded mb-1 w-max animate-pulse">হট ডিল</span>
-                    <h3 class="text-white font-bold text-base">সীমিত সময়ের অফার</h3>
+                    <h3 class="text-white font-bold text-base">সীমিত সময়ের অফার</h3>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Quick Badges -->
     <div class="container mx-auto px-4 my-2">
         <div class="flex flex-wrap items-center justify-start gap-2 text-xs font-semibold">
-            <button onclick="alert('আপনার ওয়ালেটে ১০% ক্যাশব্যাক যুক্ত করা হয়েছে!')" class="bg-amber-100 text-amber-800 border border-amber-200 px-3 py-1.5 rounded-xl hover:bg-amber-600 hover:text-white transition flex items-center gap-1">
+            <button onclick="alert('আপনার ওয়ালেটে ১০% ক্যাশব্যাক যুক্ত করা হয়েছে!')" class="bg-amber-100 text-amber-800 border border-amber-200 px-3 py-1.5 rounded-xl hover:bg-amber-600 hover:text-white transition flex items-center gap-1">
                 <i class="fa-solid fa-gift text-amber-500"></i> ১০% ক্যাশব্যাক
             </button>
             <a href="#product-grid-1" class="bg-red-50 text-red-700 border border-red-200 px-3 py-1.5 rounded-xl hover:bg-red-600 hover:text-white transition flex items-center gap-1">
                 <i class="fa-solid fa-bolt text-red-500"></i> ফ্ল্যাশ ডিল
             </a>
-            <button onclick="alert('আমাদের জনপ্রিয় পার্টনার ব্র্যান্ড সমূহের তালিকা লোড হচ্ছে...')" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-xl hover:bg-blue-600 hover:text-white transition flex items-center gap-1">
-                <i class="fa-solid fa-award text-blue-500"></i> জনপ্রিয় ব্র্যান্ড
+            <button onclick="alert('আমাদের জনপ্রিয় পার্টনার ব্র্যান্ড সমূহের তালিকা লোড হচ্ছে...')" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-xl hover:bg-blue-600 hover:text-white transition flex items-center gap-1">
+                <i class="fa-solid fa-award text-blue-500"></i> জনপ্রিয় ব্র্যান্ড
             </button>
             <button onclick="alert('৫ তারকা সম্বলিত ভেরিফাইড রিভিউ ফিল্টার ওপেন করা হচ্ছে...')" class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-xl hover:bg-emerald-600 hover:text-white transition flex items-center gap-1">
                 <i class="fa-solid fa-comments text-emerald-500"></i> কাস্টমার রিভিউ জোন
@@ -118,39 +121,44 @@
         </div>
     </div>
 
+    <!-- Search & Filters -->
     <div class="container mx-auto px-4 my-4">
-        <div class="bg-white rounded-xl p-3 shadow-sm border border-orange-100 flex flex-col sm:flex-row gap-3 items-center justify-between">
-            <input type="text" id="search-bar" oninput="renderProducts()" placeholder="প্রোডাক্টের নাম দিয়ে সার্চ করুন..." class="w-full sm:w-1/2 px-4 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-500 bg-gray-50">
+        <div class="bg-white rounded-xl p-3 shadow-sm border border-green-100 flex flex-col sm:flex-row gap-3 items-center justify-between">
+            <input type="text" id="search-bar" oninput="renderProducts()" placeholder="প্রোডাক্টের নাম দিয়ে সার্চ করুন..." class="w-full sm:w-1/2 px-4 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-green-500 bg-gray-50">
             <select id="category-filter" onchange="renderProducts()" class="w-full sm:w-auto bg-gray-50 border border-gray-200 px-3 py-2 rounded-xl text-sm focus:outline-none cursor-pointer">
                 <option value="all">সব ক্যাটাগরি</option>
                 <option value="শার্ট">শার্ট</option>
-                <option value="ঘড়ি">ঘড়ি</option>
+                <option value="ঘড়ি">ঘড়ি</option>
                 <option value="জুতো">জুতো</option>
                 <option value="গ্যাজেট">গ্যাজেট</option>
             </select>
         </div>
     </div>
 
+    <!-- Popular Products Grid -->
     <div class="container mx-auto px-4 my-4">
-        <div class="border-l-4 border-orange-brand pl-2 mb-4">
-            <h2 class="text-xl font-bold text-gray-800">জনপ্রিয় প্রোডাক্টস</h2>
+        <div class="border-l-4 border-green-600 pl-2 mb-4">
+            <h2 class="text-xl font-bold text-gray-800">জনপ্রিয় প্রোডাক্টস</h2>
         </div>
         <div id="product-grid-1" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"></div>
     </div>
 
+    <!-- Middle Banner Slider -->
     <div class="container mx-auto px-4 my-6">
-        <div class="relative rounded-2xl overflow-hidden shadow-md h-28 sm:h-36 bg-gray-900 border-2 border-orange-500/20">
+        <div class="relative rounded-2xl overflow-hidden shadow-md h-28 sm:h-36 bg-gray-900 border-2 border-green-500/20">
             <div id="middle-long-slider-container" class="w-full h-full relative"></div>
         </div>
     </div>
 
+    <!-- All Collections Grid -->
     <div class="container mx-auto px-4 mb-16">
-        <div class="border-l-4 border-orange-brand pl-2 mb-4">
+        <div class="border-l-4 border-green-600 pl-2 mb-4">
             <h2 class="text-xl font-bold text-gray-800">অন্যান্য সকল কালেকশন</h2>
         </div>
         <div id="product-grid-2" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"></div>
     </div>
 
+    <!-- Product Details Modal -->
     <div id="details-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center hidden p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-2xl w-full p-5 shadow-2xl relative max-h-[92vh] overflow-y-auto animate-modal">
             <button onclick="closeDetailsModal()" class="absolute top-3 right-4 bg-gray-100 text-gray-700 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 text-lg font-bold">✕</button>
@@ -167,11 +175,11 @@
                     <div>
                         <h3 id="modal-product-title" class="text-xl font-bold text-slate-900"></h3>
                         <div class="flex items-center space-x-3 my-2">
-                            <span id="modal-final-price" class="text-xl font-bold text-orange-brand"></span>
+                            <span id="modal-final-price" class="text-xl font-bold text-green-600"></span>
                             <span id="modal-old-price" class="text-gray-400 text-sm line-through"></span>
                         </div>
                         
-                        <div id="modal-timer-box" class="hidden my-3 p-3 bg-red-950 text-white rounded-xl shadow-md font-mono text-center border-l-4 border-amber-400"></div>
+                        <div id="modal-timer-box" class="hidden my-3 p-2 bg-red-50 border border-red-200 rounded-xl"></div>
 
                         <div id="modal-video-box" class="hidden mt-2">
                             <p class="text-[11px] font-bold text-gray-500 mb-1"><i class="fa-solid fa-video text-red-500"></i> প্রোডাক্ট ভিডিও রিভিউ:</p>
@@ -187,32 +195,34 @@
         </div>
     </div>
 
+    <!-- Admin Login Modal -->
     <div id="login-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-2xl p-6 shadow-2xl max-w-sm w-full">
-            <h3 class="text-lg font-bold text-gray-900 mb-4"><i class="fa-solid fa-shield-halved text-orange-brand"></i> অ্যাডমিন ভেরিফিকেশন</h3>
+            <h3 class="text-lg font-bold text-gray-900 mb-4"><i class="fa-solid fa-shield-halved text-green-600"></i> অ্যাডমিন ভেরিফিকেশন</h3>
             <input type="email" id="login-email" placeholder="আপনার সঠিক জিমেইল দিন..." class="w-full px-4 py-2.5 border rounded-xl mb-4 focus:outline-none text-sm">
             <div class="flex justify-end space-x-2">
                 <button onclick="closeLoginModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl text-xs font-semibold">বাতিল</button>
-                <button onclick="verifyAdminEmail()" class="px-4 py-2 bg-orange-brand text-white rounded-xl text-xs font-semibold">ভেরিফাই</button>
+                <button onclick="verifyAdminEmail()" class="px-4 py-2 bg-green-600 text-white rounded-xl text-xs font-semibold">ভেরিফাই</button>
             </div>
         </div>
     </div>
 
+    <!-- Admin Control Panel -->
     <div id="admin-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden p-4 overflow-y-auto">
         <div class="bg-white rounded-2xl p-6 shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 class="text-xl font-bold text-slate-900"><i class="fa-solid fa-sliders text-orange-brand"></i> অ্যাডমিন কন্ট্রোল প্যানেল</h3>
+                <h3 class="text-xl font-bold text-slate-900"><i class="fa-solid fa-sliders text-green-600"></i> অ্যাডমিন কন্ট্রোল প্যানেল</h3>
                 <button onclick="closeAdminModal()" class="text-gray-500 text-lg">✕</button>
             </div>
             
             <div class="space-y-3">
-                <h4 class="font-bold text-sm text-orange-brand border-b pb-1">১. নতুন প্রোডাক্ট আপলোড অপশন</h4>
+                <h4 class="font-bold text-sm text-green-600 border-b pb-1">১. নতুন প্রোডাক্ট আপলোড অপশন</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input type="text" id="prod-title" placeholder="প্রোডাক্টের নাম" class="p-2 border rounded-xl text-xs focus:outline-none">
                     <input type="number" id="prod-price" placeholder="মূল্য (৳)" class="p-2 border rounded-xl text-xs focus:outline-none">
                     <select id="prod-category" class="p-2 border rounded-xl text-xs focus:outline-none">
                         <option value="শার্ট">শার্ট</option>
-                        <option value="ঘড়ি">ঘড়ি</option>
+                        <option value="ঘড়ি">ঘড়ি</option>
                         <option value="জুতো">জুতো</option>
                         <option value="গ্যাজেট">গ্যাজেট</option>
                     </select>
@@ -220,22 +230,23 @@
                     <input type="datetime-local" id="prod-timer" placeholder="টাইমার ডেট" class="p-2 border rounded-xl text-xs focus:outline-none">
                     <input type="text" id="prod-video" placeholder="ইউটিউব ভিডিও এম্বেড লিংক" class="p-2 border rounded-xl text-xs focus:outline-none">
                 </div>
-                <textarea id="prod-images" placeholder="৩ থেকে ৪টি ইমেজ লিংক দিন (কমা দিয়ে আলাদা করুন ,)" rows="2" class="w-full p-2 border rounded-xl text-xs focus:outline-none"></textarea>
-                <button onclick="addNewProduct()" class="w-full py-2.5 bg-orange-brand text-white font-bold text-xs rounded-xl shadow hover:bg-orange-600 transition">লাইভ আপলোড করুন</button>
+                <textarea id="prod-images" placeholder="৩ থেকে ৪টি ইমেজ লিংক দিন (কমা দিয়ে আলাদা করুন ,)" rows="2" class="w-full p-2 border rounded-xl text-xs focus:outline-none"></textarea>
+                <button onclick="addNewProduct()" class="w-full py-2.5 bg-green-600 text-white font-bold text-xs rounded-xl shadow hover:bg-green-700 transition">লাইভ আপলোড করুন</button>
             </div>
 
             <div class="space-y-3 mt-6 border-t pt-4">
-                <h4 class="font-bold text-sm text-orange-brand border-b pb-1">২. প্রফেশনাল পপ-আপ অ্যাডস কন্ট্রোল</h4>
+                <h4 class="font-bold text-sm text-green-600 border-b pb-1">২. প্রফেশনাল পপ-আপ অ্যাডস কন্ট্রোল</h4>
                 <input type="text" id="ad-img-url" placeholder="অ্যাডভারটাইজমেন্ট ইমেজ লিংক (URL)" class="w-full p-2 border rounded-xl text-xs focus:outline-none">
-                <input type="text" id="ad-custom-title" placeholder="অ্যাডের আকর্ষণীয় টাইটেল" class="w-full p-2 border rounded-xl text-xs focus:outline-none">
+                <input type="text" id="ad-custom-title" placeholder="অ্যাডের আকর্ষণীয় টাইটেল" class="w-full p-2 border rounded-xl text-xs focus:outline-none">
                 <button onclick="updatePopupAdSettings()" class="w-full py-2 bg-slate-900 text-white font-bold text-xs rounded-xl hover:bg-slate-800 transition">অ্যাড আপডেট করুন</button>
             </div>
         </div>
     </div>
 
+    <!-- Shopping Cart Modal -->
     <div id="cart-modal" class="fixed inset-y-0 right-0 max-w-xs w-full bg-white z-50 shadow-2xl translate-x-full transition-transform duration-300 p-4 flex flex-col hidden">
         <div class="flex justify-between items-center border-b pb-2 mb-3">
-            <h3 class="font-bold text-base text-slate-900"><i class="fa-solid fa-cart-shopping text-orange-brand"></i> শপিং কার্ট</h3>
+            <h3 class="font-bold text-base text-slate-900"><i class="fa-solid fa-cart-shopping text-green-600"></i> শপিং কার্ট</h3>
             <button onclick="toggleCartModal()" class="text-gray-500 font-bold text-lg">✕</button>
         </div>
         
@@ -254,19 +265,22 @@
             </div>
             <div class="grid grid-cols-1 gap-2">
                 <button onclick="generateCustomerInvoice()" class="w-full py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition"><i class="fa-solid fa-file-invoice-dollar"></i> ক্যাশ মেমো / ইনভয়েস দেখুন</button>
-                <button onclick="checkoutCartWhatsApp()" class="w-full py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 transition"><i class="fa-brands fa-whatsapp"></i> হোয়াটসঅ্যাপে অর্ডার করুন</button>
+                <button onclick="checkoutCartWhatsApp()" class="w-full py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 transition"><i class="fa-brands fa-whatsapp"></i> হোয়াটসঅ্যাপে অর্ডার করুন</button>
             </div>
         </div>
     </div>
 
+    <!-- Invoice Modal -->
     <div id="invoice-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden p-4 overflow-y-auto">
-        <div class="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full border-t-8 border-orange-brand relative">
+        <div class="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full border-t-8 border-green-600 relative">
             <button onclick="closeInvoiceModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 font-bold text-lg">✕</button>
             
             <div id="invoice-print-area" class="text-xs">
-                <div class="text-center mb-4 border-b pb-2 flex flex-col items-center justify-center">
-                    <img src="https://lh3.googleusercontent.com/d/1Xl2Kx2y8lX5lXW2lX5lXW2lX5lXW2lX5=s800?authuser=0" onerror="this.src='https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=100&q=80'" class="h-16 w-auto object-contain mx-auto mb-1" alt="LoFfy 4u Logo">
-                    <p class="text-gray-500 text-[10px]">প্রিমিয়াম অনলাইন শপিং হাব</p>
+                <div class="text-center mb-4 border-b pb-2">
+                    <h2 class="text-2xl font-bold text-[#facc15] tracking-wider bg-green-600 inline-block px-4 py-1.5 rounded-xl shadow-sm">
+                        LoFfy <span class="text-white">4u</span>
+                    </h2>
+                    <p class="text-gray-500 text-[10px] mt-1">প্রিমিয়াম অনলাইন শপিং হাব</p>
                     <p class="text-gray-400 text-[9px]">তারিখ: <span id="inv-date"></span> | ইনভয়েস নং: #INV-<span id="inv-num"></span></p>
                 </div>
                 
@@ -292,7 +306,7 @@
                         <span>ডেলিভারি চার্জ:</span>
                         <span>৳ ৬০ (ক্যাশ অন)</span>
                     </div>
-                    <div class="flex justify-between border-t pt-1 text-orange-brand">
+                    <div class="flex justify-between border-t pt-1 text-green-600">
                         <span>সর্বমোট প্রদেয়:</span>
                         <span id="invoice-grand-total">৳ ০</span>
                     </div>
@@ -311,25 +325,18 @@
         </div>
     </div>
 
+    <!-- Complete Optimized Engine Script -->
     <script>
-        // Core Live Database Initialization Component (Code Edit Persistence Shield Enabled)
-        let defaultProducts = [
+        let products = JSON.parse(localStorage.getItem('loFfy_products')) || [
             { id: 1, title: "Premium Men's Casual Shirt", price: 1250, category: "শার্ট", discount: 20, timer: "2026-12-31T23:59:00", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", images: ["https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=500&q=80"] },
-            { id: 2, title: "Luxury Waterproof Smartwatch", price: 3400, category: "ঘড়ি", discount: 15, timer: "2026-11-25T18:00:00", video: "", images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80"] },
+            { id: 2, title: "Luxury Waterproof Smartwatch", price: 3400, category: "ঘড়ি", discount: 15, timer: "2026-11-25T18:00:00", video: "", images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80"] },
             { id: 3, title: "Ultra Breathable Sports Sneaker", price: 2800, category: "জুতো", discount: 30, timer: "", video: "", images: ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=500&q=80"] },
             { id: 4, title: "Premium TWS Wireless Earbuds", price: 1950, category: "গ্যাজেট", discount: 10, timer: "2026-08-15T12:00:00", video: "", images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=500&q=80"] }
         ];
 
-        // Persistence Logic Layer
-        if (!localStorage.getItem('loFfy_products')) {
-            localStorage.setItem('loFfy_products', JSON.stringify(defaultProducts));
-        }
-        let products = JSON.parse(localStorage.getItem('loFfy_products'));
-
         let cart = [];
         let activeAdmin = localStorage.getItem('isAdminActive') === 'true';
 
-        // 3 Different Distinct Image Sets for Sliders to avoid replica duplication
         const largeSliderImages = [
             "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80",
             "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
@@ -374,9 +381,9 @@
                 localStorage.setItem('isAdminActive', 'true');
                 checkAdminUIVisibility();
                 closeLoginModal();
-                alert('সফলভাবে এডমিন প্যানেল আনলক হয়েছে!');
+                alert('সফলভাবে এডমিন প্যানেল আনলক হয়েছে!');
             } else {
-                alert('অক্ষমা প্রকাশ করা হচ্ছে! এই জিমেইল দিয়ে এডমিন অ্যাক্সেস সম্ভব নয়।');
+                alert('অক্ষমা প্রকাশ করা হচ্ছে! এই জিমেইল দিয়ে এডমিন অ্যাক্সেস সম্ভব নয়।');
             }
         }
 
@@ -389,11 +396,10 @@
             const title = document.getElementById('ad-custom-title').value;
             if(img) document.getElementById('popup-ad-img').src = img;
             if(title) document.getElementById('popup-ad-title').innerText = title;
-            alert('বিজ্ঞাপন অপশন আপডেট হয়েছে!');
+            alert('বিজ্ঞাপন অপশন আপডেট হয়েছে!');
             closeAdminModal();
         }
 
-        // Setup Sliders using distinct database arrays (4000ms / 4s Smooth Interval Rotation Engine)
         function setupSliders() {
             const largeContainer = document.getElementById('large-slider-container');
             const smallContainer = document.getElementById('small-slider-container');
@@ -403,15 +409,15 @@
             smallContainer.innerHTML = '';
             middleContainer.innerHTML = '';
 
-            for (let i = 0; i < 20; i++) {
-                largeContainer.innerHTML += `<img class="large-slide absolute inset-0 w-full h-full object-cover fade-slide ${i===0?'opacity-100':'opacity-0'}" src="${largeSliderImages[i % largeSliderImages.length]}">`;
-                smallContainer.innerHTML += `<img class="small-slide absolute inset-0 w-full h-full object-cover fade-slide ${i===0?'opacity-100':'opacity-0'}" src="${smallSliderImages[i % smallSliderImages.length]}">`;
-                middleContainer.innerHTML += `<img class="middle-slide absolute inset-0 w-full h-full object-cover fade-slide ${i===0?'opacity-100':'opacity-0'}" src="${middleSliderImages[i % middleSliderImages.length]}">`;
+            for (let i = 0; i < 3; i++) {
+                largeContainer.innerHTML += `<img class="large-slide absolute inset-0 w-full h-full object-cover fade-slide ${i===0?'opacity-100':'opacity-0'}" src="${largeSliderImages[i]}">`;
+                smallContainer.innerHTML += `<img class="small-slide absolute inset-0 w-full h-full object-cover fade-slide ${i===0?'opacity-100':'opacity-0'}" src="${smallSliderImages[i]}">`;
+                middleContainer.innerHTML += `<img class="middle-slide absolute inset-0 w-full h-full object-cover fade-slide ${i===0?'opacity-100':'opacity-0'}" src="${middleSliderImages[i]}">`;
             }
 
-            startSliderIntervals('large-slide', 4000);
-            startSliderIntervals('small-slide', 4000);
-            startSliderIntervals('middle-slide', 4000);
+            startSliderIntervals('large-slide', 3500);
+            startSliderIntervals('small-slide', 3500);
+            startSliderIntervals('middle-slide', 3500);
         }
 
         function startSliderIntervals(className, time) {
@@ -445,9 +451,10 @@
             renderProducts();
             initializeTimers();
             closeAdminModal();
-            alert('প্রোডাক্টটি সফলভাবে লাইভ যোগ করা হয়েছে এবং এটি স্থায়ীভাবে সংরক্ষিত থাকবে!');
+            alert('প্রোডাক্টটি সফলভাবে লাইভ যোগ করা হয়েছে!');
         }
 
+        /* অসম্পূর্ণ renderProducts ফাংশনটির সম্পূর্ণ রূপ */
         function renderProducts() {
             const grid1 = document.getElementById('product-grid-1');
             const grid2 = document.getElementById('product-grid-2');
@@ -465,213 +472,60 @@
 
             filtered.forEach((p, idx) => {
                 let discPrice = p.price - (p.price * (p.discount / 100));
-                
                 let productCard = `
-                    <div class="bg-white rounded-xl shadow-sm border border-orange-100 overflow-hidden flex flex-col p-3 relative cursor-pointer" onclick="openDetailsModal(${p.id})">
+                    <div class="bg-white rounded-xl shadow-sm border border-green-100 overflow-hidden flex flex-col p-3 relative cursor-pointer" onclick="openDetailsModal(${p.id})">
                         ${p.discount > 0 ? `<span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded z-10">-${p.discount}% অফ</span>` : ''}
-                        
                         <div class="relative w-full h-48 bg-gray-100 overflow-hidden rounded-t-xl img-container">
                             <img src="${p.images[0].trim()}" class="w-full h-full object-cover zoom-img">
                         </div>
-
                         <div class="flex-1 flex flex-col justify-between mt-2">
                             <div>
                                 <h4 class="font-bold text-sm text-gray-800 line-clamp-1">${p.title}</h4>
                                 <div class="flex items-center space-x-2 my-1">
-                                    <span class="text-orange-brand font-bold text-sm">৳${discPrice}</span>${p.discount > 0 ? `<span class="text-gray-400 text-xs line-through">৳${p.price}</span>` : ''}
+                                    <span class="text-green-600 font-bold text-sm">৳${discPrice}</span>
+                                    ${p.discount > 0 ? `<span class="text-gray-400 text-xs line-through">৳${p.price}</span>` : ''}
                                 </div>
-                                
                                 ${p.timer ? `
                                     <div class="mt-2 p-1.5 bg-slate-900 text-white rounded-lg flex items-center justify-center gap-1 text-[10px] font-mono shadow-sm countdown-box" data-expire="${p.timer}">
                                         <i class="fa-solid fa-clock text-amber-400 animate-spin"></i> <span class="countdown-timer-text">লোডিং...</span>
                                     </div>
                                 ` : ''}
                             </div>
-                            
-                            <div class="mt-3 pt-2 border-t text-center text-[11px] text-gray-400 font-bold">
-                                <span class="text-orange-brand"><i class="fa-solid fa-eye"></i> বিস্তারিত দেখুন</span>
+                            <div class="mt-3 pt-2 border-t text-center text-[11px] font-bold">
+                                <span class="text-green-600"><i class="fa-solid fa-eye"></i> বিস্তারিত দেখুন</span>
                             </div>
                         </div>
                     </div>
                 `;
 
-                if (idx < 4) { grid1.innerHTML += productCard; } else { grid2.innerHTML += productCard; }
+                if (idx < 4) {
+                    grid1.innerHTML += productCard;
+                } else {
+                    grid2.innerHTML += productCard;
+                }
             });
-        }
-
-        // Advanced Product Specifications Detailed Engine Functionality Implementation
-        function openDetailsModal(id) {
-            let p = products.find(prod => prod.id === id);
-            if(!p) return;
-
-            let discPrice = p.price - (p.price * (p.discount / 100));
-            document.getElementById('modal-product-title').innerText = p.title;
-            document.getElementById('modal-final-price').innerText = "৳" + discPrice;
-            document.getElementById('modal-old-price').innerText = p.discount > 0 ? "৳" + p.price : "";
-
-            // Set Showcase Image Framework base
-            const showcase = document.getElementById('modal-showcase-img');
-            showcase.src = p.images[0].trim();
-
-            // Set Gallery Thumbnails Layout
-            const thumbsContainer = document.getElementById('modal-gallery-thumbnails');
-            thumbsContainer.innerHTML = '';
-            p.images.forEach(img => {
-                thumbsContainer.innerHTML += `
-                    <img src="${img.trim()}" class="w-12 h-12 object-cover border rounded-lg cursor-pointer hover:border-orange-500 transition shadow-sm" onclick="document.getElementById('modal-showcase-img').src='${img.trim()}'">
-                `;
-            });
-
-            // Handle Video Frame Component Integration Logic
-            const videoBox = document.getElementById('modal-video-box');
-            const videoFrame = document.getElementById('modal-video-frame');
-            if(p.video) {
-                videoFrame.src = p.video;
-                videoBox.classList.remove('hidden');
-            } else {
-                videoFrame.src = "";
-                videoBox.classList.add('hidden');
-            }
-
-            // Live Customized Timers Structure Integration inside Modal Overlay
-            const timerBox = document.getElementById('modal-timer-box');
-            if(p.timer) {
-                timerBox.innerHTML = `<i class="fa-solid fa-fire text-amber-400"></i> <span class="countdown-timer-modal" data-expire="${p.timer}">লোডিং...</span>`;
-                timerBox.classList.remove('hidden');
-            } else {
-                timerBox.classList.add('hidden');
-            }
-
-            // Bind the 4 Button Functional Core Grid System Inside the Details Screen Modal Window Frame
-            const actionGrid = document.getElementById('modal-action-grid');
-            actionGrid.innerHTML = `
-                <button onclick="addToCart(${p.id}); closeDetailsModal();" class="bg-slate-900 text-white py-2 rounded-xl hover:bg-slate-800 transition">Add to Cart</button>
-                <button onclick="buyNowAction(${p.id})" class="bg-orange-brand text-white py-2 rounded-xl hover:bg-orange-700 transition">Buy Now</button>
-                <a href="https://wa.me/8801845840375?text=Hi, I want to order ${encodeURIComponent(p.title)}" target="_blank" class="bg-emerald-600 text-white py-2 rounded-xl hover:bg-emerald-700 transition text-center flex items-center justify-center gap-1"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                <button onclick="alert('কল করুন: 01845840375')" class="bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition">কল অর্ডার</button>
-            `;
-
-            document.getElementById('details-modal').classList.remove('hidden');
-        }
-
-        function closeDetailsModal() {
-            document.getElementById('details-modal').classList.add('hidden');
-            document.getElementById('modal-video-frame').src = ""; // Flush memory streams
+            initializeTimers();
         }
 
         function initializeTimers() {
-            setInterval(() => {
-                // Processor loop for general card structures
-                document.querySelectorAll('.countdown-box').forEach(t => {
-                    let expiry = new Date(t.getAttribute('data-expire')).getTime();
-                    let now = new Date().getTime();
-                    let diff = expiry - now;
-                    let textField = t.querySelector('.countdown-timer-text');
-                    if(diff <= 0) { textField.innerText = "অফার শেষ!"; return; }
-                    
-                    let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    let mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    let secs = Math.floor((diff % (1000 * 60)) / 1000);
-                    textField.innerText = `${hours}h : ${mins}m :${secs}s`;
-                });
+            const boxes = document.querySelectorAll('.countdown-box');
+            boxes.forEach(box => {
+                const expireStr = box.getAttribute('data-expire');
+                if(!expireStr) return;
+                const expireTime = new Date(expireStr).getTime();
+                
+                const interval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = expireTime - now;
+                    const textSpan = box.querySelector('.countdown-timer-text');
 
-                // Processor context loop for modal component view layer
-                document.querySelectorAll('.countdown-timer-modal').forEach(t => {
-                    let expiry = new Date(t.getAttribute('data-expire')).getTime();
-                    let now = new Date().getTime();
-                    let diff = expiry - now;
-                    if(diff <= 0) { t.innerText = "অফার শেষ হয়ে গেছে!"; return; }
-                    let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    let mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    let secs = Math.floor((diff % (1000 * 60)) / 1000);
-                    t.innerText = `অফার শেষ হতে আর মাত্র: ${hours} ঘণ্টা ${mins} মিনিট ${secs} সেকেন্ড বাকি`;
-                });
-            }, 1000);
-        }
+                    if (distance < 0) {
+                        if(textSpan) textSpan.innerText = "অফার শেষ!";
+                        clearInterval(interval);
+                        return;
+                    }
 
-        function addToCart(id) {
-            let prod = products.find(p => p.id === id);
-            cart.push(prod);
-            document.getElementById('cart-count').innerText = cart.length;
-            alert(`${prod.title} কার্টে যোগ করা হয়েছে!`);
-        }
-
-        function toggleCartModal() {
-            const el = document.getElementById('cart-modal');
-            el.classList.toggle('hidden');
-            el.classList.toggle('translate-x-full');
-            renderCartList();
-        }
-
-        function renderCartList() {
-            const container = document.getElementById('cart-items-container');
-            let total = 0;
-            container.innerHTML = '';
-            
-            cart.forEach((item, idx) => {
-                let pPrice = item.price - (item.price * (item.discount / 100));
-                total += pPrice;
-                container.innerHTML += `
-                    <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg border">
-                        <div>
-                            <p class="font-bold text-gray-800 line-clamp-1">${item.title}</p>
-                            <p class="text-orange-brand font-semibold">৳${pPrice}</p>
-                        </div>
-                        <button onclick="removeFromCart(${idx})" class="text-red-600 font-bold">✕</button>
-                    </div>
-                `;
-            });
-            document.getElementById('cart-total-price').innerText = "৳" + total;
-        }
-
-        function removeFromCart(idx) {
-            cart.splice(idx, 1);
-            document.getElementById('cart-count').innerText = cart.length;
-            renderCartList();
-        }
-
-        function generateCustomerInvoice() {
-            if(cart.length === 0) { alert('ইনভয়েস তৈরি করতে প্রথমে কার্টে প্রোডাক্ট যুক্ত করুন!'); return; }
-            
-            const name = document.getElementById('cust-name').value.trim() || "সম্মানিত কাস্টমার";
-            const phone = document.getElementById('cust-phone').value.trim() || "প্রদান করা হয়নি";
-            const address = document.getElementById('cust-address').value.trim() || "প্রদান করা হয়নি";
-
-            document.getElementById('inv-cust-name').innerText = name;
-            document.getElementById('inv-cust-phone').innerText = phone;
-            document.getElementById('inv-cust-address').innerText = address;
-
-            document.getElementById('inv-date').innerText = new Date().toLocaleDateString('bn-BD');
-            document.getElementById('inv-num').innerText = Math.floor(100000 + Math.random() * 900000);
-
-            const tableBody = document.getElementById('invoice-table-body');
-            tableBody.innerHTML = '';
-            let subtotal = 0;
-
-            cart.forEach(item => {
-                let finalPrice = item.price - (item.price * (item.discount / 100));
-                subtotal += finalPrice;
-                tableBody.innerHTML += `
-                    <tr class="border-b text-gray-700">
-                        <td class="py-2">${item.title}</td>
-                        <td class="py-2 text-right">৳${finalPrice}</td>
-                    </tr>
-                `;
-            });
-
-            document.getElementById('invoice-grand-total').innerText = "৳" + (subtotal + 60);
-            document.getElementById('invoice-modal').classList.remove('hidden');
-        }
-
-        function closeInvoiceModal() { document.getElementById('invoice-modal').classList.add('hidden'); }
-
-        function confirmInvoiceAndOrder() {
-            alert('অর্ডারটি ডাটাবেজে রেকর্ড করা হয়েছে! আপনাকে ধন্যবাদ।');
-            closeInvoiceModal();
-            checkoutCartWhatsApp();
-        }
-
-        function buyNowAction(id) {
-            let prod = products.find(p => p.id === id);
-            let pPrice = prod.price - (prod.price * (prod.discount / 100));
-            let text = `হ্যালো, আমি এই প্রোডাক্টটি সরাসরি কিনতে চাই:\nনাম: ${prod.title}\n
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
