@@ -206,7 +206,7 @@
         </h2>
         <div id="product-grid-1" class="grid grid-cols-4 gap-4 mb-10"></div>
 
-        <!-- Banner Middle Long Component (৩ নম্বর কভার ফটো - এখন অ্যানিমেটেড) -->
+        <!-- Banner Middle Long Component (৩ নম্বর কভার ফটো - এখন প্রোডাক্ট লাইনের মাঝখানে) -->
         <section class="my-8">
             <div id="middle-long-banner-box" class="w-full h-40 bg-slate-900 rounded-2xl relative overflow-hidden shadow-sm border flex items-center">
                 <div id="middle-banner-container" class="absolute inset-0 w-full h-full"></div>
@@ -318,7 +318,7 @@
                         <input type="datetime-local" id="prod-timer" class="w-full p-2 border rounded-lg text-xs">
                     </div>
                     <input type="text" id="prod-video" placeholder="ইউটিউব এমবেড লিংক (ঐচ্ছিক)..." class="w-full p-2 border rounded-lg text-xs">
-                    <textarea id="prod-images" placeholder="ইমেজ লিংকসমূহ (কমা দিয়ে আলাদা করুন)..." class="w-full p-2 border rounded-lg text-xs h-16"></textarea>
+                    <textarea id="prod-images" placeholder="ইমেজ লিংকসমূহ (কমা দিয়ে আলাদা করুন)..." class="w-full p-2 border rounded-lg text-xs h-16"></textarea>
                     <button onclick="addNewProduct()" class="w-full bg-slate-900 text-white py-2 rounded-lg text-xs font-bold hover:bg-slate-800 transition">প্রোডাক্ট লাইভ করুন</button>
                 </div>
             </div>
@@ -345,10 +345,40 @@
                 <img id="popup-ad-img" src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80" class="w-full h-48 object-cover hover:scale-105 transition duration-500">
                 <div class="p-4 text-center">
                     <h4 id="popup-ad-title" class="font-extrabold text-lg text-slate-800 mb-2">ধামাকা উইকএন্ড অফার!</h4>
-                    <p class="text-xs text-gray-500 mb-4">আমাদের সাইটের যেকোনো কেনাকাটায় পাচ্ছেন নিশ্চিত ফ্রি DELIVERY চার্জ সুবিধা। আজই অর্ডার করুন!</p>
+                    <p class="text-xs text-gray-500 mb-4">আমাদের সাইটের যেকোনো কেনাকাটায় পাচ্ছেন নিশ্চিত ফ্রি DELIVERY চার্জ সুবিধা। আজই অর্ডার করুন!</p>
                     <button class="bg-green-600 text-white text-xs px-6 py-2 rounded-xl font-bold hover:bg-green-700 transition w-full">অফারে অংশ নিন</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Options Selection Matrix Modal for Ordering -->
+    <div id="order-options-modal" class="fixed inset-0 bg-black/60 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl w-full max-w-sm shadow-2xl relative animate-fade-in">
+            <button onclick="closeOrderOptionsModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-base font-black mb-4 text-slate-800 text-center"><i class="fa-solid fa-basket-shopping text-green-600"></i> আপনার পছন্দের অর্ডার অপশনটি বেছে নিন</h3>
+            <div class="flex flex-col gap-3 text-xs font-bold">
+                <button onclick="triggerOptionBuyNow()" class="w-full bg-slate-950 text-white py-3 rounded-xl hover:bg-slate-850 transition shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bolt text-amber-400"></i> বাই নাও (Buy Now)
+                </button>
+                <button onclick="triggerOptionWhatsApp()" class="w-full bg-emerald-600 text-white py-3 rounded-xl hover:bg-emerald-700 transition shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> অর্ডার ডিরেক্টলি হোয়াটসঅ্যাপ
+                </button>
+                <button onclick="triggerOptionAddToCart()" class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cart-plus"></i> অ্যাড টু কার্ট (Add to Cart)
+                </button>
+                <button onclick="triggerOptionCashMemo()" class="w-full bg-amber-500 text-white py-3 rounded-xl hover:bg-amber-650 transition shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> ক্যাশ মেমো জেনারেট করুন
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Image Zoom Lightbox Modal Layout -->
+    <div id="product-zoom-modal" class="fixed inset-0 bg-black/90 hidden z-50 flex items-center justify-center p-4 cursor-zoom-out" onclick="closeProductZoomModal()">
+        <button onclick="closeProductZoomModal()" class="absolute top-4 right-4 bg-white/20 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/40 transition text-xl z-20"><i class="fa-solid fa-xmark"></i></button>
+        <div class="max-w-4xl max-h-[90vh] flex items-center justify-center relative p-2 overflow-hidden" onclick="event.stopPropagation()">
+            <img id="zoom-lightbox-display-img" src="" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl border border-white/10 transition-transform duration-300 hover:scale-120 cursor-zoom-in">
         </div>
     </div>
 
@@ -359,8 +389,11 @@
             
             <!-- Left Side Media Box -->
             <div class="w-1/2 p-4 bg-slate-50 flex flex-col justify-between">
-                <div class="w-full h-64 bg-white rounded-xl overflow-hidden border">
+                <div class="w-full h-64 bg-white rounded-xl overflow-hidden border cursor-pointer relative group" onclick="triggerProductZoomFromModal()">
                     <img id="modal-showcase-img" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs transition-opacity duration-300">
+                        <i class="fa-solid fa-magnifying-glass-plus text-xl mr-1"></i> জুম করে দেখুন
+                    </div>
                 </div>
                 <div id="modal-gallery-thumbnails" class="flex gap-2 mt-3 overflow-x-auto py-1"></div>
             </div>
@@ -432,680 +465,802 @@
         </div>
     </div>
 
-    <!-- Modal Layout 5: POS Invoice Layer -->
-    <div id="invoice-modal" class="fixed inset-0 bg-black/70 hidden z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white p-6 rounded-2xl w-full max-w-md shadow-2xl relative my-6 font-mono text-xs text-slate-800">
-            <button onclick="closeInvoiceModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 print:hidden"><i class="fa-solid fa-xmark text-lg"></i></button>
-            
-            <div class="text-center border-b pb-3 mb-3">
-                <h3 class="text-base font-black tracking-wider text-green-600">LoFfy 4u Invoice</h3>
-                <p class="text-[10px] text-gray-400">ঢাকা, বাংলাদেশ। মোবাইল: ০১৭০০০০০০০০</p>
-            </div>
-            
-            <div class="space-y-1 mb-4">
-                <p><strong>ইনভয়েস নং:</strong> #<span id="inv-num">000000</span></p>
-                <p><strong>তারিখ:</strong> <span id="inv-date">00/00/0000</span></p>
-                <p><strong>পেমেন্ট ধরণ:</strong> <span id="inv-pay-method">COD</span></p>
-                <p class="border-t pt-1 mt-1"><strong>কাস্টমার নাম:</strong> <span id="inv-cust-name">-</span></p>
-                <p><strong>মোবাইল:</strong> <span id="inv-cust-phone">-</span></p>
-                <p><strong>ঠিকানা:</strong> <span id="inv-cust-address">-</span></p>
-            </div>
-
-            <table class="w-full text-left mb-4">
-                <thead>
-                    <tr class="border-b-2 border-slate-900 font-bold">
-                        <th class="py-1">বিবরণ (পরিমাণ)</th>
-                        <th class="py-1 text-right">মূল্য</th>
-                    </tr>
-                </thead>
-                <tbody id="invoice-table-body"></tbody>
-            </table>
-
-            <div class="border-t pt-2 space-y-1 text-right font-bold">
-                <p id="invoice-delivery-charge" class="text-gray-500 text-[11px]">ডেলিভারি চার্জ: ৳৬০</p>
-                <p class="text-sm text-slate-900">সর্বমোট প্রদেয়: <span id="invoice-grand-total">৳০</span></p>
-            </div>
-
-            <div class="mt-6 pt-3 border-t border-dashed text-center text-gray-400 text-[10px] print:hidden">
-                <p class="mb-3">আমাদের সাথে কেনাকাটা করার জন্য ধন্যবাদ!</p>
-                <div class="flex gap-2">
-                    <button onclick="window.print()" class="flex-1 bg-slate-200 text-slate-700 py-2 rounded-lg hover:bg-slate-300 transition"><i class="fa-solid fa-print"></i> প্রিন্ট মেমো</button>
-                    <button onclick="confirmInvoiceAndOrder()" class="flex-1 bg-green-600 text-white py-2 rounded-lg font-bold hover:bg-green-700 transition">অর্ডার নিশ্চিত করুন</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Core Engine Javascript Framework -->
+    <!-- JavaScript Control Framework Engine Core -->
     <script>
-        // Global Contact Configurations
-        const FB_PAGE_URL = "https://www.facebook.com/share/1BfqbQGjNW/";
-        const WHATSAPP_NUMBER = "8801845840375";
-
-        // Core Resilient Data Repository Model
-        const defaultProducts = [
-            { id: 1, title: "Premium Men's Casual Shirt", price: 1250, category: "শার্ট", discount: 20, timer: "2026-12-31T23:59:00", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", images: ["https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=500&q=80"] },
-            { id: 2, title: "Luxury Waterproof Smartwatch", price: 3400, category: "ঘড়ি", discount: 15, timer: "2026-11-25T18:00:00", video: "", images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80"] },
-            { id: 3, title: "Ultra Breathable Sports Sneaker", price: 2800, category: "জুতো", discount: 30, timer: "2026-10-10T12:00:00", video: "", images: ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"] },
-            { id: 4, title: "Premium TWS Wireless Earbuds", price: 1950, category: "গ্যাজেট", discount: 10, timer: "2026-08-15T12:00:00", video: "", images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80"] },
-            { id: 5, title: "Exclusive Mechanical Premium Watch", price: 5500, category: "ঘড়ি", discount: 25, timer: "2026-09-01T00:00:00", video: "", images: ["https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=500&q=80"] },
-            { id: 6, title: "Classic Slim Fit Denim Jeans", price: 1850, category: "শার্ট", discount: 5, timer: "", video: "", images: ["https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=500&q=80"] },
-            { id: 7, title: "Ergonomic Office Laptop Stand", price: 1450, category: "গ্যাজেট", discount: 12, timer: "2026-07-30T15:30:00", video: "", images: ["https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=500&q=80"] },
-            { id: 8, title: "Luxury Leather Formal Shoes", price: 4200, category: "জুতো", discount: 18, timer: "2026-12-25T00:00:00", video: "", images: ["https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=500&q=80"] }
-        ];
-
-        // Customer Mock Reviews Dataset
-        const customerReviews = [
-            { name: "আরিফ রহমান", text: "শার্টের কাপড়ের কোয়ালিটি অসাধারণ ছিল! মাত্র ২ দিনেই ঢাকাতে ডেলিভারি পেয়েছি। ধন্যবাদ LoFfy 4u!", stars: 5 },
-            { name: "তাহমিনা আক্তার", text: "স্মার্টওয়াচটা অনেক সুন্দর এবং প্রিমিয়াম লুক দেয়। ঠিক যেমন ছবিতে দেখেছি তেমনটাই পেয়েছি।", stars: 5 },
-            { name: "রাশেদুল ইসলাম", text: "গ্যাজেট আইটেমটা অনেক কাজের, প্রাইস হিসেবে বেশ বাজেট ফ্রেন্ডলি এবং প্যাকেজিং খুব মজবুত ছিল।", stars: 4 },
-            { name: "মেহেদী হাসান", text: "জুতো জোড়ার কমফোর্ট এক কথায় অসাম। ডেলিভারি ম্যানের ব্যবহারও খুব ভালো ছিল। রেকমেন্ডেড!", stars: 5 }
-        ];
-
-        // Advanced Anti-Wipe Integration
-        let localData = JSON.parse(localStorage.getItem('loFfy_products')) || [];
-        
-        defaultProducts.forEach(dp => {
-            if(!localData.some(ld => ld.id === dp.id)) {
-                localData.push(dp);
+        // System Global Reactive State Storage Architecture
+        let globalProducts = [
+            {
+                id: 101,
+                title: "প্রিমিয়াম ক্যাজুয়াল লিনেন শার্ট",
+                price: 1450,
+                discount: 20,
+                timer: "2026-12-31T23:59:59",
+                category: "শার্ট",
+                images: [
+                    "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1621072156002-e2fcc103e869?auto=format&fit=crop&w=600&q=80"
+                ],
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            {
+                id: 102,
+                title: "লাক্সারি স্পোর্টস ক্রোনোগ্রাফ ওয়াচ",
+                price: 4800,
+                discount: 15,
+                timer: "2026-11-30T18:00:00",
+                category: "ঘড়ি",
+                images: [
+                    "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=600&q=80"
+                ],
+                video: ""
+            },
+            {
+                id: 103,
+                title: "স্মার্ট স্পোর্টস রানিং শুজ",
+                price: 3200,
+                discount: 10,
+                timer: "",
+                category: "জুতো",
+                images: [
+                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+                ],
+                video: ""
+            },
+            {
+                id: 104,
+                title: "আল্ট্রা-সাউন্ড নোয়েস ক্যান্সেলিং ইয়ারবাডস",
+                price: 2600,
+                discount: 25,
+                timer: "2026-08-15T12:00:00",
+                category: "গ্যাজেট",
+                images: [
+                    "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80"
+                ],
+                video: ""
+            },
+            {
+                id: 105,
+                title: "ক্লাসিক্যাল এক্সিকিউটিভ প্রিমিয়াম শার্ট",
+                price: 1850,
+                discount: 0,
+                timer: "",
+                category: "শার্ট",
+                images: [
+                    "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=600&q=80"
+                ],
+                video: ""
+            },
+            {
+                id: 106,
+                title: "মিনিমালিস্টিক স্লিম ওয়াটারপ্রুফ ওয়াচ",
+                price: 3500,
+                discount: 30,
+                timer: "2026-10-25T00:00:00",
+                category: "ঘড়ি",
+                images: [
+                    "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80"
+                ],
+                video: ""
+            },
+            {
+                id: 107,
+                title: "এয়ার-কুশন কমফোর্ট ওয়াকিং শুজ",
+                price: 2900,
+                discount: 5,
+                timer: "",
+                category: "জুতো",
+                images: [
+                    "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80"
+                ],
+                video: ""
+            },
+            {
+                id: 108,
+                title: "মাল্টি-ফাংশনাল ওয়ারলেস ফাস্ট চার্জার ডক",
+                price: 1990,
+                discount: 12,
+                timer: "2026-09-01T06:00:00",
+                category: "গ্যাজেট",
+                images: [
+                    "https://images.unsplash.com/photo-1622445262465-2481c4574875?auto=format&fit=crop&w=600&q=80"
+                ],
+                video: ""
             }
-        });
-        
-        let products = localData;
-        localStorage.setItem('loFfy_products', JSON.stringify(products));
+        ];
 
-        let cart = [];
-        let activeAdmin = localStorage.getItem('isAdminActive') === 'true';
-        let currentLang = 'bn';
-        let adTargetProductId = null;
+        let globalCart = [];
+        let currentWebsiteLanguage = "bn";
+        let activeSelectedProductIdForOptions = null;
 
-        // Currency Exchange Rates
-        const currencyConfig = {
-            bn: { rate: 1, symbol: '৳' },
-            en: { rate: 0.0085, symbol: '$' },
-            es: { rate: 0.0081, symbol: '€' },
-            fr: { rate: 0.0081, symbol: '€' },
-            de: { rate: 0.0081, symbol: '€' },
-            it: { rate: 0.0081, symbol: '€' }
+        // Custom Multi-Lingual High Definition Dictionary Architecture
+        const translationDictionary = {
+            bn: {
+                "search-placeholder": "পণ্য খুঁজুন...",
+                "cat-all": "সব ক্যাটাগরি", "cat-shirt": "শার্ট", "cat-watch": "ঘড়ি", "cat-shoes": "জুতো", "cat-gadget": "গ্যাজেট",
+                "max-price": "সর্বোচ্চ:", "track-order": "অর্ডার ট্র্যাক", "login": "লগইন", "dashboard": "ড্যাশবোর্ড",
+                "line1-title": "জনপ্রিয় ও অফার প্রোডাক্টস (লাইন ১)", "line2-title": "আমাদের সকল প্রোডাক্টস (লাইন ২)",
+                "track-title": "আপনার অর্ডার ট্র্যাক করুন", "btn-track": "অনুসন্ধান করুন",
+                "cart-title": "আপনার শপিং ব্যাগ", "subtotal": "কার্ট সাবটোটাল:",
+                "pay-method": "পেমেন্ট মেথড সিলেক্ট করুন:", "pay-cod": "ক্যাশ অন ডেলিভারি (COD)", "pay-online": "অনলাইন পেমেন্ট",
+                "btn-invoice": "ক্যাশ মেমো", "btn-wa": "হোয়াটসঅ্যাপ অর্ডার"
+            },
+            en: {
+                "search-placeholder": "Search catalog...",
+                "cat-all": "All Categories", "cat-shirt": "Shirts", "cat-watch": "Watches", "cat-shoes": "Shoes", "cat-gadget": "Gadgets",
+                "max-price": "Max:", "track-order": "Track Order", "login": "Login", "dashboard": "Dashboard",
+                "line1-title": "Trending & Flash Sales (Line 1)", "line2-title": "All Standard Products (Line 2)",
+                "track-title": "Track Your Live Package", "btn-track": "Search Now",
+                "cart-title": "Your Shopping Bag", "subtotal": "Cart Subtotal:",
+                "pay-method": "Select Payment Channel:", "pay-cod": "Cash On Delivery (COD)", "pay-online": "Online Secure Pay",
+                "btn-invoice": "Invoice Paper", "btn-wa": "WhatsApp Order"
+            },
+            es: {
+                "search-placeholder": "Buscar productos...",
+                "cat-all": "Todas las categorías", "cat-shirt": "Camisas", "cat-watch": "Relojes", "cat-shoes": "Zapatos", "cat-gadget": "Dispositivos",
+                "max-price": "Máximo:", "track-order": "Rastrear pedido", "login": "Acceso", "dashboard": "Panel de control",
+                "line1-title": "Productos populares y ofertas (Línea 1)", "line2-title": "Todos nuestros productos (Línea 2)",
+                "track-title": "Rastrea tu orden en vivo", "btn-track": "Buscar ahora",
+                "cart-title": "Tu bolsa de compras", "subtotal": "Subtotal del carrito:",
+                "pay-method": "Seleccionar método de pago:", "pay-cod": "Pago en efectivo a la entrega", "pay-online": "Pago en línea seguro",
+                "btn-invoice": "Generar factura", "btn-wa": "Pedido por WhatsApp"
+            },
+            fr: {
+                "search-placeholder": "Rechercher des produits...",
+                "cat-all": "Toutes les catégories", "cat-shirt": "Chemises", "cat-watch": "Montres", "cat-shoes": "Chaussures", "cat-gadget": "Gadgets",
+                "max-price": "Maxi:", "track-order": "Suivi de commande", "login": "Connexion", "dashboard": "Tableau de bord",
+                "line1-title": "Produits populaires et offres (Ligne 1)", "line2-title": "Tous nos produits (Ligne 2)",
+                "track-title": "Suivez votre colis en direct", "btn-track": "Rechercher",
+                "cart-title": "Votre panier d'achat", "subtotal": "Sous-total du panier:",
+                "pay-method": "Sélectionnez le mode de paiement:", "pay-cod": "Paiement à la livraison", "pay-online": "Paiement en ligne sécurisé",
+                "btn-invoice": "Créer une facture", "btn-wa": "Commande WhatsApp"
+            },
+            de: {
+                "search-placeholder": "Produkte suchen...",
+                "cat-all": "Alle Kategorien", "cat-shirt": "Hemden", "cat-watch": "Uhren", "cat-shoes": "Schuhe", "cat-gadget": "Gadgets",
+                "max-price": "Maximal:", "track-order": "Bestellung verfolgen", "login": "Einloggen", "dashboard": "Dashboard",
+                "line1-title": "Beliebte Produkte & Angebote (Zeile 1)", "line2-title": "Alle unsere Produkte (Zeile 2)",
+                "track-title": "Verfolgen Sie Ihre Bestellung", "btn-track": "Jetzt suchen",
+                "cart-title": "Ihr Einkaufskorb", "subtotal": "Zwischensumme:",
+                "pay-method": "Zahlungsmethode wählen:", "pay-cod": "Nachnahme (COD)", "pay-online": "Sichere Online-Zahlung",
+                "btn-invoice": "Rechnung erstellen", "btn-wa": "WhatsApp-Bestellung"
+            },
+            it: {
+                "search-placeholder": "Cerca prodotti...",
+                "cat-all": "Tutte le categorie", "cat-shirt": "Camicie", "cat-watch": "Orologi", "cat-shoes": "Scarpe", "cat-gadget": "Gadget",
+                "max-price": "Massimo:", "track-order": "Traccia ordine", "login": "Accedi", "dashboard": "Pannello di controllo",
+                "line1-title": "Prodotti popolari e offerte (Linea 1)", "line2-title": "Tutti i nostri prodotti (Linea 2)",
+                "track-title": "Traccia il tuo ordine", "btn-track": "Cerca ora",
+                "cart-title": "Il tuo carrello", "subtotal": "Totale parziale carrello:",
+                "pay-method": "Seleziona metodo di pagamento:", "pay-cod": "Contrassegno (COD)", "pay-online": "Pagamento online sicuro",
+                "btn-invoice": "Genera fattura", "btn-wa": "Ordine WhatsApp"
+            }
         };
 
-        function formatPrice(bdtAmount) {
-            const config = currencyConfig[currentLang];
-            const converted = Math.round(bdtAmount * config.rate);
-            return `${config.symbol}${converted}`;
+        // Automated Banner Database Matrix
+        const largeBannerDatabase = [
+            { img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80", text: "আমাদের নতুন লাক্সারি কালেকশনে সবাইকে স্বাগতম! মেগা সেলে থাকছে ৩০% পর্যন্ত বিশেষ ছাড়।" },
+            { img: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80", text: "ফ্যাশনেবল লাইফস্টাইলের সেরা পণ্য সামগ্রী সরাসরি আপনার দরজায়। ক্যাশ অন ডেলিভারি সুবিধা।" },
+            { img: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=1200&q=80", text: "অরিজিনাল ব্র্যান্ডের ইলেকট্রনিক্স ও গ্যাজেট আইটেম কিনুন শতভাগ ওয়ারেন্টি নিশ্চয়তার সাথে।" }
+        ];
+
+        const smallBannerDatabase = [
+            { img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80", text: "স্মার্ট গ্যাজেটস ২০% ক্যাশব্যাক ডিল!" },
+            { img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80", text: "প্রিমিয়াম সানগ্লাস ও ফ্যাশন এক্সেসরিজ কালেকশন" },
+            { img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80", text: "সুপার সাউন্ড হেডফোন ও অডিও গিয়ার ডিল" }
+        ];
+
+        const middleBannerDatabase = [
+            { img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=80", text: "৩ নম্বর বিশেষ কভার ব্যানার: ধামাকা উইকএন্ডে কোনো ডেলিভারি চার্জ নেই! লুফে নিন সেরা ডিল!" },
+            { img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=1200&q=80", text: "প্রিমিয়াম প্রডাক্ট কিনুন সরাসরি ১ ক্লিকের ৪টি সহজ পদ্ধতিতে!" }
+        ];
+
+        let largeBannerIndex = 0, smallBannerIndex = 0, middleBannerIndex = 0;
+
+        // Custom Live Verified Consumer Review Array Matrix Data
+        const realConsumerReviewsList = [
+            "শার্টের কাপড়ের মান এককথায় অসাধারণ ছিল! রঙ এবং সাইজ একদম ঠিকঠাক পেয়েছি। ধন্যবাদ LoFfy 4u!",
+            "আমি একটি স্মার্টওয়াচ নিয়েছিলাম, ৪ দিন ব্যবহার করছি, চার্জ ব্যাকআপ চমৎকার এবং প্রিমিয়াম লুক দেয়।",
+            "ডেলিভারি অনেক দ্রুত ছিল, ঢাকার বাইরে মাত্র ২ দিনেই ক্যাশ অন ডেলিভারিতে প্রোডাক্ট হাতে পেয়েছি।",
+            "ইয়ারবাডসের সাউন্ড কোয়ালিটি অনেক জোস, বিশেষ করে বেস অসাধারণ। এই বাজেটে সেরা চয়েস!",
+            "কাস্টমার সার্ভিসের ব্যবহার অনেক ভালো ছিল, সাইজ এক্সচেঞ্জ করার প্রসেস একদম ইজি ও ফ্রেন্ডলি।"
+        ];
+        let currentReviewActivePointer = 0;
+
+        // Life-Cycle Initializer Setup Block
+        window.addEventListener("DOMContentLoaded", () => {
+            initializeInteractiveRotatorBanners();
+            renderProducts();
+            initLiveReviewsCarousel();
+            setInterval(initLiveReviewsCarousel, 4500);
+            
+            // Randomly auto triggers active pop up promotional box within short period
+            setTimeout(() => {
+                const configurations = JSON.parse(localStorage.getItem("admin_ad_config") || "{}");
+                if (configurations.img) {
+                    document.getElementById("popup-ad-img").src = configurations.img;
+                }
+                if (configurations.title) {
+                    document.getElementById("popup-ad-title").innerText = configurations.title;
+                }
+                document.getElementById("popup-ad-modal").classList.remove("hidden");
+            }, 3000);
+
+            // Setup real-time countdown clocks for products automatically
+            setInterval(updateGlobalCountdownClocks, 1000);
+        });
+
+        // Banner Multi-rotator Engine Core Operations
+        function initializeInteractiveRotatorBanners() {
+            // Setup Large Banner Component
+            const lBox = document.getElementById("large-banner-container");
+            lBox.innerHTML = largeBannerDatabase.map((b, idx) => `
+                <div class="banner-slide absolute inset-0 w-full h-full bg-cover bg-center ${idx === 0 ? 'active' : ''}" style="background-image: url('${b.img}')"></div>
+            `).join('');
+            document.getElementById("large-banner-text").innerText = largeBannerDatabase[0].text;
+            setInterval(rotateLargeBannerNext, 5000);
+
+            // Setup Small Banner Component
+            const sBox = document.getElementById("small-banner-container");
+            sBox.innerHTML = smallBannerDatabase.map((b, idx) => `
+                <div class="banner-slide absolute inset-0 w-full h-full bg-cover bg-center ${idx === 0 ? 'active' : ''}" style="background-image: url('${b.img}')"></div>
+            `).join('');
+            document.getElementById("small-banner-text").innerText = smallBannerDatabase[0].text;
+            setInterval(rotateSmallBannerNext, 4000);
+
+            // Setup Middle Long Banner Component
+            const mBox = document.getElementById("middle-banner-container");
+            mBox.innerHTML = middleBannerDatabase.map((b, idx) => `
+                <div class="banner-slide absolute inset-0 w-full h-full bg-cover bg-center ${idx === 0 ? 'active' : ''}" style="background-image: url('${b.img}')"></div>
+            `).join('');
+            document.getElementById("middle-banner-text").innerText = middleBannerDatabase[0].text;
+            setInterval(rotateMiddleBannerNext, 6000);
         }
 
-        // Dictionary Mapping for Languages
-        const languageDictionary = {
-            bn: { 'search-placeholder': 'পণ্য খুঁজুন...', 'cat-all': 'সব ক্যাটাগরি', 'cat-shirt': 'শার্ট', 'cat-watch': 'ঘড়ি', 'cat-shoes': 'জুতো', 'cat-gadget': 'গ্যাজেট', 'max-price': 'সর্বোচ্চ:', 'track-order': 'অর্ডার ট্র্যাক', 'login': 'লগইন', 'dashboard': 'ড্যাশবোর্ড', 'line1-title': 'জনপ্রিয় ও অফার প্রোডাক্টস (লাইন ১)', 'line2-title': 'আমাদের সকল প্রোডাক্টস (লাইন ২)', 'track-title': 'আপনার অর্ডার ট্র্যাক করুন', 'btn-track': 'অনুসন্ধান করুন', 'cart-title': 'আপনার শপিং ব্যাগ', 'subtotal': 'কার্ট সাবটোটাল:', 'pay-method': 'পেমেন্ট মেথড সিলেক্ট করুন:', 'pay-cod': 'ক্যাশ অন ডেলিভারি (COD)', 'pay-online': 'অনলাইন পেমেন্ট', 'btn-invoice': 'ক্যাশ মেমো', 'btn-wa': 'হোয়াটসঅ্যাপ অর্ডার', 'del-info': '🚚 ডেলিভারি: ঢাকা ৳৬০ | বাহিরে ৳১২০' },
-            en: { 'search-placeholder': 'Search items...', 'cat-all': 'All Category', 'cat-shirt': 'Shirt', 'cat-watch': 'Watch', 'cat-shoes': 'Shoes', 'cat-gadget': 'Gadget', 'max-price': 'Max Price:', 'track-order': 'Track Order', 'login': 'Login', 'dashboard': 'Dashboard', 'line1-title': 'Popular & Hot Offers (Line 1)', 'line2-title': 'All Available Products (Line 2)', 'track-title': 'Track Your Order Status', 'btn-track': 'Search Now', 'cart-title': 'Your Shopping Cart', 'subtotal': 'Cart Subtotal:', 'pay-method': 'Select Payment Method:', 'pay-cod': 'Cash on Delivery (COD)', 'pay-online': 'Online Payment Gate', 'btn-invoice': 'Get Cash Memo', 'btn-wa': 'WhatsApp Checkout', 'del-info': '🚚 Delivery: Inside Dhaka $1 | Outside Dhaka $2' }
-        };
+        function rotateLargeBannerNext() {
+            const slides = document.querySelectorAll("#large-banner-container .banner-slide");
+            slides[largeBannerIndex].classList.remove("active");
+            largeBannerIndex = (largeBannerIndex + 1) % largeBannerDatabase.length;
+            slides[largeBannerIndex].classList.add("active");
+            document.getElementById("large-banner-text").innerText = largeBannerDatabase[largeBannerIndex].text;
+        }
 
-        // 20 Completely Different Dynamic Images for Cover Photo 1 (Large Banner)
-        const largeBannerDataset = [
-            { img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80", txt: "মেগা ধামাকা অফার - ৫০% পর্যন্ত অবিশ্বাস্য ছাড়!" },
-            { img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80", txt: "অনলাইন শপিং এ পান সবচেয়ে নির্ভরযোগ্য সিকিউর ডিল" },
-            { img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", txt: "নতুন বছরের বিশেষ কালেকশনে সেরা ডিজাইন চুজ করুন" },
-            { img: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=800&q=80", txt: "প্রিমিয়াম লাক্সারি আইটেম এখন আপনার হাতের মুঠোয়" },
-            { img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80", txt: "স্মার্ট শপিং এক্সপেরিয়েন্স উইথ LoFfy 4u প্ল্যাটফর্ম" },
-            { img: "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&w=800&q=80", txt: "শহুরে ফ্যাশনের নতুন ট্রেন্ড নিয়ে এলো বিশেষ ছাড়" },
-            { img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80", txt: "সহজ ক্যাশ অন ডেলিভারি ও রিয়েল-টাইম ট্র্যাকিং সুবিধা" },
-            { img: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80", txt: "গ্রাহক সন্তুষ্টি আমাদের একমাত্র এবং প্রধান অঙ্গীকার" }
-        ];
+        function rotateSmallBannerNext() {
+            const slides = document.querySelectorAll("#small-banner-container .banner-slide");
+            slides[smallBannerIndex].classList.remove("active");
+            smallBannerIndex = (smallBannerIndex + 1) % smallBannerDatabase.length;
+            slides[smallBannerIndex].classList.add("active");
+            document.getElementById("small-banner-text").innerText = smallBannerDatabase[smallBannerIndex].text;
+        }
 
-        const smallBannerDataset = [
-            { img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80", txt: "এক্সক্লুসিভ লাইফস্টাইল ও ফ্যাশন এক্সেসরিজ" },
-            { img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80", txt: "স্মার্ট এক্সেসরিজ কালেকশন ২০২৬" },
-            { img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=800&q=80", txt: "ক্লাসিক রিস্ট ওয়াচ ট্রেন্ডি ডিজাইনসমূহ" }
-        ];
+        function rotateMiddleBannerNext() {
+            const slides = document.querySelectorAll("#middle-banner-container .banner-slide");
+            if(slides.length === 0) return;
+            slides[middleBannerIndex].classList.remove("active");
+            middleBannerIndex = (middleBannerIndex + 1) % middleBannerDatabase.length;
+            slides[middleBannerIndex].classList.add("active");
+            document.getElementById("middle-banner-text").innerText = middleBannerDatabase[middleBannerIndex].text;
+        }
 
-        const middleBannerDataset = [
-            { img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80", txt: "স্পেশাল কম্বো ধামাকা! যেকোনো দুটি পণ্য একসাথে কিনলেই ডেলিভারি সম্পূর্ণ ফ্রি।" },
-            { img: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80", txt: "আমাদের কফি ও লাক্সারি লিভিং কালেকশনে পাচ্ছেন বিশেষ ৩০% কম্বো অফার।" }
-        ];
-
-        window.onload = function() {
-            initBanners();
-            renderProducts();
-            startCountdownTimerLoop();
-            checkAdminUIVisibility();
-            triggerOncePopupAd(); 
-            startReviewSliderLoop(); 
+        function initLiveReviewsCarousel() {
+            const container = document.getElementById("live-review-container");
+            if(!container) return;
+            container.style.opacity = 0;
+            container.style.transform = "translateY(10px)";
             
             setTimeout(() => {
-                document.getElementById('ai-assistant-bubble').classList.remove('hidden');
-            }, 2000);
-        };
-
-        function selectCategory(catName) {
-            document.getElementById('category-filter').value = catName;
-            renderProducts();
-            document.getElementById('category-filter').scrollIntoView({ behavior: 'smooth' });
+                container.innerHTML = `
+                    <p class="text-sm italic font-medium text-slate-700">"${realConsumerReviewsList[currentReviewActivePointer]}"</p>
+                    <div class="flex justify-center gap-1 text-amber-400 text-xs mt-2">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-[10px] text-green-600 font-bold mt-1">✓ ভেরিফাইড কাস্টমার রিভিউ</p>
+                `;
+                container.style.opacity = 1;
+                container.style.transform = "translateY(0px)";
+                currentReviewActivePointer = (currentReviewActivePointer + 1) % realConsumerReviewsList.length;
+            }, 800);
         }
 
-        function resetFilters() {
-            document.getElementById('search-bar').value = '';
-            document.getElementById('category-filter').value = 'all';
-            document.getElementById('price-filter').value = '';
-            renderProducts();
-        }
-
-        function changeWebsiteLanguage(langCode) {
-            currentLang = langCode;
-            const dict = languageDictionary[langCode] || languageDictionary['bn'];
-            document.querySelectorAll('[data-ln]').forEach(el => {
-                const key = el.getAttribute('data-ln');
-                if(dict[key]) {
-                    if(el.tagName === 'INPUT') { el.placeholder = dict[key]; }
-                    else { el.innerText = dict[key]; }
-                }
-            });
-            renderProducts();
-            renderCartItems();
-        }
-
-        function initBanners() {
-            const largeContainer = document.getElementById('large-banner-container');
-            const smallContainer = document.getElementById('small-banner-container');
-            const middleContainer = document.getElementById('middle-banner-container');
-            
-            largeBannerDataset.forEach((b, i) => {
-                largeContainer.innerHTML += `<div class="banner-slide absolute inset-0 bg-cover bg-center ${i===0?'active':''}" style="background-image:url('${b.img}')"></div>`;
-            });
-            
-            smallBannerDataset.forEach((b, i) => {
-                smallContainer.innerHTML += `<div class="banner-slide absolute inset-0 bg-cover bg-center ${i===0?'active':''}" style="background-image:url('${b.img}')"></div>`;
-            });
-
-            middleBannerDataset.forEach((b, i) => {
-                middleContainer.innerHTML += `<div class="banner-slide absolute inset-0 bg-cover bg-center ${i===0?'active':''}" style="background-image:url('${b.img}')"></div>`;
-            });
-            
-            document.getElementById('large-banner-text').innerText = largeBannerDataset[0].txt;
-            document.getElementById('small-banner-text').innerText = smallBannerDataset[0].txt;
-            document.getElementById('middle-banner-text').innerText = middleBannerDataset[0].txt;
-
-            let lIdx = 0, sIdx = 0, mIdx = 0;
-            
-            setInterval(() => {
-                const slides = largeContainer.querySelectorAll('.banner-slide');
-                if(slides.length > 0) {
-                    slides[lIdx].classList.remove('active');
-                    lIdx = (lIdx + 1) % largeBannerDataset.length;
-                    slides[lIdx].classList.add('active');
-                    document.getElementById('large-banner-text').innerText = largeBannerDataset[lIdx].txt;
-                }
-            }, 4000);
-
-            setInterval(() => {
-                const slides = smallContainer.querySelectorAll('.banner-slide');
-                if(slides.length > 0) {
-                    slides[sIdx].classList.remove('active');
-                    sIdx = (sIdx + 1) % smallBannerDataset.length;
-                    slides[sIdx].classList.add('active');
-                    document.getElementById('small-banner-text').innerText = smallBannerDataset[sIdx].txt;
-                }
-            }, 4000);
-
-            setInterval(() => {
-                const slides = middleContainer.querySelectorAll('.banner-slide');
-                if(slides.length > 0) {
-                    slides[mIdx].classList.remove('active');
-                    mIdx = (mIdx + 1) % middleBannerDataset.length;
-                    slides[mIdx].classList.add('active');
-                    document.getElementById('middle-banner-text').innerText = middleBannerDataset[mIdx].txt;
-                }
-            }, 4500);
-        }
-
-        function checkAdminUIVisibility() {
-            const savedEmail = localStorage.getItem('adminUserEmail');
-            if (activeAdmin && savedEmail === 'elhasshossain@gmail.com') {
-                document.getElementById('admin-trigger-btn').classList.remove('hidden');
-                document.getElementById('login-trigger-btn').classList.add('hidden');
-            } else {
-                document.getElementById('admin-trigger-btn').classList.add('hidden');
-                document.getElementById('login-trigger-btn').classList.remove('hidden');
-                activeAdmin = false;
-                localStorage.setItem('isAdminActive', 'false');
-            }
-        }
-
-        function openLoginModal() { document.getElementById('login-modal').classList.remove('hidden'); }
-        function closeLoginModal() { document.getElementById('login-modal').classList.add('hidden'); }
-
-        function verifyAdminAccess() {
-            const email = document.getElementById('login-email').value.trim().toLowerCase();
-            const pass = document.getElementById('login-password').value.trim();
-            
-            if (email === 'elhasshossain@gmail.com' && pass === '01400028003') {
-                activeAdmin = true;
-                localStorage.setItem('isAdminActive', 'true');
-                localStorage.setItem('adminUserEmail', email);
-                checkAdminUIVisibility();
-                closeLoginModal();
-                alert('সফলভাবে এডমিন কন্ট্রোল প্যানেল আনলক হয়েছে!');
-            } else {
-                alert('ভুল ইমেইল অথবা পাসওয়ার্ড! অ্যাক্সেস ডিনাইড।');
-            }
-        }
-
-        function openAdminModal() { 
-            const savedEmail = localStorage.getItem('adminUserEmail');
-            if(activeAdmin && savedEmail === 'elhasshossain@gmail.com') {
-                document.getElementById('admin-modal').classList.remove('hidden'); 
-            } else {
-                alert('অননুমোদিত অ্যাক্সেস ব্লক করা হয়েছে!');
-            }
-        }
-        function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
-        function closePopupAd() { document.getElementById('popup-ad-modal').classList.add('hidden'); }
-
-        function triggerOncePopupAd() {
-            const hasSeenAd = sessionStorage.getItem('has_seen_promo_ad');
-            if (!hasSeenAd) {
-                setTimeout(() => {
-                    document.getElementById('popup-ad-modal').classList.remove('hidden');
-                    sessionStorage.setItem('has_seen_promo_ad', 'true');
-                }, 1500);
-            }
-        }
-
-        let currentReviewIdx = 0;
-        function startReviewSliderLoop() {
-            const container = document.getElementById('live-review-container');
-            
-            function updateReviewText() {
-                const r = customerReviews[currentReviewIdx];
-                let starIcons = '';
-                for(let i=0; i<r.stars; i++) {
-                    starIcons += `<i class="fa-solid fa-star text-amber-400 text-xs"></i> `;
-                }
-                
-                container.style.opacity = '0';
-                container.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    container.innerHTML = `
-                        <div class="mb-2">${starIcons}</div>
-                        <p class="text-xs text-slate-700 italic font-medium mb-3">"${r.text}"</p>
-                        <h5 class="text-xs font-bold text-green-600">- ${r.name}</h5>
-                    `;
-                    container.style.opacity = '1';
-                    container.style.transform = 'translateY(0px)';
-                }, 400);
-
-                currentReviewIdx = (currentReviewIdx + 1) % customerReviews.length;
-            }
-            
-            updateReviewText();
-            setInterval(updateReviewText, 4500);
-        }
-
-        function updatePopupAdSettings() {
-            const img = document.getElementById('ad-img-url').value;
-            const title = document.getElementById('ad-custom-title').value;
-            const targetId = document.getElementById('ad-target-product-id').value;
-            
-            if(img) document.getElementById('popup-ad-img').src = img;
-            if(title) document.getElementById('popup-ad-title').innerText = title;
-            if(targetId) {
-                adTargetProductId = parseInt(targetId);
-            } else {
-                adTargetProductId = null;
-            }
-            alert('পপ-আপ বিজ্ঞাপন সেটিংস আপডেট করা হয়েছে!');
-            closeAdminModal();
-        }
-
-        function handleAdClick() {
-            if(adTargetProductId) {
-                closePopupAd();
-                openDetailsModal(adTargetProductId);
-            }
-        }
-
-        function addNewProduct() {
-            const title = document.getElementById('prod-title').value;
-            const price = parseFloat(document.getElementById('prod-price').value);
-            const category = document.getElementById('prod-category').value;
-            const discount = parseFloat(document.getElementById('prod-discount').value) || 0;
-            const timer = document.getElementById('prod-timer').value;
-            const video = document.getElementById('prod-video').value;
-            const imgsRaw = document.getElementById('prod-images').value;
-            
-            let images = imgsRaw ? imgsRaw.split(',') : ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"];
-            if(!title || !price) { alert('সঠিক তথ্য দিন!'); return; }
-
-            const newProd = { id: Date.now(), title, price, category, discount, timer, video, images };
-            products.unshift(newProd);
-            localStorage.setItem('loFfy_products', JSON.stringify(products));
-            
-            renderProducts();
-            closeAdminModal();
-            alert('প্রোডাক্টটি ডেটাবেজে পার্মানেন্টলি সেভ হয়েছে! আইডি: ' + newProd.id);
-        }
-
+        // Global Dynamic Product Rendering Architecture Matrix System
         function renderProducts() {
-            const grid1 = document.getElementById('product-grid-1');
-            const grid2 = document.getElementById('product-grid-2');
-            const searchVal = document.getElementById('search-bar').value.toLowerCase();
-            const catVal = document.getElementById('category-filter').value;
-            const maxPriceVal = parseFloat(document.getElementById('price-filter').value) || Infinity;
+            const query = document.getElementById("search-bar").value.toLowerCase();
+            const cat = document.getElementById("category-filter").value;
+            const priceVal = parseFloat(document.getElementById("price-filter").value) || Infinity;
 
-            grid1.innerHTML = ''; grid2.innerHTML = '';
+            const targetGrid1 = document.getElementById("product-grid-1");
+            const targetGrid2 = document.getElementById("product-grid-2");
+            
+            targetGrid1.innerHTML = "";
+            targetGrid2.innerHTML = "";
 
-            let filtered = products.filter(p => {
-                let matchesSearch = p.title.toLowerCase().includes(searchVal);
-                let matchesCat = catVal === 'all' || p.category === catVal;
-                let discPrice = Math.round(p.price - (p.price * (p.discount / 100)));
-                let matchesPrice = discPrice <= maxPriceVal;
-                return matchesSearch && matchesCat && matchesPrice;
+            // Filter Process Execution
+            const cleanFilteredSet = globalProducts.filter(p => {
+                const matchSearch = p.title.toLowerCase().includes(query);
+                const matchCat = (cat === "all" || p.category === cat);
+                const finalCalcPrice = p.price - (p.price * (p.discount / 100));
+                const matchPrice = finalCalcPrice <= priceVal;
+                return matchSearch && matchCat && matchPrice;
             });
 
-            filtered.forEach((p, index) => {
-                let discPrice = Math.round(p.price - (p.price * (p.discount / 100)));
-                let productCard = `
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col p-3 relative cursor-pointer hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300" onclick="openDetailsModal(${p.id})">
-                        ${p.discount > 0 ? `<span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-black px-2.5 py-1 rounded-lg z-10 shadow-sm uppercase tracking-wider">-${p.discount}% অফ</span>` : ''}
-                        <span class="absolute top-3 right-3 bg-slate-900/60 backdrop-blur-xs text-white text-[9px] px-2 py-0.5 rounded font-mono z-10">ID: ${p.id}</span>
-                        <div class="relative w-full h-48 bg-slate-50 overflow-hidden rounded-xl img-container border border-slate-100">
-                            <img src="${p.images[0].trim()}" class="w-full h-full object-cover zoom-img">
+            cleanFilteredSet.forEach((prod, index) => {
+                const mainCutPrice = prod.price - (prod.price * (prod.discount / 100));
+                const countdownBoxHtml = prod.timer ? `
+                    <div class="absolute top-2 left-2 bg-red-600 text-white font-mono font-bold tracking-tight px-2 py-0.5 rounded shadow-md text-[9px] z-20" data-countdown="${prod.timer}">
+                        00h 00m 00s
+                    </div>
+                ` : '';
+
+                const discountTagHtml = prod.discount > 0 ? `
+                    <span class="absolute top-2 right-2 bg-amber-500 text-slate-950 font-black px-2 py-0.5 rounded-xl text-[10px] z-20 shadow-md">
+                        -${prod.discount}% OFF
+                    </span>
+                ` : '';
+
+                const productCardUI = `
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition duration-300 flex flex-col relative group">
+                        ${countdownBoxHtml}
+                        ${discountTagHtml}
+                        
+                        <!-- Image Frame Container Architecture with Zoom View Hook -->
+                        <div class="h-44 bg-slate-100 relative overflow-hidden img-container cursor-pointer" onclick="openProductZoomModalDirectly('${prod.images[0]}')">
+                            <img src="${prod.images[0]}" alt="${prod.title}" class="w-full h-full object-cover zoom-img">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xs font-bold gap-1">
+                                <i class="fa-solid fa-magnifying-glass-plus text-base"></i> View Archive (Zoom)
+                            </div>
                         </div>
-                        <div class="flex-1 flex flex-col justify-between mt-3">
+
+                        <!-- Content Details Block -->
+                        <div class="p-3 flex-1 flex flex-col justify-between">
                             <div>
-                                <h4 class="font-extrabold text-xs text-slate-800 line-clamp-2 min-h-[32px] tracking-wide">${p.title}</h4>
-                                <div class="flex items-center space-x-2 my-1.5">
-                                    <span class="text-green-600 font-black text-base">${formatPrice(discPrice)}</span>
-                                    ${p.discount > 0 ? `<span class="text-gray-400 text-xs line-through font-semibold">${formatPrice(p.price)}</span>` : ''}
+                                <span class="bg-slate-100 text-slate-600 font-extrabold px-2 py-0.5 rounded text-[9px] uppercase tracking-wider">${prod.category}</span>
+                                <h3 class="font-bold text-xs text-slate-800 line-clamp-2 mt-1 hover:text-green-600 cursor-pointer transition" onclick="openDetailsModal(${prod.id})">${prod.title}</h3>
+                            </div>
+                            
+                            <div class="mt-2">
+                                <div class="flex items-baseline space-x-1.5">
+                                    <span class="text-sm font-black text-green-600">৳${mainCutPrice}</span>
+                                    ${prod.discount > 0 ? `<span class="text-[10px] text-gray-400 line-through">৳${prod.price}</span>` : ''}
                                 </div>
-                                <div class="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-lg p-1.5 mb-2 font-bold tracking-wide flex items-center gap-1">
-                                    <i class="fa-solid fa-truck-fast text-[11px]"></i> ${languageDictionary[currentLang] ? languageDictionary[currentLang]['del-info'] : '🚚 ডেলিভারি: ঢাকা ৳৬০ | বাহিরে ৳১২০'}
-                                </div>
-                                ${p.timer ? `
-                                    <div class="p-2 bg-slate-900 text-white rounded-lg flex items-center justify-center gap-1.5 text-[10px] font-mono shadow-md countdown-box" data-expire="${p.timer}">
-                                        <i class="fa-solid fa-clock text-amber-400 animate-spin"></i> <span class="countdown-timer-text">Counting...</span>
-                                    </div>
-                                ` : ''}
+                                
+                                <!-- Triggering the Order Options Selector Framework Matrix -->
+                                <button onclick="openOrderOptionsModal(${prod.id})" class="w-full bg-slate-900 text-white py-2 rounded-xl text-[11px] font-black tracking-wide mt-2 hover:bg-green-600 transition flex items-center justify-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন (Order Options)
+                                </button>
                             </div>
                         </div>
                     </div>
                 `;
-                
-                if (p.discount > 0 || index < 4) {
-                    grid1.innerHTML += productCard;
+
+                // Split systematically line 1 and line 2 evenly across catalog
+                if (index < 4) {
+                    targetGrid1.innerHTML += productCardUI;
                 } else {
-                    grid2.innerHTML += productCard;
+                    targetGrid2.innerHTML += productCardUI;
                 }
             });
-        }
 
-        function startCountdownTimerLoop() {
-            setInterval(() => {
-                document.querySelectorAll('.countdown-box').forEach(box => {
-                    const expireTime = new Date(box.getAttribute('data-expire')).getTime();
-                    const now = new Date().getTime();
-                    const diff = expireTime - now;
-                    
-                    const textEl = box.querySelector('.countdown-timer-text');
-                    if(diff <= 0) {
-                        textEl.innerText = "অফার শেষ!";
-                    } else {
-                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                        const secs = Math.floor((diff % (1000 * 60)) / 1000);
-                        textEl.innerText = `শেষ হতে বাকি: ${days}দিন ${hours}ঘণ্টা ${mins}মিঃ ${secs}সেঃ`;
-                    }
-                });
-            }, 1000);
-        }
-
-        function openDetailsModal(id) {
-            const p = products.find(prod => prod.id === id);
-            if(!p) return;
-            
-            document.getElementById('details-modal').classList.remove('hidden');
-            document.getElementById('modal-product-title').innerText = p.title;
-            
-            let discPrice = Math.round(p.price - (p.price * (p.discount / 100)));
-            document.getElementById('modal-final-price').innerText = formatPrice(discPrice);
-            if(p.discount > 0) {
-                document.getElementById('modal-old-price').innerText = formatPrice(p.price);
-                document.getElementById('modal-old-price').classList.remove('hidden');
-            } else {
-                document.getElementById('modal-old-price').classList.add('hidden');
+            // Fallback for blank screens
+            if (cleanFilteredSet.length === 0) {
+                targetGrid1.innerHTML = `<div class="col-span-4 text-center py-8 text-gray-400 text-xs font-bold">দুঃখিত, কোনো পণ্য পাওয়া যায়নি! অনুগ্রহ করে অন্য কিছু খুঁজুন।</div>`;
             }
+        }
 
-            document.getElementById('modal-showcase-img').src = p.images[0].trim();
-            
-            const thumbBox = document.getElementById('modal-gallery-thumbnails');
-            thumbBox.innerHTML = '';
-            p.images.forEach(img => {
-                thumbBox.innerHTML += `
-                    <img src="${img.trim()}" onclick="document.getElementById('modal-showcase-img').src='${img.trim()}'" class="w-12 h-12 object-cover rounded-lg border cursor-pointer hover:border-green-600 transition">
-                `;
+        // Live Product Level Countdown System Logic Loop
+        function updateGlobalCountdownClocks() {
+            document.querySelectorAll("[data-countdown]").forEach(element => {
+                const targetTimeStr = element.getAttribute("data-countdown");
+                const difference = new Date(targetTimeStr).getTime() - new Date().getTime();
+                
+                if (difference <= 0) {
+                    element.innerHTML = "OFFER EXPIRED";
+                    element.classList.replace("bg-red-600", "bg-slate-500");
+                    return;
+                }
+
+                const hours = Math.floor((difference / (1000 * 60 * 60)));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                element.innerHTML = `⏳ ${hours}h ${minutes}m ${seconds}s`;
             });
+        }
 
-            const videoBox = document.getElementById('modal-video-box');
-            if(p.video) {
-                videoBox.classList.remove('hidden');
-                document.getElementById('modal-video-frame').src = p.video;
+        // Order Options Modal Management System Methods
+        function openOrderOptionsModal(productId) {
+            activeSelectedProductIdForOptions = productId;
+            document.getElementById("order-options-modal").classList.remove("hidden");
+        }
+
+        function closeOrderOptionsModal() {
+            document.getElementById("order-options-modal").classList.add("hidden");
+            activeSelectedProductIdForOptions = null;
+        }
+
+        // Action Trigger Framework Hooks for Option Matrix Components
+        function triggerOptionBuyNow() {
+            if(!activeSelectedProductIdForOptions) return;
+            const pId = activeSelectedProductIdForOptions;
+            closeOrderOptionsModal();
+            
+            // Instantly appends data set to virtual basket cart matrix array
+            const found = globalProducts.find(x => x.id === pId);
+            if(found) {
+                const inCart = globalCart.find(c => c.id === pId);
+                if(!inCart) globalCart.push({ ...found, quantity: 1 });
+                syncCartUiState();
+                if(document.getElementById("cart-modal").classList.contains("translate-x-full")) {
+                    toggleCartModal();
+                }
+                // Scroll focus target directly onto user client submission address segment
+                document.getElementById("cust-name").focus();
+            }
+        }
+
+        function triggerOptionWhatsApp() {
+            if(!activeSelectedProductIdForOptions) return;
+            const found = globalProducts.find(x => x.id === activeSelectedProductIdForOptions);
+            closeOrderOptionsModal();
+            if(!found) return;
+
+            const calcPrice = found.price - (found.price * (found.discount / 100));
+            const txt = encodeURIComponent(`হ্যালো LoFfy 4u শপ, আমি এই প্রোডাক্টটি সরাসরি অর্ডার করতে চাই:\n\nপণ্যের নাম: ${found.title}\nআইডি: ${found.id}\nমূল্য: ৳${calcPrice}\nলিংক: ${window.location.href}`);
+            window.open(`https://wa.me/8801845840375?text=${txt}`, "_blank");
+        }
+
+        function triggerOptionAddToCart() {
+            if(!activeSelectedProductIdForOptions) return;
+            const pId = activeSelectedProductIdForOptions;
+            closeOrderOptionsModal();
+            
+            const found = globalProducts.find(x => x.id === pId);
+            if(found) {
+                const inCart = globalCart.find(c => c.id === pId);
+                if(inCart) {
+                    inCart.quantity++;
+                } else {
+                    globalCart.push({ ...found, quantity: 1 });
+                }
+                syncCartUiState();
+                alert("পণ্যটি সফলভাবে শপিং ব্যাগে যুক্ত হয়েছে!");
+            }
+        }
+
+        function triggerOptionCashMemo() {
+            if(!activeSelectedProductIdForOptions) return;
+            const pId = activeSelectedProductIdForOptions;
+            closeOrderOptionsModal();
+            
+            const found = globalProducts.find(x => x.id === pId);
+            if(found) {
+                const calcPrice = found.price - (found.price * (found.discount / 100));
+                alert(`--- ক্যাশ মেমো প্রাক-দর্শন ---\nপ্রোডাক্ট: ${found.title}\nআইডি: ${found.id}\nমোট মূল্য: ৳${calcPrice}\n\nঅর্ডার সম্পূর্ণ করতে কার্ট ড্রয়ার থেকে ক্যাশ মেমো বাটনে ক্লিক করুন।`);
+                triggerOptionBuyNow();
+            }
+        }
+
+        // Archive Product Zoom Viewer Lightbox System Methods
+        function openProductZoomModalDirectly(imageSrc) {
+            const zModal = document.getElementById("product-zoom-modal");
+            const zImg = document.getElementById("zoom-lightbox-display-img");
+            zImg.src = imageSrc;
+            zModal.classList.remove("hidden");
+        }
+
+        function closeProductZoomModal() {
+            document.getElementById("product-zoom-modal").classList.add("hidden");
+        }
+
+        function triggerProductZoomFromModal() {
+            const src = document.getElementById("modal-showcase-img").src;
+            if(src) openProductZoomModalDirectly(src);
+        }
+
+        // Details Presentation Layer Controls
+        function openDetailsModal(productId) {
+            const prod = globalProducts.find(x => x.id === productId);
+            if (!prod) return;
+
+            document.getElementById("modal-product-title").innerText = prod.title;
+            const fPrice = prod.price - (prod.price * (prod.discount / 100));
+            document.getElementById("modal-final-price").innerText = "৳" + fPrice;
+            document.getElementById("modal-old-price").innerText = prod.discount > 0 ? "৳" + prod.price : "";
+            
+            const showImg = document.getElementById("modal-showcase-img");
+            showImg.src = prod.images[0];
+
+            // Thumbnails Generation Engine
+            const thumbContainer = document.getElementById("modal-gallery-thumbnails");
+            thumbContainer.innerHTML = prod.images.map((img, i) => `
+                <img src="${img}" onclick="document.getElementById('modal-showcase-img').src='${img}'" class="w-12 h-12 object-cover rounded-lg border cursor-pointer hover:border-green-500 transition">
+            `).join('');
+
+            // Setup Embedded Multi-media streams
+            const vBox = document.getElementById("modal-video-box");
+            const vFrame = document.getElementById("modal-video-frame");
+            if (prod.video) {
+                vFrame.src = prod.video;
+                vBox.classList.remove("hidden");
             } else {
-                videoBox.classList.add('hidden');
-                document.getElementById('modal-video-frame').src = '';
+                vFrame.src = "";
+                vBox.classList.add("hidden");
             }
 
-            const actionGrid = document.getElementById('modal-action-grid');
+            // Options injected directly inside actions workspace grid layout
+            const actionGrid = document.getElementById("modal-action-grid");
             actionGrid.innerHTML = `
-                <button onclick="addToCartAction(${p.id})" class="w-full bg-slate-900 text-white py-2.5 rounded-xl hover:bg-slate-800 transition"><i class="fa-solid fa-basket-shopping"></i> ব্যাগ-এ যুক্ত করুন</button>
-                <button onclick="directWhatsAppOrder(${p.id})" class="w-full bg-emerald-600 text-white py-2.5 rounded-xl hover:bg-emerald-700 transition"><i class="fa-brands fa-whatsapp"></i> সরাসরি হোয়াটসঅ্যাপে অর্ডার করুন</button>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="closeDetailsModal(); openOrderOptionsModal(${prod.id});" class="bg-green-600 text-white py-2.5 rounded-xl hover:bg-green-700 transition flex items-center justify-center gap-1.5 shadow-md">
+                        <i class="fa-solid fa-basket-shopping"></i> অর্ডার অপশন (4 Methods)
+                    </button>
+                    <button onclick="closeDetailsModal(); openProductZoomModalDirectly('${prod.images[0]}');" class="bg-slate-800 text-white py-2.5 rounded-xl hover:bg-slate-700 transition flex items-center justify-center gap-1.5 shadow-md">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i> জুম ভিউ (Zoom Archive)
+                    </button>
+                </div>
             `;
+
+            document.getElementById("details-modal").classList.remove("hidden");
         }
 
         function closeDetailsModal() {
-            document.getElementById('details-modal').classList.add('hidden');
+            document.getElementById("details-modal").classList.add("hidden");
+            document.getElementById("modal-video-frame").src = "";
         }
 
-        function addToCartAction(id) {
-            const p = products.find(prod => prod.id === id);
-            if(!p) return;
-            
-            const item = cart.find(c => c.product.id === id);
-            if(item) {
-                item.qty++;
-            } else {
-                cart.push({ product: p, qty: 1 });
-            }
-            updateCartCount();
-            renderCartItems();
-            closeDetailsModal();
-            toggleCartModal();
-        }
-
-        function updateCartCount() {
-            const count = cart.reduce((total, c) => total + c.qty, 0);
-            document.getElementById('cart-count').innerText = count;
-        }
-
+        // Cart Drawer Operations System Logic Core
         function toggleCartModal() {
-            const cartModal = document.getElementById('cart-modal');
-            cartModal.classList.toggle('hidden');
-            if(!cartModal.classList.contains('hidden')) {
-                cartModal.classList.remove('translate-x-full');
+            const drawer = document.getElementById("cart-modal");
+            if (drawer.classList.contains("translate-x-full")) {
+                drawer.classList.remove("hidden");
+                setTimeout(() => drawer.classList.remove("translate-x-full"), 10);
             } else {
-                cartModal.classList.add('translate-x-full');
+                drawer.classList.add("translate-x-full");
+                setTimeout(() => drawer.classList.add("hidden"), 300);
             }
         }
 
-        function renderCartItems() {
-            const container = document.getElementById('cart-items-container');
-            container.innerHTML = '';
+        function syncCartUiState() {
+            document.getElementById("cart-count").innerText = globalCart.reduce((acc, obj) => acc + obj.quantity, 0);
+            const container = document.getElementById("cart-items-container");
+            container.innerHTML = "";
             
-            let total = 0;
-            cart.forEach(c => {
-                let discPrice = Math.round(c.product.price - (c.product.price * (c.product.discount / 100)));
-                let itemTotal = discPrice * c.qty;
-                total += itemTotal;
-                
+            let accumulatedSum = 0;
+
+            globalCart.forEach(item => {
+                const accurateCost = item.price - (item.price * (item.discount / 100));
+                const totalCalculatedWeight = accurateCost * item.quantity;
+                accumulatedSum += totalCalculatedWeight;
+
                 container.innerHTML += `
-                    <div class="flex items-center gap-3 bg-slate-50 p-2 rounded-xl border">
-                        <img src="${c.product.images[0]}" class="w-12 h-12 object-cover rounded-lg border">
-                        <div class="flex-1 min-w-0">
-                            <h4 class="text-xs font-bold truncate text-slate-800">${c.product.title}</h4>
-                            <p class="text-[11px] text-green-600 font-bold">${formatPrice(discPrice)} x ${c.qty}</p>
+                    <div class="flex items-center gap-3 bg-slate-50 border p-2 rounded-xl">
+                        <img src="${item.images[0]}" class="w-12 h-12 object-cover rounded-lg border bg-white">
+                        <div class="flex-1">
+                            <h4 class="text-[11px] font-bold text-slate-850 line-clamp-1">${item.title}</h4>
+                            <p class="text-[10px] text-green-600 font-extrabold mt-0.5">৳${accurateCost} × ${item.quantity}</p>
                         </div>
-                        <div class="flex items-center gap-1">
-                            <button onclick="changeQty(${c.product.id}, -1)" class="w-6 h-6 bg-white border rounded flex items-center justify-center text-xs font-bold">-</button>
-                            <button onclick="changeQty(${c.product.id}, 1)" class="w-6 h-6 bg-white border rounded flex items-center justify-center text-xs font-bold">+</button>
+                        <div class="flex items-center space-x-1 bg-white border rounded-lg p-0.5">
+                            <button onclick="modifyCartAmount(${item.id}, -1)" class="w-5 h-5 bg-slate-100 text-xs rounded hover:bg-gray-200 font-bold">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="modifyCartAmount(${item.id}, 1)" class="w-5 h-5 bg-slate-100 text-xs rounded hover:bg-gray-200 font-bold">+</button>
                         </div>
                     </div>
                 `;
             });
-            
-            document.getElementById('cart-total-price').innerText = formatPrice(total);
+
+            document.getElementById("cart-total-price").innerText = "৳ " + accumulatedSum;
         }
 
-        function changeQty(id, delta) {
-            const item = cart.find(c => c.product.id === id);
-            if(item) {
-                item.qty += delta;
-                if(item.qty <= 0) {
-                    cart = cart.filter(c => c.product.id !== id);
+        function modifyCartAmount(prodId, quantityChange) {
+            const idx = globalCart.findIndex(x => x.id === prodId);
+            if (idx !== -1) {
+                globalCart[idx].quantity += quantityChange;
+                if (globalCart[idx].quantity <= 0) {
+                    globalCart.splice(idx, 1);
                 }
+                syncCartUiState();
             }
-            updateCartCount();
-            renderCartItems();
         }
 
-        function directWhatsAppOrder(id) {
-            const p = products.find(prod => prod.id === id);
-            if(!p) return;
-            
-            let discPrice = Math.round(p.price - (p.price * (p.discount / 100)));
-            let text = `হ্যালো LoFfy 4u শপ! আমি এই প্রোডাক্টটি সরাসরি অর্ডার করতে চাই:\n\n`;
-            text += `🔹 প্রোডাক্ট নাম: ${p.title}\n`;
-            text += `🔹 আইডি: ${p.id}\n`;
-            text += `🔹 মূল্য: ৳${discPrice}\n\n`;
-            text += `অনুগ্রহ করে আমার অর্ডারটি কনফার্ম করুন।`;
-            
-            let url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
-        }
-
+        // Checkout & Final Order Dispatch Terminal Generators
         function checkoutCartWhatsApp() {
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
-            const address = document.getElementById('cust-address').value.trim();
+            const clientName = document.getElementById("cust-name").value.trim();
+            const clientPhone = document.getElementById("cust-phone").value.trim();
+            const clientAddr = document.getElementById("cust-address").value.trim();
+            const method = document.querySelector("input[name='payment-opt']:checked").value;
+
+            if (!clientName || !clientPhone || !clientAddr) {
+                alert("অনুগ্রহ করে আপনার নাম, মোবাইল নম্বর এবং সম্পূর্ণ ডেলিভারি ঠিকানা প্রদান করুন!");
+                return;
+            }
+
+            if(globalCart.length === 0) {
+                alert("আপনার শপিং ব্যাগ সম্পূর্ণ খালি!");
+                return;
+            }
+
+            let orderOverviewText = `--- নতুন প্রোডাক্ট অর্ডার ইনভয়েস ---\n`;
+            orderOverviewText += `কাস্টমার নাম: ${clientName}\nফোন নম্বর: ${clientPhone}\nঠিকানা: ${clientAddr}\nপেমেন্ট মেথড: ${method}\n\n`;
             
-            if(cart.length === 0) { alert('আপনার কার্ট খালি!'); return; }
-            if(!name || !phone || !address) { alert('দয়া করে আপনার সম্পূর্ণ নাম, মোবাইল এবং ঠিকানা দিন।'); return; }
-            
-            let text = `🛒 *নতুন অর্ডার মেমো (LoFfy 4u)*\n\n`;
-            text += `👤 *কাস্টমার ইনফো:*\n`;
-            text += `▪️ নাম: ${name}\n`;
-            text += `▪️ মোবাইল: ${phone}\n`;
-            text += `▪️ ঠিকানা: ${address}\n\n`;
-            text += `📦 *অর্ডারকৃত পণ্যসমূহ:*\n`;
-            
-            let grandTotal = 0;
-            cart.forEach(c => {
-                let discPrice = Math.round(c.product.price - (c.product.price * (c.product.discount / 100)));
-                text += `- ${c.product.title} (${c.qty} টি) = ৳${discPrice * c.qty}\n`;
-                grandTotal += (discPrice * c.qty);
+            let subTotalPriceCalculated = 0;
+            globalCart.forEach((item, index) => {
+                const preciseCost = item.price - (item.price * (item.discount / 100));
+                orderOverviewText += `${index + 1}. ${item.title} [Qty: ${item.quantity}] -> ৳${preciseCost * item.quantity}\n`;
+                subTotalPriceCalculated += preciseCost * item.quantity;
             });
+
+            orderOverviewText += `\nমোট প্রদেয় মূল্য: ৳${subTotalPriceCalculated}\n\nধন্যবাদ আমাদের সাথে থাকার জন্য!`;
             
-            text += `\n💵 *সর্বমোট প্রদেয় মূল্য:* ৳${grandTotal}\n\n`;
-            text += `আমার অর্ডারটি অতিসত্বর ডেলিভারি করার অনুরোধ রইল।`;
-            
-            let url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
+            const targetUrl = `https://wa.me/8801845840375?text=${encodeURIComponent(orderOverviewText)}`;
+            window.open(targetUrl, "_blank");
         }
 
         function generateCustomerInvoice() {
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
-            const address = document.getElementById('cust-address').value.trim();
-            const payOpt = document.querySelector('input[name="payment-opt"]:checked').value;
-
-            if(cart.length === 0) { alert('কার্ট খালি!'); return; }
-            if(!name || !phone || !address) { alert('সঠিক কাস্টমার ইনফো প্রদান করুন!'); return; }
-
-            document.getElementById('invoice-modal').classList.remove('hidden');
-            document.getElementById('inv-num').innerText = Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('inv-date').innerText = new Date().toLocaleDateString('bn-BD');
-            document.getElementById('inv-pay-method').innerText = payOpt;
-            document.getElementById('inv-cust-name').innerText = name;
-            document.getElementById('inv-cust-phone').innerText = phone;
-            document.getElementById('inv-cust-address').innerText = address;
-
-            const tbody = document.getElementById('invoice-table-body');
-            tbody.innerHTML = '';
-            
-            let subtotal = 0;
-            cart.forEach(c => {
-                let discPrice = Math.round(c.product.price - (c.product.price * (c.product.discount / 100)));
-                subtotal += (discPrice * c.qty);
-                tbody.innerHTML += `
-                    <tr class="border-b">
-                        <td class="py-1">${c.product.title} (${c.qty})</td>
-                        <td class="py-1 text-right">৳${discPrice * c.qty}</td>
-                    </tr>
-                `;
-            });
-
-            let delCharge = address.toLowerCase().includes('dhaka') ? 60 : 120;
-            document.getElementById('invoice-delivery-charge').innerText = `ডেলিভারি চার্জ: ৳${delCharge}`;
-            document.getElementById('invoice-grand-total').innerText = `৳${subtotal + delCharge}`;
+            const clientName = document.getElementById("cust-name").value.trim();
+            const clientPhone = document.getElementById("cust-phone").value.trim();
+            const clientAddr = document.getElementById("cust-address").value.trim();
+            if (!clientName || !clientPhone || !clientAddr) {
+                alert("ইনভয়েস বা ক্যাশ মেমো তৈরি করতে কাস্টমার তথ্য আগে প্রদান করুন!");
+                return;
+            }
+            alert(`=== LoFfy 4u OFFICIAL CASH MEMO ===\n\nগ্রাহকের নাম: ${clientName}\nমোবাইল: ${clientPhone}\nঠিকানা: ${clientAddr}\n\nইনভয়েস আইডি নম্বর: LF-${Math.floor(Math.random() * 89999 + 10000)}\nতারিখ: ${new Date().toLocaleDateString('bn-BD')}\n-----------------------------------\nকার্ট সামগ্রী পরীক্ষা করতে আপনার হোয়াটসঅ্যাপ উইন্ডো ব্যবহার করুন।`);
         }
 
-        function closeInvoiceModal() { document.getElementById('invoice-modal').classList.add('hidden'); }
-        
-        function confirmInvoiceAndOrder() {
-            alert('আপনার অর্ডারটি সিস্টেমে নথিভুক্ত করা হয়েছে! ধন্যবাদ।');
-            cart = [];
-            updateCartCount();
-            renderCartItems();
-            closeInvoiceModal();
-            toggleCartModal();
+        // Promotional Ad Actions Logic Matrix Click Handler
+        function handleAdClick() {
+            const configurations = JSON.parse(localStorage.getItem("admin_ad_config") || "{}");
+            closePopupAd();
+            if (configurations.targetId) {
+                openDetailsModal(parseInt(configurations.targetId));
+            } else {
+                alert("অফারে অংশ নেওয়ার জন্য আপনাকে ধন্যবাদ! আমাদের স্ক্রল সেকশন চেক করুন।");
+            }
         }
 
-        function openOrderTrackingModal() { document.getElementById('tracking-modal').classList.remove('hidden'); }
-        
+        function closePopupAd() {
+            document.getElementById("popup-ad-modal").classList.add("hidden");
+        }
+
+        // Order Tracker Terminal Functions
+        function openOrderTrackingModal() {
+            document.getElementById("tracking-modal").classList.remove("hidden");
+        }
+
         function trackOrderAction() {
-            const id = document.getElementById('track-id-input').value.trim();
-            const resultBox = document.getElementById('tracking-result');
-            if(!id) { alert('ইনভয়েস নম্বর দিন!'); return; }
-            
-            resultBox.classList.remove('hidden');
-            resultBox.innerHTML = `
-                STATUS: [DISPATCHED]\n
-                LOCATION: Tejgaon Hub, Dhaka\n
-                ETA: Within 24 Hours\n
-                DELIVERY MAN: MD. Asif (017XXXXXXXX)
+            const id = document.getElementById("track-id-input").value.trim();
+            const box = document.getElementById("tracking-result");
+            if (!id) {
+                alert("অনুগ্রহ করে একটি সঠিক ইনভয়েস নম্বর ইনপুট করুন!");
+                return;
+            }
+
+            box.classList.remove("hidden");
+            box.innerHTML = `
+                <p class="text-green-600 font-bold">● অর্ডার স্ট্যাটাস: প্রসেসিং (Processing)</p>
+                <p class="text-gray-600 mt-1">প্যাকেজ নম্বর: #${id}</p>
+                <p class="text-gray-500 text-[10px] mt-2">আপনার পণ্যটি বর্তমানে আমাদের মূল হাব থেকে প্যাকেজিং সম্পন্ন করে কুরিয়ারে হস্তান্তরের জন্য অপেক্ষারত রয়েছে।</p>
             `;
         }
 
-        function sendAiMessage() {
-            const input = document.getElementById('ai-input');
-            const body = document.getElementById('ai-chat-body');
-            if(!input.value.trim()) return;
+        // Authentications & Administrative Controls Panels
+        function openLoginModal() { document.getElementById("login-modal").classList.remove("hidden"); }
+        function closeLoginModal() { document.getElementById("login-modal").classList.add("hidden"); }
+        function openAdminModal() { document.getElementById("admin-modal").classList.remove("hidden"); }
+        function closeAdminModal() { document.getElementById("admin-modal").classList.add("hidden"); }
 
-            body.innerHTML += `<div class="bg-slate-200 text-slate-800 p-2 rounded-lg max-w-[85%] self-end text-right ml-auto">${input.value}</div>`;
+        function verifyAdminAccess() {
+            const email = document.getElementById("login-email").value.trim();
+            const pass = document.getElementById("login-password").value.trim();
             
-            const userMsg = input.value.toLowerCase();
-            input.value = '';
-            
-            setTimeout(() => {
-                let reply = "দুঃখিত, এই বিষয়টি আমি বুঝতে পারিনি। প্রিমিয়াম শার্ট, ঘড়ি বা জুতো অর্ডার করতে সরাসরি প্রোডাক্টে ক্লিক করুন অথবা আমাদের ফেসবুক পেজে ইনবক্স করুন।";
-                if(userMsg.includes('শার্ট') || userMsg.includes('shirt')) reply = "আমাদের কাছে প্রিমিয়াম কোয়ালিটির ক্যাজুয়াল শার্ট এভেইলেবল আছে। লাইন ১ এবং লাইন ২ এ দেখতে পারেন।";
-                if(userMsg.includes('ঘড়ি') || userMsg.includes('watch')) reply = "লাক্সারি ওয়াটারপ্রুফ এবং মেকানিক্যাল ঘড়ির কালেকশন রয়েছে বিশেষ ছাড়ে।";
-                if(userMsg.includes('ফেসবুক') || userMsg.includes('facebook') || userMsg.includes('page')) reply = `আমাদের অফিসিয়াল ফেসবুক পেজে ভিজিট করতে সরাসরি এই লিংকে ক্লিক করুন: <a href="${FB_PAGE_URL}" target="_blank" class="text-blue-600 underline font-bold">LoFfy 4u Page</a>`;
-                
-                body.innerHTML += `<div class="bg-green-100 text-green-800 p-2 rounded-lg max-w-[85%]">${reply}</div>`;
-                body.scrollTop = body.scrollHeight;
-            }, 500);
+            if (email === "admin@lofft.com" && pass === "loffy123") {
+                alert("অথেন্টিকেশন সফল হয়েছে! এডমিন প্যানেল আনলকড।");
+                closeLoginModal();
+                document.getElementById("admin-trigger-btn").classList.remove("hidden");
+                document.getElementById("login-trigger-btn").classList.add("hidden");
+                openAdminModal();
+            } else {
+                alert("ভুল সিকিউরিটি পাসওয়ার্ড বা ইমেইল দেওয়া হয়েছে! পুনরায় চেষ্টা করুন।");
+            }
         }
+
+        function addNewProduct() {
+            const title = document.getElementById("prod-title").value.trim();
+            const price = parseFloat(document.getElementById("prod-price").value);
+            const cat = document.getElementById("prod-category").value;
+            const disc = parseFloat(document.getElementById("prod-discount").value) || 0;
+            const timer = document.getElementById("prod-timer").value;
+            const video = document.getElementById("prod-video").value.trim();
+            const rawImgs = document.getElementById("prod-images").value.trim();
+
+            if (!title || !price || !rawImgs) {
+                alert("অনুগ্রহ করে প্রোডাক্টের নাম, মূল্য এবং অন্তত ১টি ইমেজ ইউআরএল প্রদান করুন!");
+                return;
+            }
+
+            const parsedImagesArray = rawImgs.split(",").map(s => s.trim());
+            const structuralProductItem = {
+                id: Date.now(),
+                title: title,
+                price: price,
+                discount: disc,
+                timer: timer,
+                category: cat,
+                images: parsedImagesArray,
+                video: video
+            };
+
+            globalProducts.unshift(structuralProductItem);
+            renderProducts();
+            closeAdminModal();
+            alert("আপনার নতুন প্রোডাক্টটি সফলভাবে শপ গ্রিডে লাইভ করা হয়েছে!");
+        }
+
+        function updatePopupAdSettings() {
+            const img = document.getElementById("ad-img-url").value.trim();
+            const title = document.getElementById("ad-custom-title").value.trim();
+            const targetId = document.getElementById("ad-target-product-id").value.trim();
+
+            const config = { img, title, targetId };
+            localStorage.setItem("admin_ad_config", JSON.stringify(config));
+            closeAdminModal();
+            alert("প্রোমোশনাল বিজ্ঞাপন পপ-আপ কনফিগারেশন সফলভাবে আপডেট হয়েছে!");
+        }
+
+        // Filtering helpers
+        function selectCategory(categoryName) {
+            document.getElementById("category-filter").value = categoryName;
+            renderProducts();
+        }
+
+        function resetFilters() {
+            document.getElementById("search-bar").value = "";
+            document.getElementById("category-filter").value = "all";
+            document.getElementById("price-filter").value = "";
+            renderProducts();
+        }
+
+        // Multi-Language Context Rotator Operation Block
+        function changeWebsiteLanguage(langKey) {
+            currentWebsiteLanguage = langKey;
+            const translationSet = translationDictionary[langKey] || translationDictionary['bn'];
+            
+            document.querySelectorAll("[data-ln]").forEach(el => {
+                const targetPropKey = el.getAttribute("data-ln");
+                const targetTextString = translationSet[targetPropKey];
+                if (targetTextString) {
+                    if (el.tagName === "INPUT") {
+                        el.setAttribute("placeholder", targetTextString);
+                    } else {
+                        el.innerText = targetTextString;
+                    }
+                }
+            });
+        }
+
+        // Proactive AI Engine Chat Communication Automation Elements
+        function sendAiMessage() {
+            const input = document.getElementById("ai-input");
+            const body = document.getElementById("ai-chat-body");
+            const txt = input.value.trim();
+            if(!txt) return;
+
+            body.innerHTML += `<div class="bg-slate-200 text-slate-800 p-2 rounded-lg max-w-[85%] ml-auto text-right">${txt}</div>`;
+            input.value = "";
+            body.scrollTop = body.scrollHeight;
+
+            setTimeout(() => {
+                let aiResponse = "ধন্যবাদ আপনার বার্তার জন্য! আমাদের প্রিমিয়াম শার্ট এবং গ্যাজেট কালেকশনে এখন বিশেষ মূল্যছাড় চলছে। অর্ডার করতে পণ্যের নিচের বাটনে ক্লিক করুন।";
+                if(txt.includes("শার্ট")) aiResponse = "আমাদের কটন এবং লিনেন ক্যাজুয়াল শার্টের ফেব্রিক্স কোয়ালিটি অত্যন্ত প্রিমিয়াম। আপনি প্রোডাক্টে ক্লিক করে ৪টি উপায়ে অর্ডার প্লেস করতে পারবেন।";
+                if(txt.includes("ডেলিভারি")) aiResponse = "ঢাকার ভিতরে ডেলিভারি চার্জ মাত্র ৬০ টাকা, এবং ঢাকার বাইরে ১২০ টাকা। মেগা অফার চলাকালীন ফ্রি ডেলিভারি পেতে পারেন!";
+                
+                body.innerHTML += `<div class="bg-green-100 text-green-800 p-2 rounded-lg max-w-[85%] mr-auto text-left">${aiResponse}</div>`;
+                body.scrollTop = body.scrollHeight;
+            }, 1000);
+        }
+
+        // Trigger AI automation entry delay loop
+        setTimeout(() => {
+            document.getElementById("ai-assistant-bubble").classList.remove("hidden");
+        }, 8000);
     </script>
 </body>
 </html>
