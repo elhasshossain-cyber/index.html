@@ -2,6 +2,7 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
+    <!-- Viewport adjusted for standard scaling behavior while preserving desktop layout integrity -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoFfy 4u - Premium Ultra E-Commerce</title>
     <!-- Tailwind CSS CDN -->
@@ -10,31 +11,47 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        .fade-slide { transition: opacity 0.8s ease-in-out; }
-        .zoom-img { transition: transform 0.5s ease; }
-        .img-container:hover .zoom-img { transform: scale(1.1); }
+        /* Forced Consistent Desktop Layout across all mobile screens */
+        body {
+            min-width: 1280px !important;
+            overflow-x: auto !important;
+        }
         
-        /* Small Banner 3s Smooth Zoom Animation */
-        @keyframes customZoomInOut {
+        /* Ultra Professional Smooth Cross-Dissolve & Zoom Banner Animations */
+        .banner-slide {
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: scale(1.03);
+        }
+        .banner-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .zoom-img { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .img-container:hover .zoom-img { transform: scale(1.08); }
+        
+        /* Small Banner continuous professional pulse-zoom action */
+        @keyframes professionalZoom {
             0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
+            50% { transform: scale(1.04); }
             100% { transform: scale(1); }
         }
         .zoom-active {
-            animation: customZoomInOut 3s infinite ease-in-out;
+            animation: professionalZoom 4s infinite ease-in-out;
         }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-gray-900">
 
     <!-- Top Navigation Bar -->
-    <nav class="bg-white border-b sticky top-0 z-40 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+    <nav class="bg-white border-b sticky top-0 z-40 shadow-sm w-full">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
             <h1 class="text-2xl font-black text-green-600 tracking-wider">LoFfy 4u</h1>
             
             <!-- Global Search, Category & Price Filter Zone -->
-            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
-                <input type="text" id="search-bar" oninput="renderProducts()" data-ln="search-placeholder" placeholder="পণ্য খুঁজুন..." class="text-xs px-3 py-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-green-500 w-32">
+            <div class="flex items-center gap-2">
+                <input type="text" id="search-bar" oninput="renderProducts()" data-ln="search-placeholder" placeholder="পণ্য খুঁজুন..." class="text-xs px-3 py-2 border rounded-xl focus:outline-none focus:ring-1 focus:ring-green-500 w-36">
                 
                 <select id="category-filter" onchange="renderProducts()" class="text-xs px-2 py-2 border rounded-xl bg-white focus:outline-none">
                     <option value="all" data-ln="cat-all">সব ক্যাটাগরি</option>
@@ -47,7 +64,7 @@
                 <!-- Price Filter Input -->
                 <div class="flex items-center space-x-1 border rounded-xl px-2 py-1 bg-white">
                     <span class="text-[10px] text-gray-500" data-ln="max-price">সর্বোচ্চ:</span>
-                    <input type="number" id="price-filter" oninput="renderProducts()" placeholder="৳১০০০০" class="w-16 text-xs focus:outline-none font-bold text-green-600">
+                    <input type="number" id="price-filter" oninput="renderProducts()" placeholder="৳১০০০০" class="w-20 text-xs focus:outline-none font-bold text-green-600">
                 </div>
 
                 <!-- Multi-Language Selector Dropdown -->
@@ -62,7 +79,7 @@
             </div>
 
             <!-- Header Action Controls -->
-            <div class="flex items-center space-x-3 text-xs font-bold">
+            <div class="flex items-center space-x-4 text-xs font-bold">
                 <button onclick="openOrderTrackingModal()" class="text-slate-700 hover:text-green-600 transition">
                     <i class="fa-solid fa-truck"></i> <span data-ln="track-order">অর্ডার ট্র্যাক</span>
                 </button>
@@ -81,18 +98,18 @@
     </nav>
 
     <!-- Top Layout: Two Banners Side by Side -->
-    <header class="max-w-7xl mx-auto px-4 my-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Large Banner -->
-        <div class="md:col-span-2 h-64 md:h-80 bg-slate-200 rounded-2xl relative overflow-hidden shadow-sm border">
-            <div id="large-banner-box" class="w-full h-full bg-cover bg-center transition-all duration-500 flex items-end">
-                <div id="large-banner-text" class="w-full bg-gradient-to-t from-black/80 to-transparent text-white p-4 font-bold text-base md:text-lg"></div>
-            </div>
+    <header class="max-w-7xl mx-auto px-4 my-6 grid grid-cols-3 gap-4">
+        <!-- Large Banner with Smooth Cross-Dissolve -->
+        <div class="col-span-2 h-80 bg-slate-900 rounded-2xl relative overflow-hidden shadow-sm border">
+            <div id="large-banner-container" class="absolute inset-0 w-full h-full"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 pointer-events-none"></div>
+            <div id="large-banner-text" class="absolute bottom-0 left-0 w-full text-white p-5 font-black text-xl z-20"></div>
         </div>
-        <!-- Small Banner with 3s Zoom -->
-        <div class="h-64 md:h-80 bg-slate-200 rounded-2xl relative overflow-hidden shadow-sm border">
-            <div id="small-banner-box" class="w-full h-full bg-cover bg-center zoom-active transition-all duration-500 flex items-end">
-                <div id="small-banner-text" class="w-full bg-gradient-to-t from-black/80 to-transparent text-white p-4 font-bold text-sm md:text-base"></div>
-            </div>
+        <!-- Small Banner with Smooth Professional Zoom & Text Animation -->
+        <div class="h-80 bg-slate-900 rounded-2xl relative overflow-hidden shadow-sm border">
+            <div id="small-banner-container" class="absolute inset-0 w-full h-full zoom-active"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 pointer-events-none"></div>
+            <div id="small-banner-text" class="absolute bottom-0 left-0 w-full text-white p-5 font-bold text-base z-20"></div>
         </div>
     </header>
 
@@ -102,13 +119,13 @@
         <h2 class="text-lg font-extrabold text-slate-800 mb-4 flex items-center gap-2">
             <i class="fa-solid fa-fire text-amber-500"></i> <span data-ln="line1-title">জনপ্রিয় ও অফার প্রোডাক্টস (লাইন ১)</span>
         </h2>
-        <div id="product-grid-1" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-10"></div>
+        <div id="product-grid-1" class="grid grid-cols-4 gap-4 mb-10"></div>
 
         <!-- Banner Middle Long Component -->
         <section class="my-8">
-            <div id="middle-long-banner-box" class="w-full h-32 md:h-40 bg-slate-200 rounded-2xl relative overflow-hidden shadow-sm border flex items-center bg-cover bg-center">
-                <div class="absolute inset-0 bg-black/40"></div>
-                <div id="middle-banner-text" class="relative z-10 text-white font-black px-6 text-sm md:text-xl tracking-wide"></div>
+            <div id="middle-long-banner-box" class="w-full h-40 bg-slate-900 rounded-2xl relative overflow-hidden shadow-sm border flex items-center bg-cover bg-center transition-all duration-1000">
+                <div class="absolute inset-0 bg-black/50 z-10"></div>
+                <div id="middle-banner-text" class="relative z-20 text-white font-black px-8 text-xl tracking-wide"></div>
             </div>
         </section>
 
@@ -116,7 +133,7 @@
         <h2 class="text-lg font-extrabold text-slate-800 mb-4 flex items-center gap-2">
             <i class="fa-solid fa-box-open text-green-600"></i> <span data-ln="line2-title">আমাদের সকল প্রোডাক্টস (লাইন ২)</span>
         </h2>
-        <div id="product-grid-2" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+        <div id="product-grid-2" class="grid grid-cols-4 gap-4"></div>
     </main>
 
     <!-- Proactive AI Customer Assistant UI -->
@@ -212,11 +229,11 @@
 
     <!-- Modal Layout 4: 5 Action Product Click Showcase -->
     <div id="details-modal" class="fixed inset-0 bg-black/60 hidden z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden relative my-8 flex flex-col md:flex-row">
+        <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden relative my-8 flex flex-row">
             <button onclick="closeDetailsModal()" class="absolute top-3 right-3 bg-black/50 text-white w-7 h-7 rounded-full flex items-center justify-center hover:bg-black transition z-20"><i class="fa-solid fa-xmark"></i></button>
             
             <!-- Left Side Media Box -->
-            <div class="w-full md:w-1/2 p-4 bg-slate-50 flex flex-col justify-between">
+            <div class="w-1/2 p-4 bg-slate-50 flex flex-col justify-between">
                 <div class="w-full h-64 bg-white rounded-xl overflow-hidden border">
                     <img id="modal-showcase-img" class="w-full h-full object-cover">
                 </div>
@@ -224,7 +241,7 @@
             </div>
 
             <!-- Right Side Purchase Panel with 5 Core Options -->
-            <div class="w-full md:w-1/2 p-6 flex flex-col justify-between">
+            <div class="w-1/2 p-6 flex flex-col justify-between">
                 <div>
                     <h3 id="modal-product-title" class="text-xl font-black text-slate-800 leading-tight">Loading...</h3>
                     <div class="flex items-center space-x-3 my-3">
@@ -232,7 +249,7 @@
                         <span id="modal-old-price" class="text-sm text-gray-400 line-through">৳00</span>
                     </div>
 
-                    <div class="bg-amber-50 text-amber-800 border border-amber-200 rounded-lg p-2 text-xs font-semibold mb-3">
+                    <div id="modal-delivery-info" class="bg-amber-50 text-amber-800 border border-amber-200 rounded-lg p-2 text-xs font-semibold mb-3">
                         🚚 ডেলিভারি চার্জ: ঢাকার ভেতরে ৳৬০ | ঢাকার বাইরে ৳১২০
                     </div>
                     
@@ -320,7 +337,7 @@
             </table>
 
             <div class="border-t pt-2 space-y-1 text-right font-bold">
-                <p class="text-gray-500 text-[11px]">ডেলিভারি চার্জ: ৳৬০</p>
+                <p id="invoice-delivery-charge" class="text-gray-500 text-[11px]">ডেলিভারি চার্জ: ৳৬০</p>
                 <p class="text-sm text-slate-900">সর্বমোট প্রদেয়: <span id="invoice-grand-total">৳০</span></p>
             </div>
 
@@ -348,31 +365,47 @@
             { id: 8, title: "Luxury Leather Formal Shoes", price: 4200, category: "জুতো", discount: 18, timer: "2026-12-25T00:00:00", video: "", images: ["https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=500&q=80"] }
         ];
 
-        // Resilient Engine Protection Logic: Keeps custom added items safe even when code is completely redeployed
+        // Advanced Anti-Wipe Integration: Safely syncs default items with user-added database items seamlessly
         let localData = JSON.parse(localStorage.getItem('loFfy_products')) || [];
-        let mergedProducts = [...localData];
         
-        // Anti-wipe integration
         defaultProducts.forEach(dp => {
-            if(!mergedProducts.some(mp => mp.id === dp.id && mp.title === dp.title)) {
-                mergedProducts.push(dp);
+            if(!localData.some(ld => ld.id === dp.id)) {
+                localData.push(dp);
             }
         });
-        let products = mergedProducts;
+        
+        let products = localData;
         localStorage.setItem('loFfy_products', JSON.stringify(products));
 
         let cart = [];
         let activeAdmin = localStorage.getItem('isAdminActive') === 'true';
         let currentLang = 'bn';
 
+        // Currency Exchange Rates and Format Meta Configuration
+        const currencyConfig = {
+            bn: { rate: 1, symbol: '৳' },
+            en: { rate: 0.0085, symbol: '$' },
+            es: { rate: 0.0081, symbol: '€' },
+            fr: { rate: 0.0081, symbol: '€' },
+            de: { rate: 0.0081, symbol: '€' },
+            it: { rate: 0.0081, symbol: '€' }
+        };
+
+        // Utility helper to seamlessly convert prices globally based on selected language
+        function formatPrice(bdtAmount) {
+            const config = currencyConfig[currentLang];
+            const converted = Math.round(bdtAmount * config.rate);
+            return `${config.symbol}${converted}`;
+        }
+
         // Dictionary Mapping for 6 Global Languages (BN, EN, ES, FR, DE, IT)
         const languageDictionary = {
-            bn: { 'search-placeholder': 'পণ্য খুঁজুন...', 'cat-all': 'সব ক্যাটাগরি', 'cat-shirt': 'শার্ট', 'cat-watch': 'ঘড়ি', 'cat-shoes': 'জুতো', 'cat-gadget': 'গ্যাজেট', 'max-price': 'সর্বোচ্চ:', 'track-order': 'অর্ডার ট্র্যাক', 'login': 'লগইন', 'dashboard': 'ড্যাশবোর্ড', 'line1-title': 'জনপ্রিয় ও অফার প্রোডাক্টস (লাইন ১)', 'line2-title': 'আমাদের সকল প্রোডাক্টস (লাইন ২)', 'track-title': 'আপনার অর্ডার ট্র্যাক করুন', 'btn-track': 'অনুসন্ধান করুন', 'cart-title': 'আপনার শপিং ব্যাগ', 'subtotal': 'কার্ট সাবটোটাল:', 'pay-method': 'পেমেন্ট মেথড সিলেক্ট করুন:', 'pay-cod': 'ক্যাশ অন ডেলিভারি (COD)', 'pay-online': 'অনলাইন পেমেন্ট', 'btn-invoice': 'ক্যাশ মেমো', 'btn-wa': 'হোয়াটসঅ্যাপ অর্ডার' },
-            en: { 'search-placeholder': 'Search items...', 'cat-all': 'All Category', 'cat-shirt': 'Shirt', 'cat-watch': 'Watch', 'cat-shoes': 'Shoes', 'cat-gadget': 'Gadget', 'max-price': 'Max Price:', 'track-order': 'Track Order', 'login': 'Login', 'dashboard': 'Dashboard', 'line1-title': 'Popular & Hot Offers (Line 1)', 'line2-title': 'All Available Products (Line 2)', 'track-title': 'Track Your Order Status', 'btn-track': 'Search Now', 'cart-title': 'Your Shopping Cart', 'subtotal': 'Cart Subtotal:', 'pay-method': 'Select Payment Method:', 'pay-cod': 'Cash on Delivery (COD)', 'pay-online': 'Online Payment Gate', 'btn-invoice': 'Get Cash Memo', 'btn-wa': 'WhatsApp Checkout' },
-            es: { 'search-placeholder': 'Buscar...', 'cat-all': 'Todo', 'cat-shirt': 'Camisa', 'cat-watch': 'Reloj', 'cat-shoes': 'Zapatos', 'cat-gadget': 'Artilugio', 'max-price': 'Precio máx:', 'track-order': 'Rastrear', 'login': 'Acceso', 'dashboard': 'Panel', 'line1-title': 'Ofertas populares (Línea 1)', 'line2-title': 'Todos los productos (Línea 2)', 'track-title': 'Rastrear pedido', 'btn-track': 'Buscar', 'cart-title': 'Su Bolsa', 'subtotal': 'Subtotal:', 'pay-method': 'Método de pago:', 'pay-cod': 'Contra reembolso (COD)', 'pay-online': 'Pago en línea', 'btn-invoice': 'Factura', 'btn-wa': 'Orden WhatsApp' },
-            fr: { 'search-placeholder': 'Rechercher...', 'cat-all': 'Tout', 'cat-shirt': 'Chemise', 'cat-watch': 'Montre', 'cat-shoes': 'Chaussures', 'cat-gadget': 'Gadget', 'max-price': 'Prix Max:', 'track-order': 'Suivre', 'login': 'Connexion', 'dashboard': 'Tableau', 'line1-title': 'Offres populaires (Ligne 1)', 'line2-title': 'Tous les produits (Ligne 2)', 'track-title': 'Suivre la commande', 'btn-track': 'Chercher', 'cart-title': 'Votre Panier', 'subtotal': 'Sous-total:', 'pay-method': 'Mode de paiement:', 'pay-cod': 'Paiement à la livraison', 'pay-online': 'Paiement en ligne', 'btn-invoice': 'Facture', 'btn-wa': 'Commander via WA' },
-            de: { 'search-placeholder': 'Suche...', 'cat-all': 'Alle', 'cat-shirt': 'Hemd', 'cat-watch': 'Uhr', 'cat-shoes': 'Schuhe', 'cat-gadget': 'Gadget', 'max-price': 'Max Preis:', 'track-order': 'Verfolgen', 'login': 'Einloggen', 'dashboard': 'Dashboard', 'line1-title': 'Beliebte Angebote (Zeile 1)', 'line2-title': 'Alle Produkte (Zeile 2)', 'track-title': 'Bestellung verfolgen', 'btn-track': 'Suchen', 'cart-title': 'Einkaufstasche', 'subtotal': 'Zwischensumme:', 'pay-method': 'Zahlungsart:', 'pay-cod': 'Nachnahme (COD)', 'pay-online': 'Online-Zahlung', 'btn-invoice': 'Rechnung', 'btn-wa': 'WhatsApp Bestellung' },
-            it: { 'search-placeholder': 'Cerca...', 'cat-all': 'Tutti', 'cat-shirt': 'Camicia', 'cat-watch': 'Orologio', 'cat-shoes': 'Scarpe', 'cat-gadget': 'Gadget', 'max-price': 'Prezzo massimo:', 'track-order': 'Traccia', 'login': 'Accesso', 'dashboard': 'Pannello', 'line1-title': 'Offerte popolari (Linea 1)', 'line2-title': 'Tutti i prodotti (Linea 2)', 'track-title': 'Traccia ordine', 'btn-track': 'Cerca', 'cart-title': 'Il tuo carrello', 'subtotal': 'Totale parziale:', 'pay-method': 'Metodo di pagamento:', 'pay-cod': 'Contrassegno (COD)', 'pay-online': 'Pagamento online', 'btn-invoice': 'Fattura', 'btn-wa': 'Ordina su WA' }
+            bn: { 'search-placeholder': 'পণ্য খুঁজুন...', 'cat-all': 'সব ক্যাটাগরি', 'cat-shirt': 'শার্ট', 'cat-watch': 'ঘড়ি', 'cat-shoes': 'জুতো', 'cat-gadget': 'গ্যাজেট', 'max-price': 'সর্বোচ্চ:', 'track-order': 'অর্ডার ট্র্যাক', 'login': 'লগইন', 'dashboard': 'ড্যাশবোর্ড', 'line1-title': 'জনপ্রিয় ও অফার প্রোডাক্টস (লাইন ১)', 'line2-title': 'আমাদের সকল প্রোডাক্টস (লাইন ২)', 'track-title': 'আপনার অর্ডার ট্র্যাক করুন', 'btn-track': 'অনুসন্ধান করুন', 'cart-title': 'আপনার শপিং ব্যাগ', 'subtotal': 'কার্ট সাবটোটাল:', 'pay-method': 'পেমেন্ট মেথড সিলেক্ট করুন:', 'pay-cod': 'ক্যাশ অন ডেলিভারি (COD)', 'pay-online': 'অনলাইন পেমেন্ট', 'btn-invoice': 'ক্যাশ মেমো', 'btn-wa': 'হোয়াটসঅ্যাপ অর্ডার', 'del-info': '🚚 ডেলিভারি চার্জ: ঢাকার ভেতরে ৳৬০ | ঢাকার বাইরে ৳১২০' },
+            en: { 'search-placeholder': 'Search items...', 'cat-all': 'All Category', 'cat-shirt': 'Shirt', 'cat-watch': 'Watch', 'cat-shoes': 'Shoes', 'cat-gadget': 'Gadget', 'max-price': 'Max Price:', 'track-order': 'Track Order', 'login': 'Login', 'dashboard': 'Dashboard', 'line1-title': 'Popular & Hot Offers (Line 1)', 'line2-title': 'All Available Products (Line 2)', 'track-title': 'Track Your Order Status', 'btn-track': 'Search Now', 'cart-title': 'Your Shopping Cart', 'subtotal': 'Cart Subtotal:', 'pay-method': 'Select Payment Method:', 'pay-cod': 'Cash on Delivery (COD)', 'pay-online': 'Online Payment Gate', 'btn-invoice': 'Get Cash Memo', 'btn-wa': 'WhatsApp Checkout', 'del-info': '🚚 Delivery: Inside Dhaka $1 | Outside Dhaka $2' },
+            es: { 'search-placeholder': 'Buscar...', 'cat-all': 'Todo', 'cat-shirt': 'Camisa', 'cat-watch': 'Reloj', 'cat-shoes': 'Zapatos', 'cat-gadget': 'Artilugio', 'max-price': 'Precio máx:', 'track-order': 'Rastrear', 'login': 'Acceso', 'dashboard': 'Panel', 'line1-title': 'Ofertas populares (Línea 1)', 'line2-title': 'Todos los productos (Línea 2)', 'track-title': 'Rastrear pedido', 'btn-track': 'Buscar', 'cart-title': 'Su Bolsa', 'subtotal': 'Subtotal:', 'pay-method': 'Método de pago:', 'pay-cod': 'Contra reembolso (COD)', 'pay-online': 'Pago en línea', 'btn-invoice': 'Factura', 'btn-wa': 'Orden WhatsApp', 'del-info': '🚚 Envío: Dentro de Dhaka €1 | Fuera de Dhaka €2' },
+            fr: { 'search-placeholder': 'Rechercher...', 'cat-all': 'Tout', 'cat-shirt': 'Chemise', 'cat-watch': 'Montre', 'cat-shoes': 'Chaussures', 'cat-gadget': 'Gadget', 'max-price': 'Prix Max:', 'track-order': 'Suivre', 'login': 'Connexion', 'dashboard': 'Tableau', 'line1-title': 'Offres populaires (Ligne 1)', 'line2-title': 'Tous les produits (Ligne 2)', 'track-title': 'Suivre la commande', 'btn-track': 'Chercher', 'cart-title': 'Votre Panier', 'subtotal': 'Sous-total:', 'pay-method': 'Mode de paiement:', 'pay-cod': 'Paiement à la livraison', 'pay-online': 'Paiement en línea', 'btn-invoice': 'Facture', 'btn-wa': 'Commander via WA', 'del-info': '🚚 Livraison: À l\'intérieur de Dhaka €1 | À l\'extérieur €2' },
+            de: { 'search-placeholder': 'Suche...', 'cat-all': 'Alle', 'cat-shirt': 'Hemd', 'cat-watch': 'Uhr', 'cat-shoes': 'Schuhe', 'cat-gadget': 'Gadget', 'max-price': 'Max Preis:', 'track-order': 'Verfolgen', 'login': 'Einloggen', 'dashboard': 'Dashboard', 'line1-title': 'Beliebte Angebote (Zeile 1)', 'line2-title': 'Alle Produkte (Zeile 2)', 'track-title': 'Bestellung verfolgen', 'btn-track': 'Suchen', 'cart-title': 'Einkaufstasche', 'subtotal': 'Zwischensumme:', 'pay-method': 'Zahlungsart:', 'pay-cod': 'Nachnahme (COD)', 'pay-online': 'Online-Zahlung', 'btn-invoice': 'Rechnung', 'btn-wa': 'WhatsApp Bestellung', 'del-info': '🚚 Lieferung: Innerhalb von Dhaka €1 | Außerhalb von Dhaka €2' },
+            it: { 'search-placeholder': 'Cerca...', 'cat-all': 'Tutti', 'cat-shirt': 'Camicia', 'cat-watch': 'Orologio', 'cat-shoes': 'Scarpe', 'cat-gadget': 'Gadget', 'max-price': 'Prezzo massimo:', 'track-order': 'Traccia', 'login': 'Accesso', 'dashboard': 'Pannello', 'line1-title': 'Offerte popolari (Linea 1)', 'line2-title': 'Tutti i prodotti (Linea 2)', 'track-title': 'Traccia ordine', 'btn-track': 'Cerca', 'cart-title': 'Il tuo carrello', 'subtotal': 'Totale parziale:', 'pay-method': 'Metodo di pagamento:', 'pay-cod': 'Contrassegno (COD)', 'pay-online': 'Pagamento online', 'btn-invoice': 'Fattura', 'btn-wa': 'Ordina su WA', 'del-info': '🚚 Consegna: All\'interno di Dhaka €1 | All\'esterno di Dhaka €2' }
         };
 
         const largeBannerDataset = [
@@ -387,15 +420,12 @@
             { img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80", txt: "স্পেশাল কম্বো ধামাকা! যেকোনো দুটি পণ্য একসাথে কিনলেই ডেলিভারি সম্পূর্ণ ফ্রি।" }
         ];
 
-        let largeIdx = 0, smallIdx = 0, middleIdx = 0;
-
         window.onload = function() {
             initBanners();
             renderProducts();
             startCountdownTimerLoop();
             checkAdminUIVisibility();
             
-            // 2 Seconds Proactive AI Activation Loop
             setTimeout(() => {
                 document.getElementById('ai-assistant-bubble').classList.remove('hidden');
             }, 2000);
@@ -415,40 +445,64 @@
                     else { el.innerText = dict[key]; }
                 }
             });
+            // Re-render components instantly to re-calculate current selected currency values
+            renderProducts();
+            renderCartItems();
         }
 
+        // Professionalized Cross-Dissolve Fade with subtle scale effect banner initializer
         function initBanners() {
-            updateLargeBanner(); updateSmallBanner(); updateMiddleBanner();
-            setInterval(() => { largeIdx = (largeIdx + 1) % largeBannerDataset.length; updateLargeBanner(); }, 3000);
-            setInterval(() => { 
-                smallIdx = (smallIdx + 1) % smallBannerDataset.length; updateSmallBanner(); 
-                const sb = document.getElementById('small-banner-box');
-                sb.classList.remove('zoom-active'); void sb.offsetWidth; sb.classList.add('zoom-active');
-            }, 3000);
-            setInterval(() => { middleIdx = (middleIdx + 1) % middleBannerDataset.length; updateMiddleBanner(); }, 3000);
+            const largeContainer = document.getElementById('large-banner-container');
+            const smallContainer = document.getElementById('small-banner-container');
+            
+            // Build permanent layout DOM structures for smooth cross-fading execution
+            largeBannerDataset.forEach((b, i) => {
+                largeContainer.innerHTML += `<div class="banner-slide absolute inset-0 bg-cover bg-center ${i===0?'active':''}" style="background-image:url('${b.img}')"></div>`;
+            });
+            smallBannerDataset.forEach((b, i) => {
+                smallContainer.innerHTML += `<div class="banner-slide absolute inset-0 bg-cover bg-center ${i===0?'active':''}" style="background-image:url('${b.img}')"></div>`;
+            });
+            
+            document.getElementById('large-banner-text').innerText = largeBannerDataset[0].txt;
+            document.getElementById('small-banner-text').innerText = smallBannerDataset[0].txt;
+            updateMiddleBanner();
+
+            let lIdx = 0, sIdx = 0, mIdx = 0;
+            
+            setInterval(() => {
+                const slides = largeContainer.querySelectorAll('.banner-slide');
+                slides[lIdx].classList.remove('active');
+                lIdx = (lIdx + 1) % largeBannerDataset.length;
+                slides[lIdx].classList.add('active');
+                document.getElementById('large-banner-text').innerText = largeBannerDataset[lIdx].txt;
+            }, 4000);
+
+            setInterval(() => {
+                const slides = smallContainer.querySelectorAll('.banner-slide');
+                slides[sIdx].classList.remove('active');
+                sIdx = (sIdx + 1) % smallBannerDataset.length;
+                slides[sIdx].classList.add('active');
+                document.getElementById('small-banner-text').innerText = smallBannerDataset[sIdx].txt;
+            }, 4000);
+
+            setInterval(() => {
+                mIdx = (mIdx + 1) % middleBannerDataset.length;
+                updateMiddleBanner(mIdx);
+            }, 5000);
         }
 
-        function updateLargeBanner() {
-            document.getElementById('large-banner-box').style.backgroundImage = `url('${largeBannerDataset[largeIdx].img}')`;
-            document.getElementById('large-banner-text').innerText = largeBannerDataset[largeIdx].txt;
-        }
-        function updateSmallBanner() {
-            document.getElementById('small-banner-box').style.backgroundImage = `url('${smallBannerDataset[smallIdx].img}')`;
-            document.getElementById('small-banner-text').innerText = smallBannerDataset[smallIdx].txt;
-        }
-        function updateMiddleBanner() {
-            document.getElementById('middle-long-banner-box').style.backgroundImage = `url('${middleBannerDataset[middleIdx].img}')`;
-            document.getElementById('middle-banner-text').innerText = middleBannerDataset[middleIdx].txt;
+        function updateMiddleBanner(idx = 0) {
+            const mb = document.getElementById('middle-long-banner-box');
+            mb.style.backgroundImage = `url('${middleBannerDataset[idx].img}')`;
+            document.getElementById('middle-banner-text').innerText = middleBannerDataset[idx].txt;
         }
 
-        // Strict Enforcement for Email Identity: Only elhasshossain@gmail.com can trigger admin panel
         function checkAdminUIVisibility() {
             const savedEmail = localStorage.getItem('adminUserEmail');
             if (activeAdmin && savedEmail === 'elhasshossain@gmail.com') {
                 document.getElementById('admin-trigger-btn').classList.remove('hidden');
                 document.getElementById('login-trigger-btn').classList.add('hidden');
             } else {
-                // Safeguard lockdown
                 document.getElementById('admin-trigger-btn').classList.add('hidden');
                 document.getElementById('login-trigger-btn').classList.remove('hidden');
                 activeAdmin = false;
@@ -514,7 +568,6 @@
             alert('প্রোডাক্টটি ডেটাবেজে পার্মানেন্টলি সেভ হয়েছে!');
         }
 
-        // Expanded Product Grid Renderer with Multi-Filtering Capabilities
         function renderProducts() {
             const grid1 = document.getElementById('product-grid-1');
             const grid2 = document.getElementById('product-grid-2');
@@ -544,11 +597,11 @@
                             <div>
                                 <h4 class="font-bold text-xs text-gray-800 line-clamp-2 min-h-[32px]">${p.title}</h4>
                                 <div class="flex items-center space-x-2 my-1">
-                                    <span class="text-green-600 font-extrabold text-sm">৳${discPrice}</span>
-                                    ${p.discount > 0 ? `<span class="text-gray-400 text-[11px] line-through">৳${p.price}</span>` : ''}
+                                    <span class="text-green-600 font-extrabold text-sm">${formatPrice(discPrice)}</span>
+                                    ${p.discount > 0 ? `<span class="text-gray-400 text-[11px] line-through">${formatPrice(p.price)}</span>` : ''}
                                 </div>
                                 <div class="text-[10px] bg-slate-100 text-slate-600 rounded p-1 mb-2 font-medium">
-                                    🚚 ডেলিভারি: ঢাকা ৳৬০ | বাহিরে ৳১২০
+                                    ${languageDictionary[currentLang]['del-info'] || '🚚 ডেলিভারি: ঢাকা ৳৬০ | বাহিরে ৳১২০'}
                                 </div>
                                 ${p.timer ? `
                                     <div class="p-1.5 bg-slate-900 text-white rounded-md flex items-center justify-center gap-1 text-[10px] font-mono shadow-sm countdown-box" data-expire="${p.timer}">
@@ -584,16 +637,16 @@
             }, 1000);
         }
 
-        // Details Modal triggering exactly 5 Custom Purchase Operations
         function openDetailsModal(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
             let discPrice = Math.round(product.price - (product.price * (product.discount / 100)));
             
             document.getElementById('modal-product-title').innerText = product.title;
-            document.getElementById('modal-final-price').innerText = `৳${discPrice}`;
-            document.getElementById('modal-old-price').innerText = product.discount > 0 ? `৳${product.price}` : '';
+            document.getElementById('modal-final-price').innerText = formatPrice(discPrice);
+            document.getElementById('modal-old-price').innerText = product.discount > 0 ? formatPrice(product.price) : '';
             document.getElementById('modal-showcase-img').src = product.images[0].trim();
+            document.getElementById('modal-delivery-info').innerText = languageDictionary[currentLang]['del-info'] || '🚚 ডেলিভারি চার্জ: ঢাকার ভেতরে ৳৬০ | ঢাকার বাইরে ৳১২০';
             
             const actionGrid = document.getElementById('modal-action-grid');
             actionGrid.innerHTML = `
@@ -601,12 +654,13 @@
                 <button onclick="executeWhatsAppOrder(${product.id})" class="bg-emerald-600 text-white py-2 rounded-xl hover:bg-emerald-700 transition"><i class="fa-brands fa-whatsapp"></i> WhatsApp Order</button>
                 <button onclick="executeBuyNow(${product.id})" class="bg-green-600 text-white py-2 rounded-xl hover:bg-green-700 transition"><i class="fa-solid fa-bag-shopping"></i> Buy Now</button>
                 <button onclick="addToCart(${product.id}); alert('পণ্যটি কার্টে যুক্ত হয়েছে!');" class="bg-slate-900 text-white py-2 rounded-xl hover:bg-slate-800 transition"><i class="fa-solid fa-basket-shopping"></i> Add to Cart</button>
-                <button onclick="alert('প্রোডাক্ট মডেল কোড: LF-${product.id}')" class="bg-slate-200 text-slate-700 py-2 rounded-xl hover:bg-slate-300 transition"><i class="fa-solid fa-circle-info"></i> Product Spec/Details</button>
+                <button onclick="alert('Pro. Code: LF-${product.id}')" class="bg-slate-200 text-slate-700 py-2 rounded-xl hover:bg-slate-300 transition"><i class="fa-solid fa-circle-info"></i> Product Spec/Details</button>
             `;
             document.getElementById('details-modal').classList.remove('hidden');
         }
 
         function closeDetailsModal() { document.getElementById('details-modal').classList.add('hidden'); }
+        
         function toggleCartModal() {
             const cm = document.getElementById('cart-modal');
             cm.classList.toggle('hidden'); cm.classList.toggle('translate-x-full');
@@ -616,13 +670,15 @@
         function addToCart(id) {
             const product = products.find(p => p.id === id);
             const cartItem = cart.find(item => item.id === id);
+            let discPrice = Math.round(product.price - (product.price * (product.discount / 100)));
             if (cartItem) { cartItem.qty += 1; } else {
-                let discPrice = Math.round(product.price - (product.price * (product.discount / 100)));
-                cart.push({ ...product, price: discPrice, qty: 1 });
+                cart.push({ ...product, rawDiscPrice: discPrice, qty: 1 });
             }
             updateCartBadge();
         }
+        
         function updateCartBadge() { document.getElementById('cart-count').innerText = cart.reduce((tot, i) => tot + i.qty, 0); }
+        
         function changeQty(id, delta) {
             const item = cart.find(i => i.id === id);
             if (!item) return;
@@ -635,7 +691,7 @@
             const container = document.getElementById('cart-items-container');
             container.innerHTML = ''; let total = 0;
             cart.forEach(item => {
-                total += (item.price * item.qty);
+                total += (item.rawDiscPrice * item.qty);
                 container.innerHTML += `
                     <div class="flex justify-between items-center bg-gray-50 p-2 rounded-xl border">
                         <div class="flex items-center gap-2">
@@ -643,6 +699,7 @@
                             <div><h5 class="font-bold text-gray-800 text-xs line-clamp-1">${item.title}</h5></div>
                         </div>
                         <div class="flex items-center space-x-1 text-xs">
+                            <span class="mr-2 font-semibold text-green-600">${formatPrice(item.rawDiscPrice * item.qty)}</span>
                             <button onclick="changeQty(${item.id}, -1)" class="w-4 h-4 bg-gray-200 rounded">-</button>
                             <span>${item.qty}</span>
                             <button onclick="changeQty(${item.id}, 1)" class="w-4 h-4 bg-gray-200 rounded">+</button>
@@ -650,10 +707,9 @@
                     </div>
                 `;
             });
-            document.getElementById('cart-total-price').innerText = `৳ ${total}`;
+            document.getElementById('cart-total-price').innerText = formatPrice(total);
         }
 
-        // 5 Custom Click Actions Handler Functions
         function executeDirectOrder(id) {
             const product = products.find(p => p.id === id);
             cart = []; addToCart(id); closeDetailsModal(); toggleCartModal();
@@ -666,7 +722,6 @@
             window.open(`https://api.whatsapp.com/send?phone=8801700000000&text=${encodeURIComponent(txt)}`, '_blank');
         }
 
-        // Cash Memo Invoicing with COD/Online Payment System Integration
         function generateCustomerInvoice() {
             const name = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
@@ -688,13 +743,13 @@
             const tbody = document.getElementById('invoice-table-body'); tbody.innerHTML = '';
             let total = 0;
             cart.forEach(item => {
-                total += (item.price * item.qty);
-                tbody.innerHTML += `<tr><td>${item.title} (x${item.qty})</td><td class="text-right">৳${item.price * item.qty}</td></tr>`;
+                total += (item.rawDiscPrice * item.qty);
+                tbody.innerHTML += `<tr><td>${item.title} (x${item.qty})</td><td class="text-right">${formatPrice(item.rawDiscPrice * item.qty)}</td></tr>`;
             });
 
-            document.getElementById('invoice-grand-total').innerText = `৳ ${total + 60}`;
+            document.getElementById('invoice-delivery-charge').innerText = `${currentLang === 'bn' ? 'ডেলিভারি চার্জ: ' : 'Delivery Charge: '}${formatPrice(60)}`;
+            document.getElementById('invoice-grand-total').innerText = formatPrice(total + 60);
             
-            // Trackable Order Persistent Storage Cache Injection
             let globalOrders = JSON.parse(localStorage.getItem('loFfy_orders')) || {};
             globalOrders[generatedInvNum] = { status: "প্রসেসিং হচ্ছে (Processing)", total: total + 60, date: new Date().toLocaleDateString() };
             localStorage.setItem('loFfy_orders', JSON.stringify(globalOrders));
@@ -703,6 +758,7 @@
         }
 
         function closeInvoiceModal() { document.getElementById('invoice-modal').classList.add('hidden'); }
+        
         function confirmInvoiceAndOrder() {
             const payMethod = document.querySelector('input[name="payment-opt"]:checked').value;
             if(payMethod === 'Online') {
@@ -718,28 +774,27 @@
             const phone = document.getElementById('cust-phone').value.trim();
             const address = document.getElementById('cust-address').value.trim();
             const payMethod = document.querySelector('input[name="payment-opt"]:checked').value;
-            if(!name || !phone || !address) { alert('তথ্য পূরণ করুন!'); return; }
+            if(!name || !phone || !address) { alert('정보를 입력하세요!'); return; }
             
-            let txt = `*LoFfy Order Request*\nनाम: ${name}\nমোবাইল: ${phone}\nঠিকানা: ${address}\nমেথড: ${payMethod}\n\n*পণ্যসমূহ:*\n`;
-            cart.forEach(i => txt += `- ${i.title} (x${i.qty})\n`);
+            let txt = `*LoFfy Order Request*\nনাম: ${name}\nমোবাইল: ${phone}\nঠিকানা: ${address}\nমেথড: ${payMethod}\n\n*পণ্যসমূহ:*\n`;
+            cart.forEach(i => txt += `- ${i.title} (x${i.qty}) - ${formatPrice(i.rawDiscPrice * i.qty)}\n`);
             window.open(`https://api.whatsapp.com/send?phone=8801700000000&text=${encodeURIComponent(txt)}`, '_blank');
         }
 
-        // Order Tracking Functional Core Engine
         function openOrderTrackingModal() { document.getElementById('tracking-modal').classList.remove('hidden'); }
+        
         function trackOrderAction() {
             const id = document.getElementById('track-id-input').value.trim();
             const orders = JSON.parse(localStorage.getItem('loFfy_orders')) || {};
             const resBox = document.getElementById('tracking-result');
             resBox.classList.remove('hidden');
             if(orders[id]) {
-                resBox.innerHTML = `🟢 অর্ডার পাওয়া গেছে!<br>তারিখ: ${orders[id].date}<br>অবস্থা: ${orders[id].status}<br>মোট প্রদেয়: ৳${orders[id].total}`;
+                resBox.innerHTML = `🟢 অর্ডার পাওয়া গেছে!<br>তারিখ: ${orders[id].date}<br>অবস্থা: ${orders[id].status}<br>মোট প্রদেয়: ${formatPrice(orders[id].total)}`;
             } else {
                 resBox.innerHTML = `❌ দুঃখিত! এই ইনভয়েস নম্বরে কোনো অর্ডার খুঁজে পাওয়া যায়নি।`;
             }
         }
 
-        // Proactive Conversational AI Routine Mock Simulation
         function sendAiMessage() {
             const input = document.getElementById('ai-input');
             const msg = input.value.trim(); if(!msg) return;
