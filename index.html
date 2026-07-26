@@ -40,6 +40,27 @@
         .zoom-active {
             animation: professionalZoom 4s infinite ease-in-out;
         }
+
+        /* Cartoon Style Infinite Category Slider */
+        @keyframes cartoonScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .cartoon-track {
+            display: flex;
+            width: max-content;
+            animation: cartoonScroll 25s linear infinite;
+        }
+        .cartoon-track:hover {
+            animation-play-state: paused;
+        }
+        .cartoon-item:hover i {
+            animation: cartoonBounce 0.5s ease infinite alternate;
+        }
+        @keyframes cartoonBounce {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-8px) scale(1.1); }
+        }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-gray-900">
@@ -121,11 +142,74 @@
         </h2>
         <div id="product-grid-1" class="grid grid-cols-4 gap-4 mb-10"></div>
 
-        <!-- Banner Middle Long Component -->
+        <!-- Banner Middle Long Component (৩ নম্বর কভার ফটো) -->
         <section class="my-8">
             <div id="middle-long-banner-box" class="w-full h-40 bg-slate-900 rounded-2xl relative overflow-hidden shadow-sm border flex items-center bg-cover bg-center transition-all duration-1000">
                 <div class="absolute inset-0 bg-black/50 z-10"></div>
                 <div id="middle-banner-text" class="relative z-20 text-white font-black px-8 text-xl tracking-wide"></div>
+            </div>
+        </section>
+
+        <!-- Cartoon Style Slider Section (৩ নম্বরের নিচে যুক্ত করা হয়েছে) -->
+        <section class="my-6 overflow-hidden bg-gradient-to-r from-green-50 to-emerald-50 py-4 rounded-2xl border border-green-100 shadow-inner">
+            <div class="cartoon-track gap-4 px-4">
+                <!-- Group 1 -->
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-shirt text-emerald-500 text-lg"></i> <span>ছেলেদের ক্লোজ আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-person-dress text-pink-500 text-lg"></i> <span>মেয়েদের ক্লোজ আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-clock text-amber-500 text-lg"></i> <span>প্রিমিয়াম ঘড়ি</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-wand-magic-sparkles text-purple-500 text-lg"></i> <span>কসমেটিক্স কালেকশন</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-gem text-blue-500 text-lg"></i> <span>জুয়েলারি আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-laptop text-red-500 text-lg"></i> <span>ইলেকট্রনিক্স গ্যাজেট</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-glasses text-indigo-500 text-lg"></i> <span>ফ্যাশন আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-gamepad text-orange-500 text-lg"></i> <span>খেলনা আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-baby text-cyan-500 text-lg"></i> <span>বেবি আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-spa text-teal-500 text-lg"></i> <span>স্কিন কেয়ার আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-flask text-violet-500 text-lg"></i> <span>রেজিন আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-gifts text-yellow-600 text-lg"></i> <span>শোপিস আইটেম</span>
+                </div>
+
+                <!-- Duplicate Group for Infinite Effect Loop -->
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-shirt text-emerald-500 text-lg"></i> <span>ছেলেদের ক্লোজ আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-person-dress text-pink-500 text-lg"></i> <span>মেয়েদের ক্লোজ আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-clock text-amber-500 text-lg"></i> <span>প্রিমিয়াম ঘড়ি</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-wand-magic-sparkles text-purple-500 text-lg"></i> <span>কসমেটিক্স কালেকশন</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-gem text-blue-500 text-lg"></i> <span>জুয়েলারি আইটেম</span>
+                </div>
+                <div class="cartoon-item flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-emerald-200 cursor-pointer text-slate-800 font-bold text-xs hover:bg-amber-100 transition duration-300">
+                    <i class="fa-solid fa-laptop text-red-500 text-lg"></i> <span>ইলেকট্রনিক্স গ্যাজেট</span>
+                </div>
             </div>
         </section>
 
@@ -202,12 +286,14 @@
                 </div>
             </div>
 
-            <!-- Custom Interstitial Ad Configuration -->
-            <div class="bg-slate-50 p-4 rounded-xl border border-dashed">
-                <h4 class="font-bold text-sm text-slate-700 mb-3"><i class="fa-solid fa-rectangle-ad"></i> প্রোমোショナル পপ-আপ অ্যাড সেটিংস</h4>
+            <!-- Custom Interstitial Ad Configuration Dashboard Panel Extension -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-dashed border-green-400">
+                <h4 class="font-bold text-sm text-green-700 mb-3"><i class="fa-solid fa-rectangle-ad"></i> প্রোমোショナル পপ-আপ অ্যাড সেটিংস</h4>
                 <div class="space-y-3">
                     <input type="text" id="ad-img-url" placeholder="বিজ্ঞাপন ইমেজ ইউআরএল..." class="w-full p-2 border rounded-lg text-xs">
                     <input type="text" id="ad-custom-title" placeholder="বিজ্ঞাপনের শিরোনাম..." class="w-full p-2 border rounded-lg text-xs">
+                    <input type="number" id="ad-target-product-id" placeholder="ট্যাগ করার জন্য প্রোডাক্টের আইডি দিন (ঐচ্ছিক)..." class="w-full p-2 border rounded-lg text-xs">
+                    <p class="text-[10px] text-gray-500 mt-[-5px]">কোনো প্রোডাক্ট আইডি দিলে বিজ্ঞাপনে ক্লিক করলে সরাসরি ওই প্রোডাক্ট মডাল খুলে যাবে।</p>
                     <button onclick="updatePopupAdSettings()" class="w-full bg-green-600 text-white py-2 rounded-lg text-xs font-bold hover:bg-green-700 transition">বিজ্ঞাপন আপডেট করুন</button>
                 </div>
             </div>
@@ -216,13 +302,15 @@
 
     <!-- Modal Layout 3: Global Interstitial Popup Ad -->
     <div id="popup-ad-modal" class="fixed inset-0 bg-black/70 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl overflow-hidden w-full max-w-sm shadow-2xl relative">
+        <div class="bg-white rounded-2xl overflow-hidden w-full max-w-sm shadow-2xl relative border-2 border-green-500 animate-fade-in">
             <button onclick="closePopupAd()" class="absolute top-2 right-2 bg-black/60 text-white w-7 h-7 rounded-full flex items-center justify-center hover:bg-black transition z-10"><i class="fa-solid fa-xmark"></i></button>
-            <img id="popup-ad-img" src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80" class="w-full h-48 object-cover">
-            <div class="p-4 text-center">
-                <h4 id="popup-ad-title" class="font-extrabold text-lg text-slate-800 mb-2">ধামাকা উইকএন্ড অফার!</h4>
-                <p class="text-xs text-gray-500 mb-4">আমাদের সাইটের যেকোনো কেনাকাটায় পাচ্ছেন নিশ্চিত ফ্রি DELIVERY চার্জ সুবিধা। আজই অর্ডার করুন!</p>
-                <button onclick="closePopupAd()" class="bg-green-600 text-white text-xs px-6 py-2 rounded-xl font-bold hover:bg-green-700 transition">শপ নাও</button>
+            <div onclick="handleAdClick()" class="cursor-pointer">
+                <img id="popup-ad-img" src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80" class="w-full h-48 object-cover hover:scale-105 transition duration-500">
+                <div class="p-4 text-center">
+                    <h4 id="popup-ad-title" class="font-extrabold text-lg text-slate-800 mb-2">ধামাকা উইকএন্ড অফার!</h4>
+                    <p class="text-xs text-gray-500 mb-4">আমাদের সাইটের যেকোনো কেনাকাটায় পাচ্ছেন নিশ্চিত ফ্রি DELIVERY চার্জ সুবিধা। আজই অর্ডার করুন!</p>
+                    <button class="bg-green-600 text-white text-xs px-6 py-2 rounded-xl font-bold hover:bg-green-700 transition w-full">অফারে অংশ নিন</button>
+                </div>
             </div>
         </div>
     </div>
@@ -380,6 +468,7 @@
         let cart = [];
         let activeAdmin = localStorage.getItem('isAdminActive') === 'true';
         let currentLang = 'bn';
+        let adTargetProductId = null; // Holds the current targeted ad product ID linkage
 
         // Currency Exchange Rates and Format Meta Configuration
         const currencyConfig = {
@@ -425,14 +514,11 @@
             renderProducts();
             startCountdownTimerLoop();
             checkAdminUIVisibility();
+            initIntervalBasedPopupAd(); // Starts the requested 15-second loop recurring system
             
             setTimeout(() => {
                 document.getElementById('ai-assistant-bubble').classList.remove('hidden');
             }, 2000);
-
-            setTimeout(() => {
-                document.getElementById('popup-ad-modal').classList.remove('hidden');
-            }, 5000);
         };
 
         function changeWebsiteLanguage(langCode) {
@@ -445,7 +531,6 @@
                     else { el.innerText = dict[key]; }
                 }
             });
-            // Re-render components instantly to re-calculate current selected currency values
             renderProducts();
             renderCartItems();
         }
@@ -455,7 +540,6 @@
             const largeContainer = document.getElementById('large-banner-container');
             const smallContainer = document.getElementById('small-banner-container');
             
-            // Build permanent layout DOM structures for smooth cross-fading execution
             largeBannerDataset.forEach((b, i) => {
                 largeContainer.innerHTML += `<div class="banner-slide absolute inset-0 bg-cover bg-center ${i===0?'active':''}" style="background-image:url('${b.img}')"></div>`;
             });
@@ -471,18 +555,22 @@
             
             setInterval(() => {
                 const slides = largeContainer.querySelectorAll('.banner-slide');
-                slides[lIdx].classList.remove('active');
-                lIdx = (lIdx + 1) % largeBannerDataset.length;
-                slides[lIdx].classList.add('active');
-                document.getElementById('large-banner-text').innerText = largeBannerDataset[lIdx].txt;
+                if(slides.length > 0) {
+                    slides[lIdx].classList.remove('active');
+                    lIdx = (lIdx + 1) % largeBannerDataset.length;
+                    slides[lIdx].classList.add('active');
+                    document.getElementById('large-banner-text').innerText = largeBannerDataset[lIdx].txt;
+                }
             }, 4000);
 
             setInterval(() => {
                 const slides = smallContainer.querySelectorAll('.banner-slide');
-                slides[sIdx].classList.remove('active');
-                sIdx = (sIdx + 1) % smallBannerDataset.length;
-                slides[sIdx].classList.add('active');
-                document.getElementById('small-banner-text').innerText = smallBannerDataset[sIdx].txt;
+                if(slides.length > 0) {
+                    slides[sIdx].classList.remove('active');
+                    sIdx = (sIdx + 1) % smallBannerDataset.length;
+                    slides[sIdx].classList.add('active');
+                    document.getElementById('small-banner-text').innerText = smallBannerDataset[sIdx].txt;
+                }
             }, 4000);
 
             setInterval(() => {
@@ -493,8 +581,10 @@
 
         function updateMiddleBanner(idx = 0) {
             const mb = document.getElementById('middle-long-banner-box');
-            mb.style.backgroundImage = `url('${middleBannerDataset[idx].img}')`;
-            document.getElementById('middle-banner-text').innerText = middleBannerDataset[idx].txt;
+            if(mb && middleBannerDataset[idx]) {
+                mb.style.backgroundImage = `url('${middleBannerDataset[idx].img}')`;
+                document.getElementById('middle-banner-text').innerText = middleBannerDataset[idx].txt;
+            }
         }
 
         function checkAdminUIVisibility() {
@@ -538,13 +628,38 @@
         function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
         function closePopupAd() { document.getElementById('popup-ad-modal').classList.add('hidden'); }
 
+        // Core Interstitial 15s Ad Scheduling Configuration
+        function initIntervalBasedPopupAd() {
+            setInterval(() => {
+                // Trigger ad if not already open
+                const adModal = document.getElementById('popup-ad-modal');
+                if(adModal && adModal.classList.contains('hidden')) {
+                    adModal.classList.remove('hidden');
+                }
+            }, 15000); // Triggers automatically every 15 seconds perfectly
+        }
+
         function updatePopupAdSettings() {
             const img = document.getElementById('ad-img-url').value;
             const title = document.getElementById('ad-custom-title').value;
+            const targetId = document.getElementById('ad-target-product-id').value;
+            
             if(img) document.getElementById('popup-ad-img').src = img;
             if(title) document.getElementById('popup-ad-title').innerText = title;
-            alert('পপ-আপ বিজ্ঞাপন আপডেট করা হয়েছে!');
+            if(targetId) {
+                adTargetProductId = parseInt(targetId);
+            } else {
+                adTargetProductId = null;
+            }
+            alert('পপ-আপ বিজ্ঞাপন ও প্রোডাক্ট ওয়েট/ট্যাগ সেটিংস আপডেট করা হয়েছে!');
             closeAdminModal();
+        }
+
+        function handleAdClick() {
+            if(adTargetProductId) {
+                closePopupAd();
+                openDetailsModal(adTargetProductId);
+            }
         }
 
         function addNewProduct() {
@@ -565,9 +680,10 @@
             
             renderProducts();
             closeAdminModal();
-            alert('প্রোডাক্টটি ডেটাবেজে পার্মানেন্টলি সেভ হয়েছে!');
+            alert('প্রোডাক্টটি ডেটাবেজে পার্মানেন্টলি সেভ হয়েছে! আইডিটি মনে রাখুন: ' + newProd.id);
         }
 
+        // Beautiful Card UI with enhanced premium element placements & scaling transitions
         function renderProducts() {
             const grid1 = document.getElementById('product-grid-1');
             const grid2 = document.getElementById('product-grid-2');
@@ -588,29 +704,30 @@
             filtered.forEach((p, index) => {
                 let discPrice = Math.round(p.price - (p.price * (p.discount / 100)));
                 let productCard = `
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col p-3 relative cursor-pointer hover:shadow-md transition" onclick="openDetailsModal(${p.id})">
-                        ${p.discount > 0 ? `<span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded z-10">-${p.discount}% অফ</span>` : ''}
-                        <div class="relative w-full h-44 bg-gray-100 overflow-hidden rounded-lg img-container">
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col p-3 relative cursor-pointer hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300" onclick="openDetailsModal(${p.id})">
+                        ${p.discount > 0 ? `<span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-black px-2.5 py-1 rounded-lg z-10 shadow-sm uppercase tracking-wider">-${p.discount}% অফ</span>` : ''}
+                        <span class="absolute top-3 right-3 bg-slate-900/60 backdrop-blur-xs text-white text-[9px] px-2 py-0.5 rounded font-mono z-10">ID: ${p.id}</span>
+                        <div class="relative w-full h-48 bg-slate-50 overflow-hidden rounded-xl img-container border border-slate-100">
                             <img src="${p.images[0].trim()}" class="w-full h-full object-cover zoom-img">
                         </div>
-                        <div class="flex-1 flex flex-col justify-between mt-2">
+                        <div class="flex-1 flex flex-col justify-between mt-3">
                             <div>
-                                <h4 class="font-bold text-xs text-gray-800 line-clamp-2 min-h-[32px]">${p.title}</h4>
-                                <div class="flex items-center space-x-2 my-1">
-                                    <span class="text-green-600 font-extrabold text-sm">${formatPrice(discPrice)}</span>
-                                    ${p.discount > 0 ? `<span class="text-gray-400 text-[11px] line-through">${formatPrice(p.price)}</span>` : ''}
+                                <h4 class="font-extrabold text-xs text-slate-800 line-clamp-2 min-h-[32px] tracking-wide">${p.title}</h4>
+                                <div class="flex items-center space-x-2 my-1.5">
+                                    <span class="text-green-600 font-black text-base">${formatPrice(discPrice)}</span>
+                                    ${p.discount > 0 ? `<span class="text-gray-400 text-xs line-through font-semibold">${formatPrice(p.price)}</span>` : ''}
                                 </div>
-                                <div class="text-[10px] bg-slate-100 text-slate-600 rounded p-1 mb-2 font-medium">
-                                    ${languageDictionary[currentLang]['del-info'] || '🚚 ডেলিভারি: ঢাকা ৳৬০ | বাহিরে ৳১২০'}
+                                <div class="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-lg p-1.5 mb-2 font-bold tracking-wide flex items-center gap-1">
+                                    <i class="fa-solid fa-truck-fast text-[11px]"></i> ${languageDictionary[currentLang]['del-info'] || '🚚 ডেলিভারি: ঢাকা ৳৬০ | বাহিরে ৳১২০'}
                                 </div>
                                 ${p.timer ? `
-                                    <div class="p-1.5 bg-slate-900 text-white rounded-md flex items-center justify-center gap-1 text-[10px] font-mono shadow-sm countdown-box" data-expire="${p.timer}">
+                                    <div class="p-2 bg-slate-900 text-white rounded-lg flex items-center justify-center gap-1.5 text-[10px] font-mono shadow-md countdown-box" data-expire="${p.timer}">
                                         <i class="fa-solid fa-clock text-amber-400 animate-spin"></i> <span class="countdown-timer-text">Counting...</span>
                                     </div>
-                                ` : `<div class="p-1.5 bg-green-50 text-green-700 rounded-md flex items-center justify-center text-[10px] font-bold">স্টক সীমিত!</div>`}
+                                ` : `<div class="p-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg flex items-center justify-center text-[10px] font-black shadow-sm tracking-wider uppercase"><i class="fa-solid fa-circle-check mr-1 animate-pulse"></i> স্টক সীমিত!</div>`}
                             </div>
-                            <div class="mt-3 pt-2 border-t text-center text-[11px] font-bold text-green-600 flex items-center justify-center gap-1">
-                                <i class="fa-solid fa-eye"></i> বিস্তারিত ও অর্ডার প্যানেল
+                            <div class="mt-3 pt-2 border-t border-slate-100 text-center text-[11px] font-black text-green-600 flex items-center justify-center gap-1 bg-slate-50 py-1.5 rounded-lg hover:bg-green-600 hover:text-white transition duration-200">
+                                <i class="fa-solid fa-circle-info"></i> বিস্তারিত ও অর্ডার প্যানেল
                             </div>
                         </div>
                     </div>
